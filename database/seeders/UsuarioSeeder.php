@@ -15,27 +15,58 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'David',
+        // Creación de Usuarios
+    $users = [
+        [
+            'ci' => '111',
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
             'estado' => 'activo',
+            'sexo' => 'M',
+            'direccion' => 'Av. Santos Doumont',
+            'telefono' => '123',
             'fechaCreacion' => now(),
-            'email' => 'd@gmail.com',
-            'password' => bcrypt('12345678'), // Agrega aquí una contraseña
-        ]);
-        User::create([         
-            'name' => 'Juan',
-            'email' => 'j@gmail.com', 
+            'password' => bcrypt('12345678'),
+        ],
+        [
+            'ci' => '222',
+            'name' => 'Empleado',
+            'email' => 'empleado@example.com',
             'estado' => 'activo',
+            'sexo' => 'M',
+            'direccion' => 'Transito',
+            'telefono' => '456',
             'fechaCreacion' => now(),
-            'password' => bcrypt('12345678'),        
-        ]);
-        User::create([         
-            'name' => 'Carlos',
-            'email' => 'c@gmail.com',
+            'password' => bcrypt('12345678'),
+        ],
+        [
+            'ci' => '333',
+            'name' => 'Cliente',
+            'email' => 'cliente@example.com',
             'estado' => 'activo',
+            'sexo' => 'M',
+            'direccion' => 'Zona Alto San Pedro',
+            'telefono' => '789',
             'fechaCreacion' => now(),
-            'password' => bcrypt('12345678'),         
-        ]); 
+            'password' => bcrypt('12345678'),
+        ],
+        [
+            'ci' => '444',
+            'name' => 'Proveedor',
+            'email' => 'proveedor@example.com',
+            'estado' => 'activo',
+            'sexo' => 'M',
+            'direccion' => 'Zona Urubo',
+            'telefono' => '701',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+        ],
+    ];
+
+    foreach ($users as $userData) {
+        User::create($userData);
+    }
+    
         Rol::create([         
             'rolUsuario' => 'Administrador'          
         ]); 
@@ -45,7 +76,9 @@ class UsuarioSeeder extends Seeder
         Rol::create([         
             'rolUsuario' => 'Cliente'          
         ]);
-
+        Rol::create([         
+            'rolUsuario' => 'Proveedor'          
+        ]);
         UsuarioRol::create([         
             'user_id' => '1',    
             'rol_id' => '1'            
@@ -57,6 +90,10 @@ class UsuarioSeeder extends Seeder
         UsuarioRol::create([         
             'user_id' => '3',    
             'rol_id' => '3'          
+        ]);
+        UsuarioRol::create([         
+            'user_id' => '4',    
+            'rol_id' => '4'          
         ]);
     }
 }

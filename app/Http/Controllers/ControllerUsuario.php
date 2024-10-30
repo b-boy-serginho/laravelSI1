@@ -10,7 +10,7 @@ use Session;
 use App\Models\User;
 use App\Models\Rol;
 use App\Models\UsuarioRol;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;    
 use Illuminate\Support\Facades\Storage;
 use App\Models\Empleado;
 use App\Models\Horario;
@@ -20,6 +20,34 @@ class ControllerUsuario extends Controller
 
     public function inicio(){
         return view('usuario.inicio');
+    }
+
+    public function redireccionar()
+    {
+        $userId = Auth::user()->id;
+        $usuarioRol = UsuarioRol::where('user_id', $userId)->first();
+
+        if ($usuarioRol) {
+            $rolId = $usuarioRol->rol_id;
+            
+            // Verificar el rol del usuario y redirigir al lugar correcto
+            switch ($rolId) {
+                case 1:
+                    // Si es administrador
+                    return view('usuario.admin'); // Redirige a la ruta 'admin.inicio'
+                case 2:
+                    // Si es empleado
+                    return view('usuario.empleado'); 
+                case 3:
+                    // Si es cliente
+                    return view('usuario.cliente');
+                default:
+                    return redirect('/')->with('error', 'Rol no reconocido.');
+            }
+        } 
+        else {
+            return redirect('/')->with('error', 'No se ha asignado un rol a este usuario.');
+        }
     }
 
     public function logeado()

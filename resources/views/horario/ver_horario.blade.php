@@ -94,13 +94,13 @@
                         <div class="grid grid-cols-3 gap-4">
                             <div>
                                 <label for="horainicio" class="block text-sm font-medium text-gray-700">Hora de Inicio</label>
-                                <input type="number" name="horainicio" id="horainicio" 
+                                <input type="time" name="horainicio" id="horainicio" 
                                 required min="0" max="23" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" 
                                 placeholder="HH">
                             </div>
                             <div>
                                 <label for="horafinal" class="block text-sm font-medium text-gray-700">Hora Final</label>
-                                <input type="number" name="horafinal" id="horafinal"
+                                <input type="time" name="horafinal" id="horafinal"
                                  required min="0" max="23" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" 
                                  placeholder="HH">
                             </div>

@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
 
             //agregamos esto
+            $table->integer('ci')->nullable();
             $table->string('name');
+            $table->char('sexo', 1)->nullable();
+            $table->date('fechaCreacion')->nullable();
             $table->string('estado')->nullable();
-            $table->string('fechaCreacion')->nullable();
+            $table->string('direccion')->nullable();
+            $table->integer('telefono')->nullable();
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

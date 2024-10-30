@@ -18,6 +18,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
+    Route::get('redireccionar', [ControllerUsuario::class, 'redireccionar']);
+
     Route::get('logeado', [ControllerUsuario::class, 'logeado']);
 
     Route::get('/ver_horario', [ControllerUsuario::class, 'ver_horario']);
