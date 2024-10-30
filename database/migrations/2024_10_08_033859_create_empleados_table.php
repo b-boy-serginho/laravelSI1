@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('empleados', function (Blueprint $table) {
 
             $table->id(); // Clave primaria
-            $table->date('fechacontratacion')->nullable(false); // Fecha de contratación
-            $table->string('cargo', 40)->nullable(false); // Cargo            
-            $table->foreignId('idhorario')->constrained('horarios')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea
+            $table->date('fechaContratacion')->nullable(false); // Fecha de contratación
+            $table->string('cargo', 40)->nullable(false); // Cargo 
+            $table->foreignId('idUsuario')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea           
+            $table->foreignId('idHorario')->constrained('horarios')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea
 
 
             $table->timestamps();

@@ -11,8 +11,8 @@ class Horario extends Model
 
     protected $table = 'horarios'; // Nombre de la tabla
     protected $fillable = [
-        'horainicio',
-        'horafinal',
-        'dias',
+        'horaInicio',
+        'horaFinal',
+        'dia',
     ];
 }

@@ -9,10 +9,15 @@ class Empleado extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['ci', 'nombre', 'sexo', 'telefono', 'direccion', 'fechacontratacion', 'cargo', 'idhorario'];
+    protected $fillable = [ 'fechaContratacion', 'cargo', 'idUsuario', 'idHorario'];
 
     public function horario()
     {
-        return $this->belongsTo(Horario::class, 'idhorario');
+        return $this->belongsTo(Horario::class, 'idHorario');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'idUsuario');
     }
 }

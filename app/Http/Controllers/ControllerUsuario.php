@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Empleado;
 use App\Models\Horario;
+use Illuminate\Support\Facades\DB;
 
 class ControllerUsuario extends Controller
 {
@@ -50,54 +51,28 @@ class ControllerUsuario extends Controller
         }
     }
 
-    public function logeado()
-    {
-        $userId = Auth::user()->id;
-        $usuarioRol = UsuarioRol::where('user_id', $userId)->first();
-
-        if ($usuarioRol) {
-            $rolId = $usuarioRol->rol_id;
-            
-            // Verificar el rol del usuario y redirigir al lugar correcto
-            switch ($rolId) {
-                case 1:
-                    // Si es administrador
-                    return view('usuario.admin'); // Redirige a la ruta 'admin.inicio'
-                case 2:
-                    // Si es empleado
-                    return view('usuario.empleado'); 
-                case 3:
-                    // Si es cliente
-                    return view('usuario.cliente');
-                default:
-                    return redirect('/')->with('error', 'Rol no reconocido.');
-            }
-        } else {
-            return redirect('/')->with('error', 'No se ha asignado un rol a este usuario.');
-        }
-    }
-
+    
     public function ver_horario() {
-        $horarios = Horario::all(); // Obtener todos los horarios para listarlos
-        
-        return view('horario.ver_horario', compact('horarios')); // Mostrar vista de horarios
+        $horarios = Horario::all(); 
+        $empleados = Empleado::all();        
+        return view('usuario.empleado', compact('horarios', 'empleados'));       
     }
 
     public function crear_horario(Request $request)
     {
         $request->validate([
-            'horainicio' => 'required',
-            'horafinal' => 'required',
-            'dias' => 'required',
+            'horaInicio' => 'required',
+            'horaFinal' => 'required',
+            'dia' => 'required',
         ]);
 
         $horarios = new Horario;
-        $horarios->horainicio = $request->horainicio;
-        $horarios->horafinal = $request->horafinal;
-        $horarios->dias = $request->dias;
+        $horarios->horaInicio = $request->horaInicio;
+        $horarios->horaFinal = $request->horaFinal;
+        $horarios->dia = $request->dia;
 
         $horarios->save();
-        return redirect()->back()->with('mensaje','agregado exitosanmente');
+        return redirect()->back()->with('message','agregado exitosanmente');
     }
 
     public function editar($id)
@@ -110,16 +85,16 @@ class ControllerUsuario extends Controller
     {
         $horarios = Horario::findOrFail($id); // Buscar el horario por ID
         $request->validate([
-            'horainicio' => 'required',
-            'horafinal' => 'required',
-            'dias' => 'required',
+            'horaInicio' => 'required',
+            'horaFinal' => 'required',
+            'dia' => 'required',
         ]);
-        $horarios->horainicio = $request->horainicio;
-        $horarios->horafinal = $request->horafinal;
-        $horarios->dias = $request->dias;       
+        $horarios->horaInicio = $request->horaInicio;
+        $horarios->horaFinal = $request->horaFinal;
+        $horarios->dia = $request->dia;       
     
         $horarios->save();
-        return redirect()->back()->with('mensaje','actualizado exitosamente');
+        return redirect()->back()->with('sms','actualizado exitosamente');
     }
 
     public function borrar_horario($id){
@@ -128,75 +103,72 @@ class ControllerUsuario extends Controller
         return redirect()->back()->with('message','eliminado exitosanmente');
     }
 
+    
     public function ver_empleado() {        
         $horarios = Horario::all(); 
-        $empleados = Empleado::all();        
-        return view('horario.ver_horario', compact('horarios', 'empleados')); // Las variables deben ser pasadas separadamente
+        $empleados = Empleado::all();  
+        $usuarios = DB::table('users')
+            ->join('usuario_rols', 'users.id', '=', 'usuario_rols.user_id')
+            ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
+            ->where('usuario_rols.user_id', 2)  // Puedes modificar el número para otro usuario específico
+            ->select('users.id', 'users.name', 'rols.rolUsuario')
+            ->get();
+    
+        return view('usuario.empleado', compact('horarios', 'empleados', 'usuarios'));
     }
-
+    
 
     public function crear_empleado(Request $request)
     {
-        $request->validate([
-            'ci' => 'required|integer',
-            'nombre' => 'required|string|max:60',
-            'sexo' => 'required|in:M,F',
-            'telefono' => 'required|integer',
-            'direccion' => 'required|string|max:60',
-            'fechacontratacion' => 'required|date',
+        $request->validate([           
+            'idUsuario' => 'required|integer',
+            'fechaContratacion' => 'required|date',
             'cargo' => 'required|string|max:40',
-            'idhorario' => 'required|exists:horarios,id',
+            'idHorario' => 'required|exists:horarios,id',
         ]);
 
         $empleados = new Empleado;
-        $empleados->ci = $request->ci;
-        $empleados->nombre = $request->nombre;
-        $empleados->sexo = $request->sexo;
-        $empleados->telefono = $request->telefono;
-        $empleados->direccion = $request->direccion;
-        $empleados->fechacontratacion = $request->fechacontratacion;
+        $empleados->idUsuario = $request->idUsuario;
+        $empleados->fechacontratacion = $request->fechaContratacion;
         $empleados->cargo = $request->cargo;
-        $empleados->idhorario = $request->idhorario;
+        $empleados->idHorario = $request->idHorario;
         $empleados->save();
-        return redirect()->back()->with('sms','agregado exitosanmente');
+        return redirect()->back()->with('message','Empleado agregado exitosanmente');
     }
 
-    public function editar_empl($id)
-    {
-        $horarios = Horario::all();
-        $empleados = Empleado::findOrFail($id);        
-        return view('empleado.editar', compact('horarios', 'empleados'));  // Retornar la vista con el horario para editar
+    public function editar_empl($id) {
+        $horarios = Horario::all(); 
+        $empleados = Empleado::findOrFail($id);  
+        $usuarios = DB::table('users')
+        ->join('usuario_rols', 'users.id', '=', 'usuario_rols.user_id')
+        ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
+        ->where('usuario_rols.user_id', 2)  // Puedes modificar el número para otro usuario específico
+        ->select('users.id', 'users.name', 'rols.rolUsuario')
+        ->get();
+        return view('empleado.editar', compact('horarios', 'empleados', 'usuarios'));
     }
-
-    public function editar_empleado(Request $request, $id)
-    {
-        $empleados = Empleado::findOrFail($id); // Buscar el horario por ID
+    
+    public function editar_empleado(Request $request, $id) {
+        $empleado = Empleado::findOrFail($id);
         $request->validate([
-            'ci' => 'required|integer',
-            'nombre' => 'required|string|max:60',
-            'sexo' => 'required|in:M,F',
-            'telefono' => 'required|integer',
-            'direccion' => 'required|string|max:60',
-            'fechacontratacion' => 'required|date',
+            'idUsuario' => 'required|integer',
+            'fechaContratacion' => 'required|date',
             'cargo' => 'required|string|max:40',
-            'idhorario' => 'required|exists:horarios,id',
+            'idHorario' => 'required|exists:horarios,id',
         ]);
-
-        $empleados->ci = $request->ci;
-        $empleados->nombre = $request->nombre;
-        $empleados->sexo = $request->sexo;
-        $empleados->telefono = $request->telefono;
-        $empleados->direccion = $request->direccion;
-        $empleados->fechacontratacion = $request->fechacontratacion;
-        $empleados->cargo = $request->cargo;
-        $empleados->idhorario = $request->idhorario;
-        $empleados->save();
-        return redirect()->back()->with('mensaje','actualizado exitosamente');
+    
+        $empleado->idUsuario = $request->idUsuario;
+        $empleado->fechaContratacion = $request->fechaContratacion;
+        $empleado->cargo = $request->cargo;
+        $empleado->idHorario = $request->idHorario;
+        $empleado->save();
+    
+        return redirect()->back()->with('mensaje', 'Actualizado exitosamente');
     }
-
+    
     public function borrar_empleado($id){
-        Empleado::findOrFail($id)->delete(); // Eliminar el empleado por ID
-        return redirect()->back()->with('message','eliminado exitosanmente');
+        Empleado::findOrFail($id)->delete();
+        return redirect()->back()->with('message', 'Empleado Eliminado exitosamente');
     }
 
 

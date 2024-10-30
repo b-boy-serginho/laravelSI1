@@ -33,6 +33,7 @@ Route::middleware([
     Route::get('/ver_empleado', [ControllerUsuario::class, 'ver_empleado']);
     Route::post('/crear_empleado', [ControllerUsuario::class, 'crear_empleado']);
     Route::get('/editar_empl/{id}', [ControllerUsuario::class, 'editar_empl'])->name('editar_empl');
+
     // Ruta para actualizar el horario (método POST)
     Route::post('/editar_empleado/{id}', [ControllerUsuario::class, 'editar_empleado']);
     Route::get('/borrar_empleado/{id}', [ControllerUsuario::class, 'borrar_empleado']);
