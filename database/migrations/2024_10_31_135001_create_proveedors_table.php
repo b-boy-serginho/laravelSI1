@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rols', function (Blueprint $table) {
+        Schema::create('proveedors', function (Blueprint $table) {
             $table->id();
 
-            //agregar
-            $table->string('descripcion');
+            $table->string('nombre')->nullable();
+            $table->string('contacto')->nullable();
+            $table->string('correo')->nullable();
+            $table->string('direccion')->nullable();
+            $table->integer('telefono')->nullable();
 
             $table->timestamps();
         });
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rols');
+        Schema::dropIfExists('proveedors');
     }
 };

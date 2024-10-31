@@ -34,7 +34,7 @@
                         </div>
                         <div class="mt-4">
                             <button type="submit" class="bg-blue-500 text-black px-4 py-2 rounded">Actualizar Horario</button>
-                            <a href="/ver_empleado" class="bg-green-500 text-black px-4 py-2 rounded">Regresar</a>
+                            <a href="/ver_horario" class="bg-green-500 text-black px-4 py-2 rounded">Regresar</a>
                         </div>
                         <div class="mt-4">                            
                             

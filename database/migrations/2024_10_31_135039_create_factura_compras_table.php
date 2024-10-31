@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rols', function (Blueprint $table) {
+        Schema::create('factura_compras', function (Blueprint $table) {
             $table->id();
 
-            //agregar
-            $table->string('descripcion');
+            $table->foreignId('proveedor_id')->constrained('proveedors')->onDelete('cascade');
+            $table->date('fecha')->nullable();
+            $table->integer('importe')->nullable();
 
             $table->timestamps();
         });
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rols');
+        Schema::dropIfExists('factura_compras');
     }
 };

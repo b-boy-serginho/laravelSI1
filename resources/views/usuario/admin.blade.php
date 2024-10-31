@@ -7,5 +7,5 @@
 @stop
 
 @section('content')
-   
+    Bienvenido joven administrador
 @stop

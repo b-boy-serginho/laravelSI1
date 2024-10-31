@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Administrador',
+    'title' => 'AdminLTE 3',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    // 'logo' => '<b>Artesania</b>ArteDec',
-    // 'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    // 'logo_img_class' => 'brand-image img-circle elevation-3',
-    // 'logo_img_xl' => null,
-    // 'logo_img_xl_class' => 'brand-image-xs',
-    // 'logo_img_alt' => 'Admin Logo',
+    'logo' => '<b>Admin</b>LTE',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_xl' => null,
+    'logo_img_xl_class' => 'brand-image-xs',
+    'logo_img_alt' => 'Admin Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,16 +83,16 @@ return [
     |
     */
 
-    // 'auth_logo' => [
-    //     'enabled' => false,
-    //     'img' => [
-    //         'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    //         'alt' => 'Auth Logo',
-    //         'class' => '',
-    //         'width' => 50,
-    //         'height' => 50,
-    //     ],
-    // ],
+    'auth_logo' => [
+        'enabled' => false,
+        'img' => [
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'Auth Logo',
+            'class' => '',
+            'width' => 50,
+            'height' => 50,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -109,17 +109,17 @@ return [
     |
     */
 
-    // 'preloader' => [
-    //     'enabled' => true,
-    //     'mode' => 'fullscreen',
-    //     'img' => [
-    //         'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    //         'alt' => 'AdminLTE Preloader Image',
-    //         'effect' => 'animation__shake',
-    //         'width' => 60,
-    //         'height' => 60,
-    //     ],
-    // ],
+    'preloader' => [
+        'enabled' => true,
+        'mode' => 'fullscreen',
+        'img' => [
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'AdminLTE Preloader Image',
+            'effect' => 'animation__shake',
+            'width' => 60,
+            'height' => 60,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -154,7 +154,6 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    // 'layout_fixed_sidebar' => null,
     'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
@@ -265,7 +264,6 @@ return [
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
-    // 'profile_url' => 'user/profile',    
     'disable_darkmode_routes' => false,
 
     /*
@@ -301,18 +299,18 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
+        //// Navbar items:
         // [
         //     'type' => 'navbar-search',
         //     'text' => 'search',
         //     'topnav_right' => true,
         // ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type' => 'fullscreen-widget',
+        //     'topnav_right' => true,
+        // ],
 
-        // Sidebar items:
+        // // Sidebar items:
         // [
         //     'type' => 'sidebar-menu-search',
         //     'text' => 'search',
@@ -329,9 +327,9 @@ return [
         //     'label' => 4,
         //     'label_color' => 'success',
         // ],
-        // ['header' => 'Usuarios'],
+        // ['header' => 'account_settings'],
         // [
-        //     'text' => 'Empleado',
+        //     'text' => 'profile',
         //     'url' => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-user',
         // ],
@@ -381,70 +379,88 @@ return [
         // ],
 
         [
-            'text' => 'Usuarios',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Gestionar de Rol',
+            'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Administrador',
-                    'url' => '#',
-                ],
+                    'text' => 'Asignar Rol',
+                    'url' => 'ver_rol',
+                ],                        
+            ],
+        ],
 
-                // [
-                //     'text' => 'Cliente',
-                //     'url' => '#',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'level_two',
-                //             'url' => '#',
-                //         ],
-                //         [
-                //             'text' => 'level_two',
-                //             'url' => '#',
-                //             'submenu' => [
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url' => '#',
-                //                 ],
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url' => '#',
-                //                 ],
-                //             ],
-                //         ],
-                //     ],
-                // ],
+        
+        [
+            'text' => 'Gestionar de Horario',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Horario',
+                    'url' => 'ver_horario',
+                ],                        
+            ],
+        ],
 
+        [
+            'text' => 'Gestionar usuarios',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
                 [
                     'text' => 'Empleado',
                     'url' => 'ver_empleado',
                 ],
-                [
-                    'text' => 'Cliente',
-                    'url' => '#',
-                ],
+                // [
+                //     'text' => 'Cliente',
+                //     'url' => '#',
+                // ],               
+
+            ],
+        ],
+        [
+            'text' => 'Gestionar Producto',
+            'icon' => 'fas fa-fw fa-share',
+            'submenu' => [
                 [
                     'text' => 'Proveedor',
-                    'url' => '#',
+                    'url' => 'ver_proveedor',
                 ],
+                [
+                    'text' => 'Categoria',
+                    'url' => 'ver_categoria',
+                ], 
+                                       
+                [
+                    'text' => 'Producto',
+                    'url' => 'ver_producto',
+                ], 
+                [
+                    'text' => 'Factura',
+                    'url' => 'ver_factura',
+                ], 
+                [
+                    'text' => 'Detalle de la Factura',
+                    'url' => 'ver_detalle',
+                ], 
+
             ],
         ],
 
-    //     ['header' => 'labels'],
-    //     [
-    //         'text' => 'important',
-    //         'icon_color' => 'red',
-    //         'url' => '#',
-    //     ],
-    //     [
-    //         'text' => 'warning',
-    //         'icon_color' => 'yellow',
-    //         'url' => '#',
-    //     ],
-    //     [
-    //         'text' => 'information',
-    //         'icon_color' => 'cyan',
-    //         'url' => '#',
-    //     ],
+        // ['header' => 'labels'],
+        // [
+        //     'text' => 'important',
+        //     'icon_color' => 'red',
+        //     'url' => '#',
+        // ],
+        // [
+        //     'text' => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url' => '#',
+        // ],
+        // [
+        //     'text' => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url' => '#',
+        // ],
     ],
 
     /*

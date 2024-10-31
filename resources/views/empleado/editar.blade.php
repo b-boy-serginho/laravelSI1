@@ -12,9 +12,7 @@
 
                     <form action="{{ url('/editar_empleado', $empleados->id) }}" method="POST">
                         @csrf
-                        <div class="grid grid-cols-3 gap-4">
-
-                                <div>
+                        <div>
                                     <label for="idUsuario" class="block text-sm font-medium text-gray-700">Empleado</label>
                                     <select class="text_color" name="idUsuario" required>
                                         <option value="" selected>Seleccionar empleado...</option>
@@ -30,10 +28,36 @@
                                 </div>
 
                                 <div>
+                                    <label for="ci" class="block text-sm font-medium text-gray-700">CI</label>
+                                    <input type="number" name="ci" id="ci" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Cargo del empleado">
+                                </div>
+
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-700">Nombre del empleado</label>
+                                    <select class="text_color" name="name" required>
+                                        <option value="" selected>Seleccionar empleado...</option>
+                                        @foreach ($usuarios as $user)
+                                            <option value="{{ $user->name }}">{{ $user->id }} - {{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+                                    <select name="sexo" id="sexo" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                        <option value="" selected>Seleccionar sexo...</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </div>
+
+                                
+
+                                <div>
                                     <label for="cargo" class="block text-sm font-medium text-gray-700">Cargo</label>
                                     <input type="text" name="cargo" id="cargo" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Cargo del empleado">
                                 </div>
-                                
+
                                 <div>
                                     <label for="idHorario" class="block text-sm font-medium text-gray-700">Horario</label>
                                     <select class="text_color" name="idHorario" required>
@@ -44,8 +68,7 @@
                                     </select>
                                 </div>
 
-
-                        </div>
+                            </div>
                         <div class="mt-4">
                             <button type="submit" class="bg-blue-500 text-black px-4 py-2 rounded">Actualizar Empleado</button>
                             <a href="/ver_empleado" class="bg-green-500 text-black px-4 py-2 rounded">Regresar</a>
