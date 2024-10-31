@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             // Claves foráneas
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('rol_id')->constrained('rols')->onDelete('cascade');
 
             $table->timestamps();

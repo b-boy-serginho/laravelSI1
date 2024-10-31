@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             //agregar
-            $table->string('rolUsuario');
+            $table->string('descripcion');
 
             $table->timestamps();
         });

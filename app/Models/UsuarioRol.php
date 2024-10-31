@@ -12,9 +12,9 @@ class UsuarioRol extends Model
 {
     use HasFactory;
 
-    public function user()
+    public function usuario()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'usuario_id', 'id');
     }
     public function rol()
     {

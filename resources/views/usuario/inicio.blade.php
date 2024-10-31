@@ -60,7 +60,7 @@
                 <!-- Aquí añadimos d-flex y justify-content-center para centrar horizontalmente -->
                 <div class="row d-flex justify-content-center">
                     <!-- Columna de producto 1 -->
-                    <div class="col-sm-6 col-md-4 col-lg-3">
+                    <!-- <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="box">
                             <div class="img-box">
                                 <img src="/inicio/R.jpeg" alt="Producto 1" class="img-fluid">
@@ -70,16 +70,16 @@
                                         <h3>Bs Precio</h3>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Descripción del producto -->
-                            <div class="product-description">
+                            <!-- <div class="product-description">
                                 <p>Una hermosa canasta hecha a mano, perfecta para regalos o decoración.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Columna de producto 2 -->
-                    <div class="col-sm-6 col-md-4 col-lg-3">
+                    <!-- <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="box">
                             <div class="img-box">
                                 <img src="/inicio/OIP.jpeg" alt="Producto 2" class="img-fluid">
@@ -90,12 +90,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Descripción del producto -->
-                            <div class="product-description">
+                            Descripción del producto -->
+                            <!-- <div class="product-description">
                                 <p>Tinajas de barro ideales para decoración de interiores o exteriores.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Columna de producto 3 -->
                     <div class="col-sm-6 col-md-4 col-lg-3">
@@ -115,6 +115,43 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="/inicio/img2.jpg" alt="Producto 3" class="img-fluid">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <h2>Casita</h2>
+                                        <h3>Bs Precio</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Descripción del producto -->
+                            <div class="product-description">
+                                <p>Compra productos por mayor para eventos o grandes decoraciones.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="/inicio/img3.jpg" alt="Producto 3" class="img-fluid">
+                                <div class="overlay">
+                                    <div class="text">
+                                        <h2>Decoraciones</h2>
+                                        <h3>Bs Precio</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Descripción del producto -->
+                            <div class="product-description">
+                                <p>Compra productos por mayor para eventos o grandes decoraciones.</p>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div> <!-- Fin de la fila -->
             </div>

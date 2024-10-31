@@ -14,14 +14,15 @@ return new class extends Migration
         Schema::create('empleados', function (Blueprint $table) {
 
             $table->id(); // Clave primaria
-            $table->integer('ci')->nullable(false); // CI
-            $table->string('nombre', 60)->nullable(false); // Nombre del empleado
-            $table->char('sexo', 1)->nullable(false); // Sexo (suponiendo que usas un solo carácter)
-            $table->integer('telefono')->nullable(false); // Teléfono
-            $table->string('direccion', 60)->nullable(false); // Dirección
-            $table->date('Fechacontratacion')->nullable(false); // Fecha de contratación
-            $table->string('cargo', 40)->nullable(false); // Cargo            
-            $table->foreignId('idhorario')->constrained('horarios')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea
+
+            $table->foreignId('idUsuario')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea           
+            $table->foreignId('idHorario')->constrained('horarios')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea
+
+            $table->integer('ci')->nullable();
+            $table->string('name');
+            $table->char('sexo', 1)->nullable();
+            $table->string('cargo', 40)->nullable(false); // Cargo 
+            $table->date('fechaContratacion')->nullable(false); // Fecha de contratación
 
 
             $table->timestamps();

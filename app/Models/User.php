@@ -63,6 +63,11 @@ class User extends Authenticatable
         ];
     }
 
+    // public function cliente()
+    // {
+    //     return $this->hasOne(Cliente::class);
+    // }
+
     // public function roles()
     // {
     //     return $this->belongsToMany(Rol::class, 'rol_user');

@@ -10,10 +10,11 @@ use Session;
 use App\Models\User;
 use App\Models\Rol;
 use App\Models\UsuarioRol;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;    
 use Illuminate\Support\Facades\Storage;
 use App\Models\Empleado;
 use App\Models\Horario;
+use Illuminate\Support\Facades\DB;
 
 class ControllerUsuario extends Controller
 {
@@ -22,10 +23,10 @@ class ControllerUsuario extends Controller
         return view('usuario.inicio');
     }
 
-    public function logeado()
+    public function redireccionar()
     {
         $userId = Auth::user()->id;
-        $usuarioRol = UsuarioRol::where('user_id', $userId)->first();
+        $usuarioRol = UsuarioRol::where('usuario_id', $userId)->first();
 
         if ($usuarioRol) {
             $rolId = $usuarioRol->rol_id;
@@ -44,29 +45,77 @@ class ControllerUsuario extends Controller
                 default:
                     return redirect('/')->with('error', 'Rol no reconocido.');
             }
-        } else {
+        } 
+        else {
             return redirect('/')->with('error', 'No se ha asignado un rol a este usuario.');
         }
     }
 
+    public function ver_rol() {
+        $rol = Rol::all(); 
+        $usuario = User::all();  
+        $usuario_rol = UsuarioRol::all();      
+        return view('rol.inicio', compact('rol','usuario','usuario_rol'));       
+    }
+
+    public function crear_rol(Request $request) {
+        $request->validate([
+            'usuario_id' => 'required',
+            'rol_id' => 'required',           
+        ]);
+
+        $usuario_rol = new UsuarioRol;
+        $usuario_rol->usuario_id = $request->usuario_id;
+        $usuario_rol->rol_id = $request->rol_id;
+        $usuario_rol->save();
+      
+        return redirect()->back()->with('mensaje','agregado exitosamente');      
+    }    
+
+    public function editar_rol($id)
+    {
+        $rol = Rol::all(); 
+        $usuario = User::all();  
+        $usuario_rol = UsuarioRol::find($id);     
+        return view('rol.editar', compact('rol','usuario','usuario_rol'));
+    }
+
+    public function editarRol(Request $request, $id) {
+
+        $usuario_rol = UsuarioRol::find($id);   
+        $usuario_rol->usuario_id = $request->usuario_id;
+        $usuario_rol->rol_id = $request->rol_id;
+        $usuario_rol->save();
+    
+        return redirect()->back()->with('mensaje', '¡Actualizado exitosamente!');
+    }
+    
+    public function borrar_rol($id){
+        $borrar = UsuarioRol::find($id);
+        $borrar->delete();
+        return redirect()->back()->with('mensaje','eliminado exitosanmente');
+    }
+    
+    //--------------------------------------------------------------------------
+
     public function ver_horario() {
-        $horarios = Horario::all(); // Obtener todos los horarios para listarlos
-        
-        return view('horario.ver_horario', compact('horarios')); // Mostrar vista de horarios
+        $horarios = Horario::all(); 
+              
+        return view('horario.inicio', compact('horarios'));       
     }
 
     public function crear_horario(Request $request)
     {
         $request->validate([
-            'horainicio' => 'required',
-            'horafinal' => 'required',
-            'dias' => 'required',
+            'horaInicio' => 'required',
+            'horaFinal' => 'required',
+            'dia' => 'required',
         ]);
 
         $horarios = new Horario;
-        $horarios->horainicio = $request->horainicio;
-        $horarios->horafinal = $request->horafinal;
-        $horarios->dias = $request->dias;
+        $horarios->horaInicio = $request->horaInicio;
+        $horarios->horaFinal = $request->horaFinal;
+        $horarios->dia = $request->dia;
 
         $horarios->save();
         return redirect()->back()->with('mensaje','agregado exitosanmente');
@@ -82,93 +131,128 @@ class ControllerUsuario extends Controller
     {
         $horarios = Horario::findOrFail($id); // Buscar el horario por ID
         $request->validate([
-            'horainicio' => 'required',
-            'horafinal' => 'required',
-            'dias' => 'required',
+            'horaInicio' => 'required',
+            'horaFinal' => 'required',
+            'dia' => 'required',
         ]);
-        $horarios->horainicio = $request->horainicio;
-        $horarios->horafinal = $request->horafinal;
-        $horarios->dias = $request->dias;       
+        $horarios->horaInicio = $request->horaInicio;
+        $horarios->horaFinal = $request->horaFinal;
+        $horarios->dia = $request->dia;       
     
         $horarios->save();
-        return redirect()->back()->with('mensaje','actualizado exitosamente');
+        return redirect()->back()->with('sms','actualizado exitosamente');
     }
 
     public function borrar_horario($id){
         $borrar = Horario::find($id);
         $borrar->delete();
-        return redirect()->back()->with('message','eliminado exitosanmente');
+        return redirect()->back()->with('mensaje','eliminado exitosanmente');
     }
 
+    //---------------------------------------------------------------------------------------
+    
     public function ver_empleado() {        
         $horarios = Horario::all(); 
-        $empleados = Empleado::all();        
-        return view('horario.ver_horario', compact('horarios', 'empleados')); // Las variables deben ser pasadas separadamente
+        $empleados = Empleado::all();  
+        $usuarios = DB::table('users')
+        ->select('users.id', 'users.name')
+        ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
+        ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
+        ->where('rols.id', 2)
+        ->get();
+    
+        return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios'));
     }
-
+    
 
     public function crear_empleado(Request $request)
     {
-        $request->validate([
+        $request->validate([           
+            'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
-            'nombre' => 'required|string|max:60',
-            'sexo' => 'required|in:M,F',
-            'telefono' => 'required|integer',
-            'direccion' => 'required|string|max:60',
-            'fechacontratacion' => 'required|date',
+            'name' => 'required|string',
+            'sexo' => 'required|string',
+            'fechaContratacion' => 'required|date',
             'cargo' => 'required|string|max:40',
-            'idhorario' => 'required|exists:horarios,id',
+            'idHorario' => 'required|exists:horarios,id',
         ]);
 
         $empleados = new Empleado;
+        $empleados->idUsuario = $request->idUsuario;
         $empleados->ci = $request->ci;
-        $empleados->nombre = $request->nombre;
+        $empleados->name = $request->name;
         $empleados->sexo = $request->sexo;
-        $empleados->telefono = $request->telefono;
-        $empleados->direccion = $request->direccion;
-        $empleados->fechacontratacion = $request->fechacontratacion;
+        $empleados->fechacontratacion = $request->fechaContratacion;
         $empleados->cargo = $request->cargo;
-        $empleados->idhorario = $request->idhorario;
+        $empleados->idHorario = $request->idHorario;
         $empleados->save();
-        return redirect()->back()->with('sms','agregado exitosanmente');
+
+        return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
     }
 
-    public function editar_empl($id)
-    {
-        $horarios = Horario::all();
-        $empleados = Empleado::findOrFail($id);        
-        return view('empleado.editar', compact('horarios', 'empleados'));  // Retornar la vista con el horario para editar
+    public function editar_empl($id) {
+        $horarios = Horario::all(); 
+        $empleados = Empleado::findOrFail($id);  
+        $usuarios = DB::table('users')
+        ->select('users.id', 'users.name')
+        ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
+        ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
+        ->where('rols.id', 2)
+        ->get();
+        return view('empleado.editar', compact('horarios', 'empleados', 'usuarios'));
     }
-
-    public function editar_empleado(Request $request, $id)
-    {
-        $empleados = Empleado::findOrFail($id); // Buscar el horario por ID
-        $request->validate([
+    
+    public function editar_empleado(Request $request, $id) {
+        $empleados = Empleado::findOrFail($id);
+        $request->validate([           
+            'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
-            'nombre' => 'required|string|max:60',
-            'sexo' => 'required|in:M,F',
-            'telefono' => 'required|integer',
-            'direccion' => 'required|string|max:60',
-            'fechacontratacion' => 'required|date',
+            'name' => 'required',
+            'sexo' => 'required',
+            'fechaContratacion' => 'required|date',
             'cargo' => 'required|string|max:40',
-            'idhorario' => 'required|exists:horarios,id',
+            'idHorario' => 'required|exists:horarios,id',
         ]);
 
+        $empleados->idUsuario = $request->idUsuario;
         $empleados->ci = $request->ci;
-        $empleados->nombre = $request->nombre;
+        $empleados->name = $request->name;
         $empleados->sexo = $request->sexo;
-        $empleados->telefono = $request->telefono;
-        $empleados->direccion = $request->direccion;
-        $empleados->fechacontratacion = $request->fechacontratacion;
+        $empleados->fechacontratacion = $request->fechaContratacion;
         $empleados->cargo = $request->cargo;
-        $empleados->idhorario = $request->idhorario;
+        $empleados->idHorario = $request->idHorario;
         $empleados->save();
-        return redirect()->back()->with('mensaje','actualizado exitosamente');
+    
+        return redirect()->back()->with('mensaje', 'Actualizado exitosamente');
+    }
+    
+    public function borrar_empleado($id){
+        Empleado::findOrFail($id)->delete();
+        return redirect()->back()->with('mensaje', 'Empleado Eliminado exitosamente');
     }
 
-    public function borrar_empleado($id){
-        Empleado::findOrFail($id)->delete(); // Eliminar el empleado por ID
-        return redirect()->back()->with('message','eliminado exitosanmente');
+    //----------------------------------------------------------------------
+
+    public function ver_cliente(){
+
+        return view('cliente.inicio');
+    }
+
+    public function crear_cliente(Request $request){
+        $request->validate([           
+            'user_id' => 'required|integer',
+            'direccion' => 'required|string|max:40',
+            'departamento' => 'required|string|max:40',
+            'telefono' => 'required|integer',
+        ]);
+
+        $cliente = new Cliente;
+        $cliente->user_id = $request->user_id;
+        $cliente->direccion = $request->direccion;
+        $cliente->departamento = $request->departamento;
+        $cliente->telefono = $request->telefono;
+        $cliente->save();
+        return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
     }
 
 

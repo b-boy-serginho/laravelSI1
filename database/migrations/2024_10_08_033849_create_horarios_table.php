@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('horarios', function (Blueprint $table) {
             
             $table->id(); // Clave primaria
-            $table->time('horainicio')->nullable(false); // Hora de inicio
-            $table->time('horafinal')->nullable(false); // Hora de finalización
-            $table->string('dias', 60)->nullable(false); // Días de la semana (Ej: "Lunes a Viernes")
+            $table->time('horaInicio')->nullable(false); // Hora de inicio
+            $table->time('horaFinal')->nullable(false); // Hora de finalización
+            $table->string('dia', 60)->nullable(false); // Días de la semana (Ej: "Lunes a Viernes")
 
             $table->timestamps();
         });

@@ -15,47 +15,101 @@ class UsuarioSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'David',
+        // Creación de Usuarios
+    $users = [
+        [
+           
+            'name' => 'Admin',
+            'email' => 'admin@example.com',
             'estado' => 'activo',
             'fechaCreacion' => now(),
-            'email' => 'd@gmail.com',
-            'password' => bcrypt('12345678'), // Agrega aquí una contraseña
-        ]);
-        User::create([         
-            'name' => 'Juan',
-            'email' => 'j@gmail.com', 
-            'estado' => 'activo',
-            'fechaCreacion' => now(),
-            'password' => bcrypt('12345678'),        
-        ]);
-        User::create([         
-            'name' => 'Carlos',
-            'email' => 'c@gmail.com',
-            'estado' => 'activo',
-            'fechaCreacion' => now(),
-            'password' => bcrypt('12345678'),         
-        ]); 
-        Rol::create([         
-            'rolUsuario' => 'Administrador'          
-        ]); 
-        Rol::create([         
-            'rolUsuario' => 'Empleado'          
-        ]);
-        Rol::create([         
-            'rolUsuario' => 'Cliente'          
-        ]);
+            'password' => bcrypt('12345678'),
 
+            // 'ci' => '111',
+            // 'sexo' => 'M',
+            // 'direccion' => 'Av. Santos Doumont',
+            // 'telefono' => '123',
+        ],
+        [
+            'name' => 'Empleado1',
+            'email' => 'empleado1@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+
+            // 'ci' => '222',
+            // 'sexo' => 'M',
+            // 'direccion' => 'Transito',
+            // 'telefono' => '456',
+        ],
+
+        [
+            'name' => 'Empleado2',
+            'email' => 'empleado2@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+
+            // 'ci' => '222',
+            // 'sexo' => 'M',
+            // 'direccion' => 'Transito',
+            // 'telefono' => '456',
+        ],
+        [
+            'name' => 'Cliente',
+            'email' => 'cliente@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+
+            // 'ci' => '333',
+            // 'sexo' => 'M',
+            // 'direccion' => 'Zona Alto San Pedro',
+            // 'telefono' => '789',
+        ],
+        // [
+        //     'ci' => '444',
+        //     'name' => 'Proveedor',
+        //     'email' => 'proveedor@example.com',
+        //     'estado' => 'activo',
+        //     'sexo' => 'M',
+        //     'direccion' => 'Zona Urubo',
+        //     'telefono' => '701',
+        //     'fechaCreacion' => now(),
+        //     'password' => bcrypt('12345678'),
+        // ],
+    ];
+
+    foreach ($users as $userData) {
+        User::create($userData);
+    }
+    
+        Rol::create([         
+            'descripcion' => 'Administrador'          
+        ]); 
+        Rol::create([         
+            'descripcion' => 'Empleado'          
+        ]);
+        Rol::create([         
+            'descripcion' => 'Cliente'          
+        ]);
+        // Rol::create([         
+        //     'rolUsuario' => 'Proveedor'          
+        // ]);
         UsuarioRol::create([         
-            'user_id' => '1',    
+            'usuario_id' => '1',    
             'rol_id' => '1'            
         ]);
         UsuarioRol::create([         
-            'user_id' => '2',    
+            'usuario_id' => '2',    
             'rol_id' => '2'            
         ]);
         UsuarioRol::create([         
-            'user_id' => '3',    
+            'usuario_id' => '3',    
+            'rol_id' => '2'          
+        ]);
+        UsuarioRol::create([         
+            'usuario_id' => '4',    
             'rol_id' => '3'          
         ]);
     }

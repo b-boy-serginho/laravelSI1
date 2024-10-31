@@ -16,8 +16,12 @@ return new class extends Migration
 
             //agregamos esto
             $table->string('name');
+            $table->date('fechaCreacion')->nullable();
             $table->string('estado')->nullable();
-            $table->string('fechaCreacion')->nullable();
+
+            // $table->string('direccion')->nullable();
+            // $table->integer('telefono')->nullable();
+
 
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
