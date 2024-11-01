@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Empleado;
 use App\Models\Horario;
 use Illuminate\Support\Facades\DB;
+use App\Models\Bitacora;
+use Carbon\Carbon;
 
 class ControllerUsuario extends Controller
 {
@@ -50,6 +52,8 @@ class ControllerUsuario extends Controller
             return redirect('/')->with('error', 'No se ha asignado un rol a este usuario.');
         }
     }
+
+
 
     public function ver_rol() {
         $rol = Rol::all(); 
@@ -154,6 +158,7 @@ class ControllerUsuario extends Controller
     public function ver_empleado() {        
         $horarios = Horario::all(); 
         $empleados = Empleado::all();  
+        $bitacora= Bitacora::all();
         $usuarios = DB::table('users')
         ->select('users.id', 'users.name')
         ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
@@ -161,9 +166,15 @@ class ControllerUsuario extends Controller
         ->where('rols.id', 2)
         ->get();
     
-        return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios'));
+        return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios', 'bitacora'));
     }
     
+    public function bitacora()
+    {
+        $bitacora = Bitacora::all();
+        $empleados = Empleado::all();  
+        return view('bitacora.inicio', compact('bitacora', 'empleados'));
+    }
 
     public function crear_empleado(Request $request)
     {
@@ -186,6 +197,18 @@ class ControllerUsuario extends Controller
         $empleados->cargo = $request->cargo;
         $empleados->idHorario = $request->idHorario;
         $empleados->save();
+
+        $bitacora = new Bitacora();
+        $bitacora->descripcion = "Creación de Empleado exitosa";
+        $bitacora->usuario_id = auth()->user()->id;
+        $bitacora->usuario = $request->name;
+        $bitacora->direccion_ip = $request->ip();
+        $bitacora->navegador = $request->header('user-agent');
+    
+        $bitacora->tabla = "Empleados";
+        $bitacora->registro_id = $empleados->id;
+        $bitacora->fecha_hora = Carbon::now();
+        $bitacora->save();
 
         return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
     }
