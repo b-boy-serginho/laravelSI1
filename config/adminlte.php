@@ -389,7 +389,7 @@ return [
             ],
         ],
 
-        
+                
         [
             'text' => 'Gestionar de Horario',
             'icon' => 'fas fa-fw fa-share',
@@ -410,12 +410,19 @@ return [
                     'url' => 'ver_empleado',
                 ],
                 // [
-                //     'text' => 'Cliente',
+                //     'text' => 'Bitacora',
                 //     'url' => '#',
                 // ],               
 
             ],
         ],
+
+    [
+            'text' => 'Bitacora',
+            'url' => 'bitacora',
+            'icon' => 'fas fa-fw fa-user',
+    ],
+
         [
             'text' => 'Gestionar Producto',
             'icon' => 'fas fa-fw fa-share',
