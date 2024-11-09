@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ use App\Models\Empleado;
 use App\Models\Horario;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bitacora;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 
 class ControllerUsuario extends Controller
@@ -154,41 +156,20 @@ class ControllerUsuario extends Controller
     }
 
     //---------------------------------------------------------------------------------------
-<<<<<<< HEAD
 
     public function ver_empleado() {
         $horarios = Horario::all();
         $empleados = Empleado::all();
-=======
-    
-    public function ver_empleado() {        
-        $horarios = Horario::all(); 
-        $empleados = Empleado::all();  
-        $bitacora= Bitacora::all();
->>>>>>> 3546899428eed4728075c99abca6b21b40afad80
         $usuarios = DB::table('users')
         ->select('users.id', 'users.name')
         ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
         ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
         ->where('rols.id', 2)
         ->get();
-<<<<<<< HEAD
 
         return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios'));
     }
 
-=======
-    
-        return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios', 'bitacora'));
-    }
-    
-    public function bitacora()
-    {
-        $bitacora = Bitacora::all();
-        $empleados = Empleado::all();  
-        return view('bitacora.inicio', compact('bitacora', 'empleados'));
-    }
->>>>>>> 3546899428eed4728075c99abca6b21b40afad80
 
     public function crear_empleado(Request $request)
     {
@@ -214,11 +195,11 @@ class ControllerUsuario extends Controller
 
         $bitacora = new Bitacora();
         $bitacora->descripcion = "Creación de Empleado exitosa";
-        $bitacora->usuario_id = auth()->user()->id;
+      //  $bitacora->usuario_id = auth()->user()->id;
         $bitacora->usuario = $request->name;
         $bitacora->direccion_ip = $request->ip();
         $bitacora->navegador = $request->header('user-agent');
-    
+
         $bitacora->tabla = "Empleados";
         $bitacora->registro_id = $empleados->id;
         $bitacora->fecha_hora = Carbon::now();
@@ -275,22 +256,22 @@ class ControllerUsuario extends Controller
         return view('cliente.inicio');
     }
 
-    public function crear_cliente(Request $request){
-        $request->validate([
-            'user_id' => 'required|integer',
-            'direccion' => 'required|string|max:40',
-            'departamento' => 'required|string|max:40',
-            'telefono' => 'required|integer',
-        ]);
+    // public function crear_cliente(Request $request){
+    //     $request->validate([
+    //         'user_id' => 'required|integer',
+    //         'direccion' => 'required|string|max:40',
+    //         'departamento' => 'required|string|max:40',
+    //         'telefono' => 'required|integer',
+    //     ]);
 
-        $cliente = new Cliente();
-        $cliente->user_id = $request->user_id;
-        $cliente->direccion = $request->direccion;
-        $cliente->departamento = $request->departamento;
-        $cliente->telefono = $request->telefono;
-        $cliente->save();
-        return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
-    }
+    //     $cliente = new Cliente();
+    //     $cliente->user_id = $request->user_id;
+    //     $cliente->direccion = $request->direccion;
+    //     $cliente->departamento = $request->departamento;
+    //     $cliente->telefono = $request->telefono;
+    //     $cliente->save();
+    //     return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
+    // }
 
 
 
