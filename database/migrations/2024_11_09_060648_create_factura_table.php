@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('factura', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->date('fecha');  // Fecha de nacimiento
+            $table->float('importe');  // Fecha de nacimiento
+            $table->float('total');  // Fecha de nacimiento
+            $table->integer('nro');  // Fecha de nacimiento
+            //llave forajea de pedido
+            // llave foranea de metodo de pago
         });
     }
 
