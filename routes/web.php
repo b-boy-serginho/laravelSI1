@@ -68,7 +68,7 @@ Route::middleware([
     Route::get('/borrar_detalle/{id}', [ProductoController::class, 'borrar_detalle']);
     Route::get('/editar_detalle/{id}', [ProductoController::class, 'editar_detalle']);
     Route::post('/editarDetalle/{id}', [ProductoController::class, 'editarDetalle']);
-
+    
 });
 
 

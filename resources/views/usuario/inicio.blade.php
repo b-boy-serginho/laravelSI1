@@ -1,166 +1,253 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <base href="/public">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="inicio/estilos.css" rel="stylesheet" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Floral</title>
 
+    <style>
+        /* Estilos generales */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f5f0;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #8e44ad;
+            color: #fff;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #ffd1dc;
+        }
+
+        /* Banner */
+        .banner {
+            height: 60vh;
+            background: url('banner-floral.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: yellow;
+
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .banner a {
+            text-decoration: none;
+            background-color: #e3f2fd;
+            color: #6a1b9a;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        /* Sección de categorías */
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #5d4037;
+        }
+
+        .categories, .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #8e44ad;
+            margin-bottom: 10px;
+        }
+
+        /* Contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .contact-form button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #8e44ad;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-form button:hover {
+            background-color: #733e90;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #8e44ad;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .banner h1 {
+                font-size: 2rem;
+            }
+            .categories, .products {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
 <body>
 
-    <!-- Encabezado -->
-    <header class="top-header">
-        <div class="container">
-            <div class="row align-items-center">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#">Tienda Floral</a>
+        <div>
+            <a href="#categorias">Categorías</a>
+            <a href="#productos">Productos</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+    </nav>
 
-                <!-- Logo Section -->
-                <div class="col-xs-5 header-logo">
-                    <a href="/">
-                        <img src="/inicio/img1.jpg" alt="Logo" class="img-responsive logo-img">
-                    </a>
+    <!-- Banner -->
+    <section class="banner">
+        <div>
+            <h1>Bienvenidos a Tienda Floral</h1>
+            <p>Encuentra una amplia variedad de productos inspirados en la naturaleza</p>
+
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section id="categorias" class="section">
+        <h2>Categorías Populares</h2>
+        <div class="categories">
+            <div class="card">
+                <img src="/inicio/R.jpeg" alt="Flores">
+                <div class="card-body">
+                    <h3 class="card-title">Flores</h3>
                 </div>
-
-                <!-- Navbar Section -->
-                <div class="col-md-7">
-                    <nav class="navbar navbar-default">
-                        <div class="container-fluid nav-bar">
-
-                            <!-- Navbar Content -->
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                <ul class="nav navbar-nav navbar-right">
-                                    <!-- Inicio -->
-                                    <li><a class="menu active" href="/">Inicio</a></li>
-                                    <!-- Iniciar Sesión -->
-                                    <li><a class="menu" href="login">Iniciar Sesión</a></li>
-                                    <li><a class="menu" href="register">Registrarse</a></li>
-                                </ul>
-                            </div><!-- /navbar-collapse -->
-
-                        </div><!-- /container-fluid -->
-                    </nav>
+            </div>
+            <div class="card">
+                <img src="/inicio/OIP.jpeg" alt="Decoración">
+                <div class="card-body">
+                    <h3 class="card-title">Decoración</h3>
                 </div>
-
+            </div>
+            <div class="card">
+                <img src="/inicio/img1.jpg" alt="Juguetes">
+                <div class="card-body">
+                    <h3 class="card-title">Juguetes</h3>
+                </div>
             </div>
         </div>
-    </header> <!-- end of header area -->
+    </section>
 
-    <!-- Contenido principal -->
-    <main>
-        <!-- Sección de productos -->
-        <section class="product-section">
-            <div class="container">
-                <div class="section-title">
-                    <h1 style="text-align:center;">Nuestros <span>productos</span></h1>
+    <!-- Productos Destacados -->
+    <section id="productos" class="section">
+        <h2>Productos Destacados</h2>
+        <div class="products">
+            <div class="card">
+                <img src="/inicio/img2.jpg" alt="Producto 1">
+                <div class="card-body">
+                    <h3 class="card-title">Producto 1</h3>
+                    <p>$15.00</p>
                 </div>
-                <!-- Aquí añadimos d-flex y justify-content-center para centrar horizontalmente -->
-                <div class="row d-flex justify-content-center">
-                    <!-- Columna de producto 1 -->
-                    <!-- <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="box">
-                            <div class="img-box">
-                                <img src="/inicio/R.jpeg" alt="Producto 1" class="img-fluid">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <h2>Canastas</h2>
-                                        <h3>Bs Precio</h3>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- Descripción del producto -->
-                            <!-- <div class="product-description">
-                                <p>Una hermosa canasta hecha a mano, perfecta para regalos o decoración.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- Columna de producto 2 -->
-                    <!-- <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="box">
-                            <div class="img-box">
-                                <img src="/inicio/OIP.jpeg" alt="Producto 2" class="img-fluid">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <h2>Tinajas</h2>
-                                        <h3>Bs Precio</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            Descripción del producto -->
-                            <!-- <div class="product-description">
-                                <p>Tinajas de barro ideales para decoración de interiores o exteriores.</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- Columna de producto 3 -->
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="box">
-                            <div class="img-box">
-                                <img src="/inicio/img1.jpg" alt="Producto 3" class="img-fluid">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <h2>Por mayor</h2>
-                                        <h3>Bs Precio</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Descripción del producto -->
-                            <div class="product-description">
-                                <p>Compra productos por mayor para eventos o grandes decoraciones.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="box">
-                            <div class="img-box">
-                                <img src="/inicio/img2.jpg" alt="Producto 3" class="img-fluid">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <h2>Casita</h2>
-                                        <h3>Bs Precio</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Descripción del producto -->
-                            <div class="product-description">
-                                <p>Compra productos por mayor para eventos o grandes decoraciones.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="box">
-                            <div class="img-box">
-                                <img src="/inicio/img3.jpg" alt="Producto 3" class="img-fluid">
-                                <div class="overlay">
-                                    <div class="text">
-                                        <h2>Decoraciones</h2>
-                                        <h3>Bs Precio</h3>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Descripción del producto -->
-                            <div class="product-description">
-                                <p>Compra productos por mayor para eventos o grandes decoraciones.</p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div> <!-- Fin de la fila -->
             </div>
-        </section>
-        <!-- Fin de la sección de productos -->
-    </main>
+            <div class="card">
+                <img src="/inicio/img3.jpg" alt="Producto 2">
+                <div class="card-body">
+                    <h3 class="card-title">Producto 2</h3>
+                    <p>$20.00</p>
+                </div>
+            </div>
+            <!-- Agrega más productos según sea necesario -->
+        </div>
+    </section>
 
-    <!-- Scripts adicionales si es necesario -->
+
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Tienda Floral. Todos los derechos reservados.</p>
+    </footer>
 
 </body>
-
 </html>
