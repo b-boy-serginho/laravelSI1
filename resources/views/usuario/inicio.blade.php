@@ -180,6 +180,8 @@
     <nav class="navbar">
         <a href="#">Tienda Floral</a>
         <div>
+            <a href="login">Iniciar sesion</a>
+            <a href="register">Registrar</a>
             <a href="#categorias">Categorías</a>
             <a href="#productos">Productos</a>
             <a href="#contacto">Contacto</a>
