@@ -154,19 +154,11 @@ class ControllerUsuario extends Controller
     }
 
     //---------------------------------------------------------------------------------------
-<<<<<<< HEAD
 
 
     public function ver_empleado() {
         $horarios = Horario::all();
         $empleados = Empleado::all();
-=======
-
-
-    public function ver_empleado() {        
-        $horarios = Horario::all(); 
-        $empleados = Empleado::all();  
->>>>>>> origin/main
         $bitacora= Bitacora::all();
         $usuarios = DB::table('users')
         ->select('users.id', 'users.name')
@@ -174,11 +166,6 @@ class ControllerUsuario extends Controller
         ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
         ->where('rols.id', 2)
         ->get();
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> origin/main
         return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios', 'bitacora'));
     }
 
@@ -191,7 +178,7 @@ class ControllerUsuario extends Controller
 
     public function crear_empleado(Request $request)
     {
-        $request->validate([           
+        $request->validate([
             'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
             'name' => 'required|string',
@@ -227,8 +214,8 @@ class ControllerUsuario extends Controller
     }
 
     public function editar_empl($id) {
-        $horarios = Horario::all(); 
-        $empleados = Empleado::findOrFail($id);  
+        $horarios = Horario::all();
+        $empleados = Empleado::findOrFail($id);
         $usuarios = DB::table('users')
         ->select('users.id', 'users.name')
         ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
@@ -237,10 +224,10 @@ class ControllerUsuario extends Controller
         ->get();
         return view('empleado.editar', compact('horarios', 'empleados', 'usuarios'));
     }
-    
+
     public function editar_empleado(Request $request, $id) {
         $empleados = Empleado::findOrFail($id);
-        $request->validate([           
+        $request->validate([
             'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
             'name' => 'required',
@@ -258,10 +245,10 @@ class ControllerUsuario extends Controller
         $empleados->cargo = $request->cargo;
         $empleados->idHorario = $request->idHorario;
         $empleados->save();
-    
+
         return redirect()->back()->with('mensaje', 'Actualizado exitosamente');
     }
-    
+
     public function borrar_empleado($id){
         Empleado::findOrFail($id)->delete();
         return redirect()->back()->with('mensaje', 'Empleado Eliminado exitosamente');
