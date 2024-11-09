@@ -68,7 +68,13 @@ Route::middleware([
     Route::get('/borrar_detalle/{id}', [ProductoController::class, 'borrar_detalle']);
     Route::get('/editar_detalle/{id}', [ProductoController::class, 'editar_detalle']);
     Route::post('/editarDetalle/{id}', [ProductoController::class, 'editarDetalle']);
+<<<<<<< HEAD
     
+=======
+
+    Route::get('/bitacora', [ControllerUsuario::class, 'bitacora']);
+
+>>>>>>> 3546899428eed4728075c99abca6b21b40afad80
 });
 
 
