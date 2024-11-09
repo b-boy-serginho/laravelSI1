@@ -78,6 +78,40 @@ class UsuarioSeeder extends Seeder
         //     'fechaCreacion' => now(),
         //     'password' => bcrypt('12345678'),
         // ],
+        [
+            'name' => 'Juan Carlos',
+            'email' => 'juan@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),           
+        ],
+
+        [
+            'name' => 'Cristian',
+            'email' => 'cristian@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+
+        ],
+
+        [
+            'name' => 'Yamil',
+            'email' => 'yamil@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+
+        ],
+
+        [
+            'name' => 'Ezequiel',
+            'email' => 'ezequiel@example.com',
+            'estado' => 'activo',
+            'fechaCreacion' => now(),
+            'password' => bcrypt('12345678'),
+        ],
+
     ];
 
     foreach ($users as $userData) {

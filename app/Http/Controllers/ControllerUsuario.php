@@ -193,7 +193,7 @@ class ControllerUsuario extends Controller
         $empleados->ci = $request->ci;
         $empleados->name = $request->name;
         $empleados->sexo = $request->sexo;
-        $empleados->fechacontratacion = $request->fechaContratacion;
+        $empleados->fechaContratacion = $request->fechaContratacion;
         $empleados->cargo = $request->cargo;
         $empleados->idHorario = $request->idHorario;
         $empleados->save();
