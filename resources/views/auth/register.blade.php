@@ -14,6 +14,16 @@
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
+            <div>
+                <x-label for="estado" value="{{ __('estado') }}" />
+                <x-input id="estado" class="block mt-1 w-full" type="text" name="estado" :value="old('estado')" required autofocus autocomplete="estado" />
+            </div>
+
+            <div>
+                <x-label for="fechaCreacion" value="{{ __('fechaCreacion') }}" />
+                <x-input id="fechaCreacion" class="block mt-1 w-full" type="date" name="fechaCreacion" :value="old('fechaCreacion')" required autofocus autocomplete="fechaCreacion" />
+            </div>
+
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
