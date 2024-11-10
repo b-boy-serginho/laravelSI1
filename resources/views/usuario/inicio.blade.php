@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Tienda Floral</title>
 
     <style>
@@ -172,6 +173,124 @@
                 align-items: center;
             }
         }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .col-sm-6,
+        .col-md-4,
+        .col-lg-4 {
+            flex: 0 0 calc(50% - 20px);
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        .box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .box:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .img-box {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .img-box img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .img-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .img-box:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay .text {
+            text-align: center;
+        }
+
+        .option_container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .options {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .option_container:hover .options {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .option1 {
+            color: #333;
+            text-decoration: none;
+        }
+
+         /* Estilos específicos para texto de oferta y precio */
+         .price {
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .price.discount {
+            color: blue;
+        }
+
+        .price.regular {
+            text-decoration: line-through;
+            color: red;
+        }
+
+        .price.normal {
+            color: green;
+        }
     </style>
 </head>
 <body>
@@ -183,7 +302,7 @@
             <a href="login">Iniciar sesion</a>
             <a href="register">Registrar</a>
             <a href="#categorias">Categorías</a>
-            <a href="#productos">Productos</a>
+            <a href="inicio">Productos</a>
             <a href="#contacto">Contacto</a>
         </div>
     </nav>
@@ -223,27 +342,102 @@
     </section>
 
     <!-- Productos Destacados -->
-    <section id="productos" class="section">
-        <h2>Productos Destacados</h2>
+    <!-- <section id="productos" class="section">
+    <h2>Productos Destacados</h2>
+    @foreach ($producto as $products)
         <div class="products">
             <div class="card">
-                <img src="/inicio/img2.jpg" alt="Producto 1">
+                <img src="imagen/{{$products->imagen_url}}" alt="Producto 1">
                 <div class="card-body">
-                    <h3 class="card-title">Producto 1</h3>
-                    <p>$15.00</p>
+                    <h3 class="card-title">{{$products->nombre}}</h3>
+
                 </div>
-            </div>
-            <div class="card">
+
+                @if ($products->precioDescuento != null)
+                        <div class="price discount">
+                            OFERTA <br>
+                            Bs {{$products->precioDescuento}}
+                        </div>
+                        <div class="price regular">
+                            PRECIO <br>
+                            Bs {{$products->precioVenta}}
+                        </div>
+                        @else
+                        <div class="price normal">
+                            PRECIO <br>
+                            Bs {{$products->precioVenta}}
+                        </div>
+                        @endif
+            </div>         -->
+
+            <!-- <div class="card">
                 <img src="/inicio/img3.jpg" alt="Producto 2">
                 <div class="card-body">
-                    <h3 class="card-title">Producto 2</h3>
+                    <h3 class="card-title">Producto 3</h3>
                     <p>$20.00</p>
                 </div>
-            </div>
+            </div>  -->
             <!-- Agrega más productos según sea necesario -->
+
+        <!-- </div>
+
+
+    @endforeach
+    </section> -->
+
+    <!-- Sección de productos -->
+    <section class="product-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Productos Destacados</h2>
+            </div>
+            <div class="row">
+                @foreach ($producto as $products)
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="box">
+                        <div class="option_container">
+                            <!-- Opciones (si las tienes) -->
+                        </div>
+                        <div class="img-box">
+                            <img src="imagen/{{$products->imagen_url}}" alt="">
+                            <div class="overlay">
+                                <div class="text">
+                                    <a style="color: white" href="/">Comprar</a>
+                                    <br>
+                                    <br>
+                                    <a style="color: white" href="{{url('detalle_producto', $products->id)}}">Ver detalles</a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <h2>{{$products->nombre}}</h2>
+                        @if ($products->precioDescuento != null)
+                        <div class="price discount">
+                            OFERTA <br>
+                            {{$products->precioDescuento}} Bs
+                        </div>
+                        <div class="price regular">
+                            PRECIO <br>
+                            {{$products->precioVenta}} Bs
+                        </div>
+                        @else
+                        <div class="price normal">
+                            PRECIO <br>
+                            {{$products->precioVenta}} Bs
+                        </div>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+
+
+            <!-- El paginado -->
+            {!! $producto->withQueryString()->links('pagination::bootstrap-5') !!}
+
+            </div>
         </div>
     </section>
-
+    <!-- Fin de la sección de productos -->
 
 
     <!-- Footer -->

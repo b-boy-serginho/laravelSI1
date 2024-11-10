@@ -17,12 +17,16 @@ use App\Models\Horario;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bitacora;
 use Carbon\Carbon;
+use App\Models\Producto;
+use App\Models\Categoria;
 
 class ControllerUsuario extends Controller
 {
 
     public function inicio(){
-        return view('usuario.inicio');
+        $producto = Producto::paginate(10);;
+        $categoria = Categoria::all();
+        return view('usuario.inicio', compact('producto', 'categoria'));
     }
 
     public function redireccionar()
@@ -156,9 +160,9 @@ class ControllerUsuario extends Controller
     //---------------------------------------------------------------------------------------
 
 
-    public function ver_empleado() {        
-        $horarios = Horario::all(); 
-        $empleados = Empleado::all();  
+    public function ver_empleado() {
+        $horarios = Horario::all();
+        $empleados = Empleado::all();
         $bitacora= Bitacora::all();
         $usuarios = DB::table('users')
         ->select('users.id', 'users.name')
@@ -166,20 +170,20 @@ class ControllerUsuario extends Controller
         ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
         ->where('rols.id', 2)
         ->get();
-    
+
         return view('empleado.inicio', compact('horarios', 'empleados', 'usuarios', 'bitacora'));
     }
-    
+
     public function bitacora()
     {
         $bitacora = Bitacora::all();
-        $empleados = Empleado::all();  
+        $empleados = Empleado::all();
         return view('bitacora.inicio', compact('bitacora', 'empleados'));
     }
 
     public function crear_empleado(Request $request)
     {
-        $request->validate([           
+        $request->validate([
             'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
             'name' => 'required|string',
@@ -205,7 +209,7 @@ class ControllerUsuario extends Controller
         $bitacora->usuario = $request->name;
         $bitacora->direccion_ip = $request->ip();
         $bitacora->navegador = $request->header('user-agent');
-    
+
         $bitacora->tabla = "Empleados";
         $bitacora->registro_id = $empleados->id;
         $bitacora->fecha_hora = Carbon::now();
@@ -215,8 +219,8 @@ class ControllerUsuario extends Controller
     }
 
     public function editar_empl($id) {
-        $horarios = Horario::all(); 
-        $empleados = Empleado::findOrFail($id);  
+        $horarios = Horario::all();
+        $empleados = Empleado::findOrFail($id);
         $usuarios = DB::table('users')
         ->select('users.id', 'users.name')
         ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
@@ -225,10 +229,10 @@ class ControllerUsuario extends Controller
         ->get();
         return view('empleado.editar', compact('horarios', 'empleados', 'usuarios'));
     }
-    
+
     public function editar_empleado(Request $request, $id) {
         $empleados = Empleado::findOrFail($id);
-        $request->validate([           
+        $request->validate([
             'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
             'name' => 'required',
@@ -246,10 +250,10 @@ class ControllerUsuario extends Controller
         $empleados->cargo = $request->cargo;
         $empleados->idHorario = $request->idHorario;
         $empleados->save();
-    
+
         return redirect()->back()->with('mensaje', 'Actualizado exitosamente');
     }
-    
+
     public function borrar_empleado($id){
         Empleado::findOrFail($id)->delete();
         return redirect()->back()->with('mensaje', 'Empleado Eliminado exitosamente');

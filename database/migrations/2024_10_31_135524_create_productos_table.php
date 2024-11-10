@@ -25,7 +25,9 @@ return new class extends Migration
             $table->string('material')->nullable();
             $table->string('medida')->nullable();
             $table->integer('precioVenta')->nullable();
+            $table->integer('cantidad')->nullable();
             $table->string('imagen_url')->nullable();
+            $table->integer('precioDescuento')->nullable();
 
             $table->timestamps();
         });
