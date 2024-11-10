@@ -33,52 +33,61 @@
 
                             <div class="form-group col-md-6">
                                 <label for="cod" class="font-weight-medium">Código del Producto</label>
-                                <input type="text" name="cod" id="cod" required class="form-control">
+                                <input type="text" name="cod" id="cod"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="nombre" class="font-weight-medium">Nombre del Producto</label>
-                                <input type="text" name="nombre" id="nombre" required class="form-control">
+                                <input type="text" name="nombre" id="nombre"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="color" class="font-weight-medium">Color</label>
-                                <input type="text" name="color" id="color" required class="form-control">
+                                <input type="text" name="color" id="color"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="descripcion" class="font-weight-medium">Descripción</label>
-                                <input type="text" name="descripcion" id="descripcion" required class="form-control">
+                                <input type="text" name="descripcion" id="descripcion"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="costoCompra" class="font-weight-medium">Costo de la Compra</label>
-                                <input type="number" name="costoCompra" id="costoCompra" required class="form-control">
+                                <input type="number" name="costoCompra" id="costoCompra"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="costoPromedio" class="font-weight-medium">Costo Promedio</label>
-                                <input type="number" name="costoPromedio" id="costoPromedio" required class="form-control">
+                                <input type="number" name="costoPromedio" id="costoPromedio"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="grosor" class="font-weight-medium">Grosor</label>
-                                <input type="text" name="grosor" id="grosor" required class="form-control">
+                                <input type="text" name="grosor" id="grosor"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="material" class="font-weight-medium">Material</label>
-                                <input type="text" name="material" id="material" required class="form-control">
+                                <input type="text" name="material" id="material"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="medida" class="font-weight-medium">Medida</label>
-                                <input type="text" name="medida" id="medida" required class="form-control">
+                                <input type="text" name="medida" id="medida"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="precioVenta" class="font-weight-medium">Precio de Venta</label>
                                 <input type="number" name="precioVenta" id="precioVenta" required class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="precioDescuento" class="font-weight-medium">Precio de Descuento</label>
+                                <input type="number" name="precioDescuento" id="precioDescuento" class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                   <label for="cantidad" class="font-weight-medium">Cantidad</label>
+                                   <input type="number" name="cantidad" id="cantidad" class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
@@ -105,7 +114,7 @@
                     <th>Categoría</th>
                     <th>Código</th>
                     <th>Nombre</th>
-                    <th>Color</th>                                   
+                    <th>Color</th>
                     <th>Descripción</th>
                     <th>Costo de Compra</th>
                     <th>Costo Promedio</th>
@@ -113,6 +122,7 @@
                     <th>Material</th>
                     <th>Medida</th>
                     <th>Precio de Venta</th>
+                    <th>Precio de Descuento</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
                 </tr>
@@ -120,20 +130,21 @@
             <tbody>
                 @foreach($producto as $productos)
                 <tr>
-                    <td>{{ $productos->categoria->nombre }}</td> 
+                    <td>{{ $productos->categoria->nombre }}</td>
                     <td>{{ $productos->cod }}</td>
                     <td>{{ $productos->nombre }}</td>
-                    <td>{{ $productos->color }}</td>  
-                    <td>{{ $productos->descripcion }}</td>                                                          
+                    <td>{{ $productos->color }}</td>
+                    <td>{{ $productos->descripcion }}</td>
                     <td>{{ $productos->costoCompra }}</td>
                     <td>{{ $productos->costoPromedio }}</td>
                     <td>{{ $productos->grosor }}</td>
-                    <td>{{ $productos->material }}</td> 
+                    <td>{{ $productos->material }}</td>
                     <td>{{ $productos->medida }}</td>
-                    <td>{{ $productos->precioVenta }}</td>  
+                    <td>{{ $productos->precioVenta }}</td>
+                    <td>{{ $productos->precioDescuento }}</td>
                     <td><img style="width: 100px; height: 100px;" src="/imagen/{{ $productos->imagen_url }}" alt="Imagen del producto"></td>
                     <td>
-                        <a href="{{ url('editar_producto', $productos->id) }}" class="btn btn-link text-primary">Editar</a>                        
+                        <a href="{{ url('editar_producto', $productos->id) }}" class="btn btn-link text-primary">Editar</a>
                         <a href="{{ url('borrar_producto', $productos->id) }}" class="btn btn-link text-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
                     </td>
                 </tr>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerUsuario;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\VentaController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -70,6 +71,8 @@ Route::middleware([
     Route::post('/editarDetalle/{id}', [ProductoController::class, 'editarDetalle']);
 
     Route::get('/bitacora', [ControllerUsuario::class, 'bitacora']);
+
+    Route::get('/detalle_producto/{id}', [VentaController::class, 'detalle_producto']);
 
 });
 

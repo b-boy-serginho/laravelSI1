@@ -21,7 +21,7 @@ class ProductoController extends Controller
     }
 
     public function crear_proveedor(Request $request){
-        $request->validate([           
+        $request->validate([
             'nombre' => 'required|string',
             'contacto' => 'required|string',
             'correo' => 'required|string|max:40',
@@ -46,13 +46,13 @@ class ProductoController extends Controller
     }
 
     public function editar_proveedor($id) {
-        $proveedor = Proveedor::find($id);       
+        $proveedor = Proveedor::find($id);
         return view('proveedor.editar', compact('proveedor'));
     }
 
     public function editarProveedor(Request $request, $id){
-        $proveedor = Proveedor::find($id);  
-        $request->validate([           
+        $proveedor = Proveedor::find($id);
+        $request->validate([
             'nombre' => 'required|string',
             'contacto' => 'required|string',
             'correo' => 'required|string|max:40',
@@ -77,7 +77,7 @@ class ProductoController extends Controller
     }
 
     public function crear_factura(Request $request){
-        $request->validate([           
+        $request->validate([
             'proveedor_id' => 'required|integer',
             'fecha' => 'required|date',
             'importe' => 'required|integer',
@@ -104,8 +104,8 @@ class ProductoController extends Controller
     }
 
     public function editarFactura(Request $request, $id){
-        $factura = FacturaCompra::find($id);  
-        $request->validate([           
+        $factura = FacturaCompra::find($id);
+        $request->validate([
             'proveedor_id' => 'required|integer',
             'fecha' => 'required|date',
             'importe' => 'required|integer',
@@ -125,7 +125,7 @@ class ProductoController extends Controller
     }
 
     public function crear_categoria(Request $request){
-        $request->validate([           
+        $request->validate([
             'nombre' => 'required|string',
             'descripcion' => 'required|string',
         ]);
@@ -149,8 +149,8 @@ class ProductoController extends Controller
     }
 
     public function editarCategoria(Request $request, $id){
-        $categoria = Categoria::find($id);  
-        $request->validate([           
+        $categoria = Categoria::find($id);
+        $request->validate([
             'nombre' => 'required|string',
             'descripcion' => 'required|string',
         ]);
@@ -170,20 +170,20 @@ class ProductoController extends Controller
     }
 
     public function crear_producto(Request $request){
-        $request->validate([           
-            'categoria_id' => 'required|integer',
-            'cod' => 'required|string',
-            'nombre' => 'required|string',
-            'color' => 'required|string',
-            'descripcion' => 'required|string',
-            'costoCompra' => 'required|integer',
-            'costoPromedio' => 'required|integer',
-            'grosor' => 'required|string',
-            'material' => 'required|string',
-            'precioVenta' => 'required|integer',
-            'medida' => 'required|string',
-            'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
-        ]);
+//         $request->validate([
+//             'categoria_id' => 'required|integer',
+//             'cod' => 'required|string',
+//             'nombre' => 'required|string',
+//             'color' => 'required|string',
+//             'descripcion' => 'required|string',
+//             'costoCompra' => 'required|integer',
+//             'costoPromedio' => 'required|integer',
+//             'grosor' => 'required|string',
+//             'material' => 'required|string',
+//             'precioVenta' => 'required|integer',
+//             'medida' => 'required|string',
+//             'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
+//         ]);
 
         $producto = new Producto;
         $producto->categoria_id = $request->categoria_id;
@@ -196,6 +196,8 @@ class ProductoController extends Controller
         $producto->grosor = $request->grosor;
         $producto->material = $request->material;
         $producto->medida = $request->medida;
+        $producto->cantidad = $request->cantidad;
+        $producto->precioDescuento = $request->precioDescuento;
         $producto->precioVenta = $request->precioVenta;
 
          // Verificar si el archivo de imagen fue subido
@@ -223,21 +225,21 @@ class ProductoController extends Controller
     }
 
     public function editarProducto(Request $request, $id){
-        $producto = Producto::find($id);  
-        $request->validate([           
-            'categoria_id' => 'required|integer',
-            'cod' => 'required|string',
-            'nombre' => 'required|string',
-            'color' => 'required|string',
-            'descripcion' => 'required|string',
-            'costoCompra' => 'required|integer',
-            'costoPromedio' => 'required|integer',
-            'grosor' => 'required|string',
-            'material' => 'required|string',
-            'precioVenta' => 'required|integer',
-            'medida' => 'required|string',
-            'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
-        ]);
+        $producto = Producto::find($id);
+//         $request->validate([
+//             'categoria_id' => 'required|integer',
+//             'cod' => 'required|string',
+//             'nombre' => 'required|string',
+//             'color' => 'required|string',
+//             'descripcion' => 'required|string',
+//             'costoCompra' => 'required|integer',
+//             'costoPromedio' => 'required|integer',
+//             'grosor' => 'required|string',
+//             'material' => 'required|string',
+//             'precioVenta' => 'required|integer',
+//             'medida' => 'required|string',
+//             'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
+//         ]);
 
         $producto->categoria_id = $request->categoria_id;
         $producto->cod = $request->cod;
@@ -249,7 +251,9 @@ class ProductoController extends Controller
         $producto->grosor = $request->grosor;
         $producto->material = $request->material;
         $producto->medida = $request->medida;
+        $producto->cantidad = $request->cantidad;
         $producto->precioVenta = $request->precioVenta;
+        $producto->precioDescuento = $request->precioDescuento;
 
          // Verificar si el archivo de imagen fue subido
         if ($request->hasFile('imagen_url')) {
@@ -273,7 +277,7 @@ class ProductoController extends Controller
     }
 
     public function crear_detalle(Request $request){
-        $request->validate([           
+        $request->validate([
             'proveedor_id' => 'required|integer',
             'producto_id' => 'required|integer',
             'cantidad' => 'required|integer',
@@ -303,8 +307,8 @@ class ProductoController extends Controller
     }
 
     public function editarDetalle(Request $request, $id){
-        $detalle = DetalleCompra::find($id);  
-        $request->validate([           
+        $detalle = DetalleCompra::find($id);
+        $request->validate([
             'proveedor_id' => 'required|integer',
             'producto_id' => 'required|integer',
             'cantidad' => 'required|integer',

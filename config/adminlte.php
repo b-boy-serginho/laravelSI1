@@ -378,79 +378,104 @@ return [
         //     ],
         // ],
 
-        [
-            'text' => 'Gestionar de Rol',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Asignar Rol',
-                    'url' => 'ver_rol',
-                ],                        
-            ],
-        ],
+       [
+                   'text' => 'Paquete de Usuarios',
+                   'icon' => 'fas fa-fw fa-share',
+                   'submenu' => [
+                       [
+                           'text' => 'Asignar Rol',
+                           'url' => 'ver_rol',
+                       ],
+                       [
+                           'text' => 'Horario',
+                           'url' => 'ver_horario',
+                       ],
+                       [
+                           'text' => 'Empleado',
+                           'url' => 'ver_empleado',
+                       ],
+                   ],
+               ],
 
-                
-        [
-            'text' => 'Gestionar de Horario',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Horario',
-                    'url' => 'ver_horario',
-                ],                        
-            ],
-        ],
 
-        [
-            'text' => 'Gestionar usuarios',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Empleado',
-                    'url' => 'ver_empleado',
-                ],
-                // [
-                //     'text' => 'Bitacora',
-                //     'url' => '#',
-                // ],               
 
-            ],
-        ],
+               [
+                   'text' => 'Gestionar usuarios',
+                   'icon' => 'fas fa-fw fa-share',
+                   'submenu' => [
 
-    [
-            'text' => 'Bitacora',
-            'url' => 'bitacora',
-            'icon' => 'fas fa-fw fa-user',
-    ],
+                       // [
+                       //     'text' => 'Bitacora',
+                       //     'url' => '#',
+                       // ],
 
-        [
-            'text' => 'Gestionar Producto',
-            'icon' => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'Proveedor',
-                    'url' => 'ver_proveedor',
-                ],
-                [
-                    'text' => 'Categoria',
-                    'url' => 'ver_categoria',
-                ], 
-                                       
-                [
-                    'text' => 'Producto',
-                    'url' => 'ver_producto',
-                ], 
-                [
-                    'text' => 'Factura',
-                    'url' => 'ver_factura',
-                ], 
-                [
-                    'text' => 'Detalle de la Factura',
-                    'url' => 'ver_detalle',
-                ], 
+                   ],
+               ],
 
-            ],
-        ],
+
+
+               [
+                   'text' => 'Paquete de Producto',
+                   'icon' => 'fas fa-fw fa-share',
+                   'submenu' => [
+                       [
+                           'text' => 'Categoria',
+                           'url' => 'ver_categoria',
+                       ],
+
+                       [
+                           'text' => 'Producto',
+                           'url' => 'ver_producto',
+                       ],
+                   ],
+               ],
+
+
+               [
+                   'text' => 'Paquete de Compra',
+                   'icon' => 'fas fa-fw fa-share',
+                   'submenu' => [
+                       [
+                           'text' => 'Proveedor',
+                           'url' => 'ver_proveedor',
+                       ],
+                       [
+                           'text' => 'Factura',
+                           'url' => 'ver_factura',
+                       ],
+                       [
+                           'text' => 'Detalle de la Factura',
+                           'url' => 'ver_detalle',
+                       ],
+
+                   ],
+               ],
+
+               [
+                   'text' => 'Paquete de Venta',
+                   'icon' => 'fas fa-fw fa-share',
+                   'submenu' => [
+                       [
+                           'text' => 'Cliente',
+                           'url' => '#',
+                       ],
+                       [
+                           'text' => 'Factura',
+                           'url' => 'ver_factura',
+                       ],
+                       [
+                           'text' => 'Detalle de la Factura',
+                           'url' => 'ver_detalle',
+                       ],
+
+                   ],
+               ],
+
+               [
+                   'text' => 'Bitacora',
+                   'url' => 'bitacora',
+                   'icon' => 'fas fa-fw fa-user',
+               ],
 
         // ['header' => 'labels'],
         // [
