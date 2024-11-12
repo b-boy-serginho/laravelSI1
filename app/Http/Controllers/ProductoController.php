@@ -77,19 +77,30 @@ class ProductoController extends Controller
     }
 
     public function crear_factura(Request $request){
-        $request->validate([
-            'proveedor_id' => 'required|integer',
-            'fecha' => 'required|date',
-            'importe' => 'required|integer',
-        ]);
-
+        // $request->validate([
+        //     'proveedor_id' => 'required|integer',
+        //     'fecha' => 'required|date',
+        // ]);
+    
         $factura = new FacturaCompra;
         $factura->proveedor_id = $request->proveedor_id;
         $factura->fecha = $request->fecha;
-        $factura->importe = $request->importe;
+    
+        // Calcular el importe sumando cantidad * costoUnitario de cada detalle asociado al proveedor
+        // $importeTotal = 0;
+        $detalles = DetalleCompra::where('proveedor_id', '=', $request->proveedor_id)->get();
+    
+        foreach ($detalles as $detalle) {
+            // $importeTotal += $detalle->cantidad * $detalle->costoUnitario;
+            $importeTotal = $detalle->cantidad * $detalle->costoUnitario;
+        }
+    
+        $factura->importe = $importeTotal;
         $factura->save();
-        return redirect()->back()->with('mensaje','Factura agregado exitosanmente');
+    
+        return redirect()->back()->with('mensaje', 'Factura agregada exitosamente');
     }
+    
 
     public function borrar_factura($id){
         $borrar = FacturaCompra::find($id);
@@ -323,4 +334,16 @@ class ProductoController extends Controller
         return redirect()->back()->with('mensaje','Detalle actualizado exitosanmente');
     }
 
+    // ------------------------------------------------------------------------
+    public function ver_etiqueta() {
+        $etiqueta = Etiqueta::all();
+        return view('etiqueta.inicio', compact('etiqueta'));
+    }
+
+    public function crear_etiqueta($id) {
+        $detalle = DetalleCompra::find($id);
+        $proveedor = Proveedor::all();
+        $producto = Producto::all();
+        return view('detalleCompra.editar', compact('detalle', 'proveedor', 'producto'));
+    }
 }

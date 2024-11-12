@@ -96,7 +96,72 @@
         .cart-form input[type="submit"]:hover {
             background-color: #733e90;
         }
+
+        /* Estilos para la tabla */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-left: 10%;
+            margin-right: 10%;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .th_deg {
+            background-color: indigo;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #eafaf1;
+        }
+
+        /* Estilos para la imagen en la tabla */
+        .img_deg {
+            width: 80px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        /* Estilos para el botón */
+        .btn-danger {
+            padding: 8px 12px;
+            color: #fff;
+            background-color: #e74c3c;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+
+        /* Estilos para el total */
+        .total_dg {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
     </style>
+
+
 </head>
 
 <body>
@@ -120,11 +185,16 @@
                     Cerrar Sesión
                 </a>
 
-
                 <!-- Formulario oculto para el cierre de sesión -->
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
+
+
+
+
+
+                
             @else
                 <!-- Enlace de inicio de sesión si el usuario no está autenticado -->
                 <a href="/login">Iniciar Sesión</a>
@@ -137,58 +207,66 @@
         </div>
     </nav>
 
-    <!-- Sección de Producto -->
-    <section class="product-section">
-        <div class="product-card">
 
-            @if (session('mensaje'))
-                <div class="alert alert-success text-center">
-                    {{ session('mensaje') }}
-                </div>
-            @endif
 
-            <div class="img-box">
-                <img src="{{ asset('imagen/' . $producto->imagen_url) }}" alt="Imagen del producto">
-            </div>
-            <div class="product-details">
-                <h5>{{ $producto->title }}</h5>
-
-                @if ($producto->precioDescuento != null)
-                    <h6 class="discount-price">OFERTA<br>{{ $producto->precioDescuento }} Bs</h6>
-                    <h6 class="original-price">PRECIO<br>{{ $producto->precioVenta }} Bs</h6>
-                @else
-                    <h6 class="normal-price">PRECIO<br>{{ $producto->precioVenta }} Bs</h6>
-                @endif
-
-                <h6 class="category">Categoría: {{ $producto->categoria->nombre }}</h6>
-                <h6 class="description">Descripción: {{ $producto->descripcion }}</h6>
-                <h6 class="quantity">Cantidad Disponible: {{ $producto->cantidad }}</h6>
-
-                <!-- Formulario para agregar al carrito -->
-                @if (Auth::check())
-                    <form class="cart-form" action="{{ url('agregar_carrito', $producto->id) }}" method="POST">
-                        @csrf
-                        <input type="number" name="cantidad" value="1" min="1">
-                        <input onclick="return confirm('¿quieres agregar al carrito?')" type="submit" value="Añadir al carrito">
-                    </form>
-                    <br>
-
-                    <div class="button-container">
-                        <a class="add-to-cart mr-3" href="{{ url('/') }}">Regresar</a>
-                        <a class="add-to-cart" style="background-color: rgb(79, 162, 79)" href="{{ url('/ver_carrito') }}">Ver carrito</a>                                        
-                    </div>
-                @endif
-                
-                
-            </div>
+    @if (session('mensaje'))
+        <div class="alert alert-success text-center">
+            {{ session('mensaje') }}
         </div>
-    </section>
+    @endif
+
+
+    <table>
+        <tr>
+            <th class="th_deg">Título</th>
+            <th class="th_deg">Cantidad</th>
+            <th class="th_deg">Precio</th>
+            <th class="th_deg">importe</th>
+            <th class="th_deg">Imagen</th>
+            <th class="th_deg">Acción</th>
+        </tr>
+
+
+        <?php $totalAPagar = 0; ?>
+        @foreach ($carrito as $cart)
+            <tr>
+                <td>{{ $cart->nombreProducto }}</td>
+                <td>{{ $cart->cantidad }}</td>
+                <td>{{ $cart->precioVenta }} Bs</td>
+                <td>{{ $cart->importe }} Bs</td>
+
+                <td>
+                    <img class="img_deg" src="/imagen/{{ $cart->imagen_url }}" alt="">
+                </td>
+                <td>
+                    <a class="btn btn-danger" onclick="return confirm('¿Estás seguro?')"
+                        href="{{ url('eliminar_carrito', $cart->id) }}">
+                        Eliminar producto
+                    </a>
+                </td>
+            </tr>
+            <?php $totalAPagar += $cart->importe; ?>
+        @endforeach
+    </table>
+
+    <div class="total_dg">
+        Precio Total: {{ $totalAPagar }} Bs
+    </div>
+
+
+    <h1 class="pedido-titulo">Proceder al Pedido</h1>
+    
+    <div class="boton-container">
+        <a class="boton-pedido" href="/ver_pedido" onclick="return confirm('¿Estás seguro?')">Realizar Pedido</a>
+        <a class="boton-tarjeta" href="{{url('stripe', $totalAPagar)}}">Pagar con Tarjeta</a>
+    </div>
+    
 
     <!-- Footer -->
-    <!-- <footer>
+    {{-- <footer>
         <p>&copy; {{ date('Y') }} Tienda Floral. Todos los derechos reservados.</p>
-    </footer>
--->
+    </footer> --}}
+
 </body>
 
 </html>

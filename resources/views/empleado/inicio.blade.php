@@ -23,18 +23,13 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="idUsuario" class="font-weight-medium">Empleado</label>
-                                <select class="form-control" name="idUsuario" required>
-                                    <option value="" selected>Seleccionar empleado...</option>
-                                    @foreach ($usuarios as $user)
-                                        <option value="{{ $user->id }}">{{ $user->id }} - {{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                                <label for="nombre" class="font-weight-medium">Nombre del empleado</label>
+                                <input type="text" name="nombre" id="nombre" required class="form-control" placeholder="Nombre del empleado">
+                            </div>                            
 
                             <div class="form-group col-md-6">
                                 <label for="fechaContratacion" class="font-weight-medium">Fecha de Contratación</label>
-                                <input type="date" name="fechaContratacion" id="fechaContratacion" required class="form-control">
+                                <input type="datetime-local" name="fechaContratacion" id="fechaContratacion" required class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
@@ -42,15 +37,7 @@
                                 <input type="number" name="ci" id="ci" required class="form-control" placeholder="CI del empleado">
                             </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="name" class="font-weight-medium">Nombre del Empleado</label>
-                                <select class="form-control" name="name" required>
-                                    <option value="" selected>Seleccionar empleado...</option>
-                                    @foreach ($usuarios as $user)
-                                        <option value="{{ $user->name }}">{{ $user->id }} - {{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                           
 
                             <div class="form-group col-md-6">
                                 <label for="sexo" class="font-weight-medium">Sexo</label>

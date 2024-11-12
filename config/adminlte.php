@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Arte Dec',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,12 +63,12 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    'logo' => '<b>Arte</b>Dec',
+    // 'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    // 'logo_img_class' => 'brand-image img-circle elevation-3',
+    // 'logo_img_xl' => null,
+    // 'logo_img_xl_class' => 'brand-image-xs',
+    // 'logo_img_alt' => 'Admin Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,16 +83,16 @@ return [
     |
     */
 
-    'auth_logo' => [
-        'enabled' => false,
-        'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'Auth Logo',
-            'class' => '',
-            'width' => 50,
-            'height' => 50,
-        ],
-    ],
+    // 'auth_logo' => [
+    //     'enabled' => false,
+    //     'img' => [
+    //         'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    //         'alt' => 'Auth Logo',
+    //         'class' => '',
+    //         'width' => 50,
+    //         'height' => 50,
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -109,17 +109,17 @@ return [
     |
     */
 
-    'preloader' => [
-        'enabled' => true,
-        'mode' => 'fullscreen',
-        'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-            'alt' => 'AdminLTE Preloader Image',
-            'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
-        ],
-    ],
+    // 'preloader' => [
+    //     'enabled' => true,
+    //     'mode' => 'fullscreen',
+    //     'img' => [
+    //         'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    //         'alt' => 'AdminLTE Preloader Image',
+    //         'effect' => 'animation__shake',
+    //         'width' => 60,
+    //         'height' => 60,
+    //     ],
+    // ],
 
     /*
     |--------------------------------------------------------------------------
@@ -427,6 +427,11 @@ return [
                            'text' => 'Producto',
                            'url' => 'ver_producto',
                        ],
+
+                       [
+                        'text' => 'Etiqueta',
+                        'url' => 'ver_etiqueta',
+                    ],
                    ],
                ],
 
@@ -439,14 +444,15 @@ return [
                            'text' => 'Proveedor',
                            'url' => 'ver_proveedor',
                        ],
-                       [
-                           'text' => 'Factura',
-                           'url' => 'ver_factura',
-                       ],
+                       
                        [
                            'text' => 'Detalle de la Factura',
                            'url' => 'ver_detalle',
                        ],
+                       [
+                        'text' => 'Factura',
+                        'url' => 'ver_factura',
+                    ],
 
                    ],
                ],
@@ -457,17 +463,13 @@ return [
                    'submenu' => [
                        [
                            'text' => 'Cliente',
-                           'url' => '#',
+                           'url' => 'ver_cliente',
                        ],
                        [
-                           'text' => 'Factura',
-                           'url' => 'ver_factura',
+                           'text' => 'Pedidos del cliente',
+                           'url' => 'mostrar_pedido',
                        ],
-                       [
-                           'text' => 'Detalle de la Factura',
-                           'url' => 'ver_detalle',
-                       ],
-
+                      
                    ],
                ],
 
