@@ -110,7 +110,9 @@ Route::middleware([
     Route::get('/editar_etiqueta/{id}', [ProductoController::class, 'editar_etiqueta']);
     Route::post('/editarEtiqueta/{id}', [ProductoController::class, 'editarEtiqueta']);
 
-    
+    Route::get('/ver_inventario', [ProductoController::class, 'ver_inventario']);
+    Route::post('/crear_inventario', [ProductoController::class, 'crear_inventario']);
+
 
 });
 
