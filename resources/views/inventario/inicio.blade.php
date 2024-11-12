@@ -17,29 +17,25 @@
                         </div>
                     @endif
 
-                    <h1 class="h4 font-weight-bold text-secondary mb-4">Formulario de Factura</h1>
-                    <form action="{{ url('/crear_factura') }}" method="POST">
+                    <h1 class="h4 font-weight-bold text-secondary mb-4">Formulario de Inventario</h1>
+                    <form action="{{ url('/crear_inventario') }}" method="POST">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="proveedor_id" class="font-weight-medium">Proveedor</label>
-                                <select class="form-control" name="proveedor_id" required>
-                                    <option value="" selected>Seleccionar proveedor...</option>
-                                    @foreach ($proveedor as $prov)
-                                        <option value="{{ $prov->id }}">{{ $prov->id }} ... {{ $prov->nombre }}</option>
+                                <label for="producto_id" class="font-weight-medium">Proveedor</label>
+                                <select class="form-control" name="producto_id" required>
+                                    <option value="" selected>Seleccionar producto...</option>
+                                    @foreach ($producto as $prod)
+                                        <option value="{{ $prod->id }}">{{ $prod->cod}} ... {{ $prod->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label for="fecha" class="font-weight-medium">Fecha</label>
-                                <input type="date" name="fecha" id="fecha" required class="form-control">
+                                <label for="fechaActualizacion" class="font-weight-medium">Fecha de Actualizacion</label>
+                                <input type="datetime-local" name="fechaActualizacion" id="fechaActualizacion" required class="form-control">
                             </div>
-
-                            {{-- <div class="form-group col-md-4">
-                                <label for="importe" class="font-weight-medium">Importe</label>
-                                <input type="number" min="0" name="importe" id="importe" required class="form-control" placeholder="Precio total">
-                            </div> --}}
+                            
                         </div>
 
                         <div class="text-right mt-4">
@@ -57,22 +53,22 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-light">
                 <tr>
-                    <th>Proveedor</th>
+                    <th>Producto</th>
                     <th>Fecha</th>
-                    <th>Importe</th>
-                    <th>Acciones</th>
+                    <th>Cantidad</th>
+                    {{-- <th>Acciones</th> --}}
                 </tr>
             </thead>
             <tbody>
-                @foreach($factura as $factura)
+                @foreach($inventario as $inv)
                 <tr>
-                    <td>{{ $factura->proveedor->nombre }}</td>
-                    <td>{{ $factura->fecha }}</td>   
-                    <td> Bs {{ $factura->importe }}</td>
-                    <td>
+                    <td>{{ $inv->producto->nombre }}</td>
+                    <td>{{ $inv->fechaActualizacion }}</td>
+                    <td>{{ $inv->cantidad }}</td>
+                    {{-- <td>
                         <a href="{{ url('editar_factura', $factura->id) }}" class="btn btn-link text-primary">Editar</a>
                         <a href="{{ url('borrar_factura', $factura->id) }}" class="btn btn-link text-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>

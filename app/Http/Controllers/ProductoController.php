@@ -11,6 +11,7 @@ use App\Models\Categoria;
 use App\Models\Etiqueta;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Inventario;
 
 
 class ProductoController extends Controller
@@ -73,7 +74,8 @@ class ProductoController extends Controller
     public function ver_factura(){
         $proveedor = Proveedor::all();
         $factura = FacturaCompra::all();
-        return view('factura.inicio', compact('factura', 'proveedor'));
+        $detalle = DetalleCompra::all();
+        return view('factura.inicio', compact('factura', 'proveedor', 'detalle'));
     }
 
     public function crear_factura(Request $request){
@@ -337,13 +339,45 @@ class ProductoController extends Controller
     // ------------------------------------------------------------------------
     public function ver_etiqueta() {
         $etiqueta = Etiqueta::all();
-        return view('etiqueta.inicio', compact('etiqueta'));
+        $producto = Producto::all();
+        return view('etiqueta.inicio', compact('etiqueta', 'producto'));
     }
 
-    public function crear_etiqueta($id) {
-        $detalle = DetalleCompra::find($id);
-        $proveedor = Proveedor::all();
-        $producto = Producto::all();
-        return view('detalleCompra.editar', compact('detalle', 'proveedor', 'producto'));
+    public function crear_etiqueta(Request $request) {
+        $etiqueta = new Etiqueta;
+        $etiqueta->producto_id = $request->producto_id;
+        $etiqueta->nombre = $request->nombre;
+        $etiqueta->save();
+        return redirect()->back()->with('mensaje','etiqueta creado exitosanmente');
     }
+
+    public function ver_inventario() {
+        $producto = Producto::all();
+        $inventario = Inventario::all();
+        return view('inventario.inicio', compact('inventario', 'producto'));
+    }
+
+    public function crear_inventario(Request $request){
+    
+        $inventario = new Inventario;
+        $inventario->producto_id = $request->producto_id;
+        $inventario->fechaActualizacion = $request->fechaActualizacion;
+    
+        $producto = Producto::where('id', '=', $request->producto_id)->get();
+        $detalle = DetalleCompra::where('producto_id', '=', $request->producto_id)->get();
+
+        $contador = 0;
+
+        foreach ($detalle as $detalle) {
+            $contador = $contador + $detalle->cantidad;
+        }
+              
+    
+        $inventario->cantidad = $contador;
+        $inventario->save();
+    
+        return redirect()->back()->with('mensaje', 'Factura agregada exitosamente');
+    }
+
+
 }

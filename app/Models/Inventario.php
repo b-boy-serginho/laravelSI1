@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FacturaCompra extends Model
+class Inventario extends Model
 {
+
     use HasFactory;
 
-    public function proveedor()
+    public function producto()
     {
-        return $this->belongsTo(Proveedor::class, 'proveedor_id');
+        return $this->belongsTo(Producto::class, 'producto_id', 'id');
     }
-
 }

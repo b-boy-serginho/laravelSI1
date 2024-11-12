@@ -431,7 +431,12 @@ return [
                        [
                         'text' => 'Etiqueta',
                         'url' => 'ver_etiqueta',
-                    ],
+                        ],
+                        [
+                            'text' => 'Inventario',
+                            'url' => 'ver_inventario',
+                        ],
+
                    ],
                ],
 
