@@ -82,7 +82,7 @@
 
                                  <div class="form-group col-md-6">
                                        <label for="cantidad" class="font-weight-medium">Cantidad</label>
-                                       <input value="{{$producto->cantidad}" type="number" name="cantidad" id="cantidad" class="form-control">
+                                       <input value="{{$producto->cantidad}}" type="number" name="cantidad" id="cantidad" class="form-control">
                                  </div>
 
                                 <div class="form-group col-md-6">

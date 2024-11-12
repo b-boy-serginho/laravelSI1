@@ -36,10 +36,10 @@
                                 <input type="date" name="fecha" id="fecha" required class="form-control">
                             </div>
 
-                            <div class="form-group col-md-4">
+                            {{-- <div class="form-group col-md-4">
                                 <label for="importe" class="font-weight-medium">Importe</label>
                                 <input type="number" min="0" name="importe" id="importe" required class="form-control" placeholder="Precio total">
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="text-right mt-4">

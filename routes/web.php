@@ -1,9 +1,13 @@
 <?php
 
+namespace App\Http\Controllers\Auth;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerUsuario;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
+
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -73,6 +77,40 @@ Route::middleware([
     Route::get('/bitacora', [ControllerUsuario::class, 'bitacora']);
 
     Route::get('/detalle_producto/{id}', [VentaController::class, 'detalle_producto']);
+    Route::post('/agregar_carrito/{id}', [VentaController::class, 'agregar_carrito']);
+
+    Route::get('/logout', [VentaController::class, 'logout'])->name('logout');
+
+    Route::get('/ver_carrito', [VentaController::class, 'ver_carrito']);
+    Route::get('/eliminar_carrito/{id}', [VentaController::class, 'eliminar_carrito']);
+
+    Route::get('/ver_pedido', [VentaController::class, 'ver_pedido']);
+
+    Route::get('/stripe/{totalAPagar}', [VentaController::class, 'stripe']);
+    Route::post('stripe/{totalAPagar}', [VentaController::class, 'stripePost'])
+    ->name('stripe.post');
+
+    Route::get('/ver_cliente', [VentaController::class, 'ver_cliente']);
+
+    Route::get('/mostrar_pedido', [VentaController::class, 'mostrar_pedido']);
+
+    Route::get('/entrega/{id}', [VentaController::class, 'entrega']);
+
+    Route::get('/generar-pdf', [VentaController::class, 'generarPDF'])->name('generarPDF');
+    Route::get('/imprimir/{id}', [VentaController::class, 'imprimir'])->name('imprimir');
+
+    Route::get('/busqueda', [VentaController::class, 'busqueda'])->name('busqueda');
+
+    Route::post('/agregar_comentario', [ControllerUsuario::class, 'agregar_comentario'])->name('agregar_comentario');
+    Route::post('/agregar_respuesta', [ControllerUsuario::class, 'agregar_respuesta'])->name('agregar_respuesta');
+
+    Route::get('/ver_etiqueta', [ProductoController::class, 'ver_etiqueta']);
+    Route::post('/crear_etiqueta', [ProductoController::class, 'crear_etiqueta']);
+    Route::get('/borrar_etiqueta/{id}', [ProductoController::class, 'borrar_etiqueta']);
+    Route::get('/editar_etiqueta/{id}', [ProductoController::class, 'editar_etiqueta']);
+    Route::post('/editarEtiqueta/{id}', [ProductoController::class, 'editarEtiqueta']);
+
+    
 
 });
 
