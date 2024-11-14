@@ -382,17 +382,36 @@ return [
                    'text' => 'Paquete de Usuarios',
                    'icon' => 'fas fa-fw fa-share',
                    'submenu' => [
-                       [
-                           'text' => 'Asignar Rol',
-                           'url' => 'ver_rol',
-                       ],
+                        
+                        [
+                            'text' => 'Pemisos ',
+                            'url' => 'ver_permiso',
+                            'can' => 'configuracion',
+                        ],
+                        [
+                            'text' => 'Usuarios ',
+                            'url' => 'ver_usuario_permiso',
+                            'can' => 'configuracion',
+                        ],
+                        [
+                            'text' => 'Roles ',
+                            'url' => 'ver_usuario',
+                            'can' => 'configuracion',
+                        ],
+                        
+                    //    [
+                    //        'text' => 'Asignar Rol',
+                    //        'url' => 'ver_rol',
+                    //    ],
                        [
                            'text' => 'Horario',
                            'url' => 'ver_horario',
+                           'can' => 'configuracion',
                        ],
                        [
                            'text' => 'Empleado',
                            'url' => 'ver_empleado',
+                           'can' => 'configuracion',
                        ],
                    ],
                ],
@@ -431,11 +450,7 @@ return [
                        [
                         'text' => 'Etiqueta',
                         'url' => 'ver_etiqueta',
-                        ],
-                        [
-                            'text' => 'Inventario',
-                            'url' => 'ver_inventario',
-                        ],
+                        ],                        
 
                    ],
                ],
@@ -463,6 +478,11 @@ return [
                ],
 
                [
+                'text' => 'Inventario',
+                'url' => 'ver_inventario',
+                ],
+
+               [
                    'text' => 'Paquete de Venta',
                    'icon' => 'fas fa-fw fa-share',
                    'submenu' => [
@@ -482,6 +502,7 @@ return [
                    'text' => 'Bitacora',
                    'url' => 'bitacora',
                    'icon' => 'fas fa-fw fa-user',
+                   'can' => 'configuracion'
                ],
 
         // ['header' => 'labels'],

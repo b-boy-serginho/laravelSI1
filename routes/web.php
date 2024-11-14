@@ -26,6 +26,22 @@ Route::middleware([
 
     Route::get('redireccionar', [ControllerUsuario::class, 'redireccionar']);
 
+    Route::get('/ver_usuario', [ControllerUsuario::class, 'ver_usuario'])->name('ver_usuario');
+    Route::get('/editar_usuario/{id}', [ControllerUsuario::class, 'editar_usuario'])->name('editar_usuario');
+    Route::put('/editar_usuario/{id}', [ControllerUsuario::class, 'actualizar_usuario']); // Ruta para actualizar
+    
+    Route::get('/ver_permiso', [ControllerUsuario::class, 'ver_permiso'])->name('ver_permiso');
+    Route::post('/crear_permiso', [ControllerUsuario::class, 'crear_permiso'])->name('crear_permiso');
+
+    Route::get('/ver_usuario_permiso', [ControllerUsuario::class, 'ver_usuario_permiso'])->name('ver_usuario_permiso');
+    Route::post('/crear_usuario', [ControllerUsuario::class, 'crear_usuario'])->name('crear_usuario');
+    Route::get('/editar_usuario_rol/{id}', [ControllerUsuario::class, 'editar_usuario_rol'])->name('editar_usuario_rol');
+    Route::put('/editar_rol_user/{id}', [ControllerUsuario::class, 'editar_rol_user'])->name('editar_rol_user');
+
+
+    // Route::post('/editar_nuevo_usuario/{id}', [ControllerUsuario::class, 'editar_nuevo_usuario']);
+    // Route::get('/borrar_usuario/{id}', [ControllerUsuario::class, 'borrar_usuario']);
+    
     Route::get('/ver_rol', [ControllerUsuario::class, 'ver_rol']);
     Route::post('/crear_rol', [ControllerUsuario::class, 'crear_rol']);
     Route::get('/editar_rol/{id}', [ControllerUsuario::class, 'editar_rol']);

@@ -22,6 +22,9 @@ use App\Models\Categoria;
 use App\Models\Comentario;
 use App\Models\Respuesta;
 
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 
 class ControllerUsuario extends Controller
 {
@@ -62,23 +65,136 @@ class ControllerUsuario extends Controller
     //     }
     // }
 
+    // public function redireccionar(){
+    //     $tipoRol = Auth::User()->rolUsuario;
+    //     if ($tipoRol == 1){
+    //         return view('usuario.admin');
+    //     }
+    //     else{                 
+    //         $producto = Producto::all();
+    //         $categoria = Categoria::all();
+    //         $comentario = Comentario::all();    
+    //         $respuesta = Respuesta::all();    
+    //         return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
+    //     }
+    // }
+
+
     public function redireccionar(){
-        $tipoRol = Auth::User()->rolUsuario;
-        if ($tipoRol == 1){
-            return view('usuario.admin');
-        }
-        else{                 
+        $user = Auth::user();
+
+        // Verificar el rol del usuario y redirigir
+        if ($user->hasRole('Admin')) {
+            return view('usuario.admin'); // Ruta para el dashboard de Admin
+        } elseif ($user->hasRole('Empleado')) {
+            $categoria = Categoria::all();
+            return view('categoria.inicio', compact('categoria')); // Ruta para la vista inicial de Empleado
+        } else {
             $producto = Producto::all();
             $categoria = Categoria::all();
             $comentario = Comentario::all();    
             $respuesta = Respuesta::all();    
             return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
-            }
+        }
     }
 
+    //------------------------------------------------------------------------
 
+    public function ver_usuario() {
+        $roles = Role::all();  // Obtiene todos los roles
+        return view('rolPermiso.inicio', compact('roles'));
+    }
 
+    public function editar_usuario($id) {
+        $role = Role::find($id);  // Busca el rol por ID
+        $permiso = Permission::all();  // Obtiene todos los permisos
+        return view('rolPermiso.editar', compact('permiso', 'role'));
+    }
+    
+    public function actualizar_usuario(Request $request, $id) {
+        $role = Role::find($id);  // Encuentra el rol a actualizar
+        $role->permissions()->sync($request->input('permiso', []));  // Sincroniza los permisos seleccionados
+        return redirect()->route('ver_usuario')->with('mensaje', 'Roles asignados exitosamente');;
+    }
+    
+    //----------------------------------------------------------------
+    public function ver_usuario_permiso() {
+        $usuario = User::all();          
+        return view('rolPermiso.usuario', compact('usuario'));
+    }
 
+    public function crear_usuario(Request $request){
+        $existingUsuario = User::where('id', $request->id)->first();
+        // Si el ID ya existe, devuelve un mensaje de error
+        if ($existingUsuario) {
+            return redirect()->back()->with('error', 'El ID ya está en uso. Por favor, elige otro ID.');
+        }
+    
+        $usuario=new User;
+        $usuario->id= $request->id;
+        $usuario->name= $request->name;
+        $usuario->email= $request->email;
+        $usuario->fechaCreacion= now();
+        // $usuario->direccion= $request->direccion;
+        // $usuario->telefono= $request->telefono;
+        $usuario->estado= $request->estado;
+
+        $usuario->password = bcrypt($request->password);
+        $usuario->save();
+        return redirect()->back()->with('mensaje','agregado exitosanmente');
+    }
+    
+    public function editar_usuario_rol($id) {
+        $usuario = User::findOrFail($id);  // Usa 'findOrFail' para manejo de errores
+        $roles = Role::all();  // Obtiene todos los roles
+        return view('rolPermiso.editarRolUsuario', compact('usuario', 'roles'));
+    }
+    
+    public function editar_rol_user(Request $request, $id) {
+        $usuario = User::findOrFail($id);  // Encuentra el usuario a actualizar
+        $usuario->roles()->sync($request->input('roles', []));  // Sincroniza los roles seleccionados
+        return redirect()->route('ver_usuario_permiso')->with('mensaje', 'Roles asignados exitosamente');
+    }
+    //-------------------------------------------------------
+    public function ver_permiso() {
+        $permiso = Permission::all(); 
+         return view('rolPermiso.permiso', compact('permiso'));
+    }
+
+    public function crear_permiso(Request $request) {
+        $permiso = Permission::create(['name' => $request->input('nombre')]);
+
+        return redirect()->back()->with('mensaje','agregado exitosanmente');
+    }
+    
+    //----------------------------------------------------------------
+
+    
+
+    // public function editar_nuevo_usuario(Request $request, $id) {
+    //     $usuario = User::find($id);       
+    //     $usuario->id= $request->id;
+    //     $usuario->ci= $request->ci;
+    //     $usuario->nombres= $request->nombres;
+    //     $usuario->apellido_paterno= $request->apellido_paterno;
+    //     $usuario->apellido_materno= $request->apellido_materno;
+    //     $usuario->telefono= $request->telefono;
+    //     $usuario->direccion= $request->direccion;
+    //     $usuario->sexo= $request->sexo;
+    //     $usuario->email= $request->email;
+    //     $usuario->password = bcrypt($request->password);
+    //     $usuario->save();
+    //     return redirect()->back()->with('message','agregado exitosanmente');
+    // }
+
+    // public function borrar_Usuario($id){
+    //     $borrar = User::find($id);
+    //     $borrar->delete();
+    //     return redirect()->back()->with('message','eliminado exitosanmente');
+    // }
+
+    
+    //------------------------------------------------------------------------------------
 
     public function ver_rol() {
         $rol = Rol::all();
@@ -182,10 +298,14 @@ class ControllerUsuario extends Controller
 
 
     public function ver_empleado() {
+        // Obtener solo los usuarios que tienen el rol 'Empleado'
+        $usuario = User::role('Empleado')->get();
+    
         $horarios = Horario::all();
         $empleados = Empleado::all();
-        $bitacora= Bitacora::all();        
-        return view('empleado.inicio', compact('horarios', 'empleados', 'bitacora'));
+        $bitacora = Bitacora::all();
+    
+        return view('empleado.inicio', compact('horarios', 'empleados', 'bitacora', 'usuario'));
     }
 
     public function bitacora()
@@ -214,6 +334,7 @@ class ControllerUsuario extends Controller
         $empleados->fechaContratacion = $request->fechaContratacion;
         $empleados->cargo = $request->cargo;
         $empleados->idHorario = $request->idHorario;
+        $empleados->idUsuario = $request->idUsuario;
         $empleados->save();
 
         $bitacora = new Bitacora();
@@ -231,16 +352,14 @@ class ControllerUsuario extends Controller
         return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
     }
 
+   
     public function editar_empl($id) {
+        $empleado = Empleado::findOrFail($id);
+          // Obtener solo los usuarios que tienen el rol 'Empleado'
+        $usuarios = User::role('Empleado')->get();        
         $horarios = Horario::all();
-        $empleados = Empleado::findOrFail($id);
-        $usuarios = DB::table('users')
-        ->select('users.id', 'users.name')
-        ->join('usuario_rols', 'users.id', '=', 'usuario_rols.usuario_id')
-        ->join('rols', 'rols.id', '=', 'usuario_rols.rol_id')
-        ->where('rols.id', 2)
-        ->get();
-        return view('empleado.editar', compact('horarios', 'empleados', 'usuarios'));
+        $bitacora = Bitacora::all();    
+        return view('empleado.editar', compact('horarios', 'empleado', 'bitacora', 'usuarios'));
     }
 
     public function editar_empleado(Request $request, $id) {
@@ -248,7 +367,7 @@ class ControllerUsuario extends Controller
         $request->validate([
             'idUsuario' => 'required|integer',
             'ci' => 'required|integer',
-            'name' => 'required',
+            'nombre' => 'required',
             'sexo' => 'required',
             'fechaContratacion' => 'required|date',
             'cargo' => 'required|string|max:40',
@@ -257,13 +376,12 @@ class ControllerUsuario extends Controller
 
         $empleados->idUsuario = $request->idUsuario;
         $empleados->ci = $request->ci;
-        $empleados->name = $request->name;
+        $empleados->nombre = $request->nombre;
         $empleados->sexo = $request->sexo;
         $empleados->fechacontratacion = $request->fechaContratacion;
         $empleados->cargo = $request->cargo;
         $empleados->idHorario = $request->idHorario;
         $empleados->save();
-
         return redirect()->back()->with('mensaje', 'Actualizado exitosamente');
     }
 

@@ -53,12 +53,12 @@
 
                             <div class="form-group col-md-6">
                                 <label for="costoCompra" class="font-weight-medium">Costo de la Compra</label>
-                                <input type="number" name="costoCompra" id="costoCompra"  class="form-control">
+                                <input type="number" name="costoCompra" min="0" id="costoCompra"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="costoPromedio" class="font-weight-medium">Costo Promedio</label>
-                                <input type="number" name="costoPromedio" id="costoPromedio"  class="form-control">
+                                <input type="number" name="costoPromedio" min="0" id="costoPromedio"  class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
@@ -78,16 +78,16 @@
 
                             <div class="form-group col-md-6">
                                 <label for="precioVenta" class="font-weight-medium">Precio de Venta</label>
-                                <input type="number" name="precioVenta" id="precioVenta" required class="form-control">
+                                <input type="number" name="precioVenta" min="0" id="precioVenta" required class="form-control">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="precioDescuento" class="font-weight-medium">Precio de Descuento</label>
-                                <input type="number" name="precioDescuento" id="precioDescuento" class="form-control">
+                                <input type="number" name="precioDescuento" min="0" id="precioDescuento" class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
                                    <label for="cantidad" class="font-weight-medium">Cantidad</label>
-                                   <input type="number" name="cantidad" id="cantidad" class="form-control">
+                                   <input type="number" name="cantidad" min="0" id="cantidad" class="form-control">
                             </div>
 
                             <div class="form-group col-md-6">
@@ -115,13 +115,14 @@
                     <th>Código</th>
                     <th>Nombre</th>
                     <th>Color</th>
+                    <th>Precio de Venta</th>
+                    <th>Cantidad</th>
                     <th>Descripción</th>
                     <th>Costo de Compra</th>
                     <th>Costo Promedio</th>
                     <th>Grosor</th>
                     <th>Material</th>
-                    <th>Medida</th>
-                    <th>Precio de Venta</th>
+                    <th>Medida</th>                   
                     <th>Precio de Descuento</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
@@ -134,13 +135,14 @@
                     <td>{{ $productos->cod }}</td>
                     <td>{{ $productos->nombre }}</td>
                     <td>{{ $productos->color }}</td>
+                    <td>{{ $productos->precioVenta }}</td>
+                    <td>{{ $productos->cantidad }}</td>
                     <td>{{ $productos->descripcion }}</td>
                     <td>{{ $productos->costoCompra }}</td>
                     <td>{{ $productos->costoPromedio }}</td>
                     <td>{{ $productos->grosor }}</td>
                     <td>{{ $productos->material }}</td>
-                    <td>{{ $productos->medida }}</td>
-                    <td>{{ $productos->precioVenta }}</td>
+                    <td>{{ $productos->medida }}</td>                  
                     <td>{{ $productos->precioDescuento }}</td>
                     <td><img style="width: 100px; height: 100px;" src="/imagen/{{ $productos->imagen_url }}" alt="Imagen del producto"></td>
                     <td>
