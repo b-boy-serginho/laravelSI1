@@ -31,6 +31,15 @@ use Stripe;
 class VentaController extends Controller
 {
 
+
+     // Name: Test
+        // Number: 4242 4242 4242 4242
+        // CSV: 123
+        // Expiration Month: 12
+        // Expiration Year: 2028
+
+        // action="{{ route('stripe.post') }}"  
+        
     public function logout()
     {
         Auth::logout(); // Este es el método correcto para cerrar sesión
@@ -227,13 +236,7 @@ class VentaController extends Controller
         }
 
         
-        // Name: Test
-        // Number: 4242 4242 4242 4242
-        // CSV: 123
-        // Expiration Month: 12
-        // Expiration Year: 2028
-
-        // action="{{ route('stripe.post') }}"  
+       
 
 
 }
