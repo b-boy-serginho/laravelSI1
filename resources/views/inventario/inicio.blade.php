@@ -22,11 +22,11 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="producto_id" class="font-weight-medium">Proveedor</label>
+                                <label for="producto_id" class="font-weight-medium">Nombre del Producto</label>
                                 <select class="form-control" name="producto_id" required>
                                     <option value="" selected>Seleccionar producto...</option>
                                     @foreach ($producto as $prod)
-                                        <option value="{{ $prod->id }}">{{ $prod->cod}} ... {{ $prod->nombre }}</option>
+                                        <option value="{{ $prod->id }}">{{ $prod->nombre }}-{{ $prod->cantidad }}-{{ $prod->precioVenta}} </option>
                                     @endforeach
                                 </select>
                             </div>

@@ -16,5 +16,10 @@ class Empleado extends Model
         return $this->belongsTo(Horario::class, 'idHorario');
     }
 
+    public function usuario()
+    {
+        return $this->belongsTo(User::class, 'idUsuario', 'id');
+    }
+
     
 }

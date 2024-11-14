@@ -25,12 +25,14 @@
                     <form action="{{ url('/crear_horario') }}" method="POST">
                         @csrf
                         <div class="form-row">
+
                             <div class="form-group col-md-4">
                                 <label for="horaInicio" class="font-weight-medium">Hora de Inicio</label>
                                 <input type="time" name="horaInicio" id="horaInicio" 
                                        required class="form-control" 
                                        placeholder="HH">
                             </div>
+                            
                             <div class="form-group col-md-4">
                                 <label for="horaFinal" class="font-weight-medium">Hora Final</label>
                                 <input type="time" name="horaFinal" id="horaFinal" 

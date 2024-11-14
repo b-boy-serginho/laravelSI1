@@ -368,7 +368,7 @@ class ProductoController extends Controller
 
         $contador = 0;
 
-        foreach ($detalle as $detalle) {
+        foreach ($detalle as $detalle) {    
             $contador = $contador + $detalle->cantidad;
         }
               

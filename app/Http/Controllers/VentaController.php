@@ -163,11 +163,14 @@ class VentaController extends Controller
             Session::flash('success', 'PAGO CON EXITO!');
             return back();
         }
-
-        public function ver_cliente(){
-            $usuario = User::where('rolUsuario', 0)->get();
+//------------------------------------------------------------
+        public function ver_cliente() {
+            // Obtener los usuarios que no tienen ningún rol asignado
+            $usuario = User::doesntHave('roles')->get();
+            
+            // Pasar los datos a la vista
             return view('cliente.inicio', compact('usuario'));
-        }
+        }         
 
         public function mostrar_pedido(){
             $pedido = Pedido::all();

@@ -16,12 +16,13 @@ return new class extends Migration
             $table->id(); // Clave primaria
 
             $table->foreignId('idHorario')->constrained('horarios')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea
+            $table->foreignId('idUsuario')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete(); // Llave foránea
 
+            $table->string('nombre')->nullable();
             $table->integer('ci')->nullable();
-            $table->string('nombre');
             $table->char('sexo', 1)->nullable();
-            $table->string('cargo', 40)->nullable(false); // Cargo 
-            $table->datetime('fechaContratacion')->nullable(false); // Fecha de contratación
+            $table->string('cargo', 40)->nullable(true); 
+            $table->datetime('fechaContratacion')->nullable(); 
 
 
             $table->timestamps();
