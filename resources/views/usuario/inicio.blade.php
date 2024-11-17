@@ -5,14 +5,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Tienda Floral</title>
+    <title>Tienda ARTEDEC</title>
 
     <link rel="stylesheet" href="{{ asset('inicio/estilos.css') }}">
 
     {{-- PARA LOS COMENTARIOS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-
+    <style>
+        .box {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+    
+        .box:hover {
+            transform: scale(1.05);
+        }
+    
+        .img-box {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            height: 200px; /* Tamaño fijo de imagen */
+        }
+    
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Asegura que la imagen se adapte sin deformarse */
+        }
+    
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+        }
+    
+        .img-box:hover .overlay {
+            opacity: 1;
+        }
+    
+        .text {
+            font-size: 14px;
+        }
+    
+        .price {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    
+        .discount {
+            color: red;
+        }
+    
+        .regular {
+            text-decoration: line-through;
+            color: #999;
+        }
+    
+        .button-container {
+            margin-top: 15px;
+        }
+    
+        .add-to-cart {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+    
+        .add-to-cart:hover {
+            background-color: #0056b3;
+        }
+    
+        /* Responsivo */
+        @media (max-width: 767px) {
+            .col-sm-6 {
+                width: 100%;
+            }
+        }
+    
+        @media (min-width: 768px) and (max-width: 991px) {
+            .col-md-4 {
+                width: 50%;
+            }
+        }
+    
+        @media (min-width: 992px) {
+            .col-lg-4 {
+                width: 33.33%;
+            }
+        }
+    </style>
 
 </head>
 
@@ -20,7 +123,7 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#">Tienda Floral</a>
+        <a href="#">Tienda ARTEDEC</a>
         <div>
             <!-- Verificar si el usuario está autenticado -->
             @if (Auth::check())
@@ -56,7 +159,7 @@
     <!-- Banner -->
     <section class="banner">
         <div>
-            <h1>Bienvenidos a Tienda Floral</h1>
+            <h1 style="">Bienvenidos a Tienda ARTEDEC</h1>
             <p>Encuentra una amplia variedad de productos inspirados en la naturaleza</p>
 
         </div>
@@ -67,21 +170,23 @@
         <h2>Categorías Populares</h2>
         <div class="categories">
             <div class="card">
-                <img src="/inicio/R.jpeg" alt="Flores">
+                {{-- <img src="/inicio/R.jpeg" alt="Flores"> --}}
+                <img src="/inicio/img3.jpg" alt="Flores">
                 <div class="card-body">
-                    <h3 class="card-title">Flores</h3>
+                    <h3 class="card-title">Decoracion</h3>
                 </div>
             </div>
             <div class="card">
-                <img src="/inicio/OIP.jpeg" alt="Decoración">
+                {{-- <img src="/inicio/img1.jpg" alt="Decoración"> --}}
+                <img src="/inicio/img2.jpg" alt="Decoración">
                 <div class="card-body">
-                    <h3 class="card-title">Decoración</h3>
+                    <h3 class="card-title">Casita en PVC</h3>
                 </div>
             </div>
             <div class="card">
                 <img src="/inicio/img1.jpg" alt="Juguetes">
                 <div class="card-body">
-                    <h3 class="card-title">Juguetes</h3>
+                    <h3 class="card-title">Robusto</h3>
                 </div>
             </div>
         </div>
@@ -103,15 +208,15 @@
                 </div>
             @endif
 
-            <div class="row">
-                {{-- <div class="card">
+           <div class="row">
+                 {{--<div class="card">
                     <img src="/inicio/img3.jpg" alt="Producto 2">
                     <div class="card-body">
                         <h3 class="card-title">Producto 1</h3>
                         <p>Bs 20</p>
                     </div>
-                </div>  --}}
-                {{-- <div class="card">
+                </div> 
+                <div class="card">
                     <img src="/inicio/img2.jpg" alt="Producto 2">
                     <div class="card-body">
                         <h3 class="card-title">Producto 2</h3>

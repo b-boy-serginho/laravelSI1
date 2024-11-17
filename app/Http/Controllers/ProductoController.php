@@ -183,20 +183,21 @@ class ProductoController extends Controller
     }
 
     public function crear_producto(Request $request){
-//         $request->validate([
-//             'categoria_id' => 'required|integer',
-//             'cod' => 'required|string',
-//             'nombre' => 'required|string',
-//             'color' => 'required|string',
-//             'descripcion' => 'required|string',
-//             'costoCompra' => 'required|integer',
-//             'costoPromedio' => 'required|integer',
-//             'grosor' => 'required|string',
-//             'material' => 'required|string',
-//             'precioVenta' => 'required|integer',
-//             'medida' => 'required|string',
-//             'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
-//         ]);
+        $request->validate([
+            'categoria_id' => 'required|integer',
+            'cod' => 'required|string',
+            'nombre' => 'required|string',
+            'color' => 'required|string',
+            'descripcion' => 'required|string',
+            'costoCompra' => 'required|integer',
+            'costoPromedio' => 'required|integer',
+            'grosor' => 'required|string',
+            'material' => 'required|string',
+            'precioVenta' => 'required|integer',
+            // 'precioDescuento' => 'required|integer',
+            'medida' => 'required|string',
+            'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
+        ]);
 
         $producto = new Producto;
         $producto->categoria_id = $request->categoria_id;
@@ -214,15 +215,20 @@ class ProductoController extends Controller
         $producto->precioVenta = $request->precioVenta;
 
          // Verificar si el archivo de imagen fue subido
-        if ($request->hasFile('imagen_url')) {
-            $foto = $request->file('imagen_url');
-            $imageName = time() . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('imagen'), $imageName); // Mover la imagen a la carpeta 'public/imagen'
-            $producto->imagen_url = $imageName;
-        }
+        // if ($request->hasFile('imagen_url')) {
+        //     $foto = $request->file('imagen_url');
+        //     $imageName = time() . '.' . $foto->getClientOriginalExtension();
+        //     $foto->move(public_path('imagen'), $imageName); // Mover la imagen a la carpeta 'public/imagen'
+        //     $producto->imagen_url = $imageName;
+        // }
+
+        $imagen=$request->imagen_url;
+        $imagename=time().'.'.$imagen->getClientOriginalExtension();
+        $request->imagen_url->move('imagen', $imagename);
+        $producto->imagen_url = $imagename;
 
         $producto->save();
-        return redirect()->back()->with('mensaje','Producto agregado exitosanmente');
+        return redirect()->back()->with('mensaje','Producto actualizado exitosanmente');
     }
 
     public function borrar_producto($id){
@@ -237,48 +243,49 @@ class ProductoController extends Controller
         return view('producto.editar', compact('producto', 'categoria'));
     }
 
-    public function editarProducto(Request $request, $id){
+    public function editarProducto(Request $request, $id) {
         $producto = Producto::find($id);
-//         $request->validate([
-//             'categoria_id' => 'required|integer',
-//             'cod' => 'required|string',
-//             'nombre' => 'required|string',
-//             'color' => 'required|string',
-//             'descripcion' => 'required|string',
-//             'costoCompra' => 'required|integer',
-//             'costoPromedio' => 'required|integer',
-//             'grosor' => 'required|string',
-//             'material' => 'required|string',
-//             'precioVenta' => 'required|integer',
-//             'medida' => 'required|string',
-//             'imagen_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // validación del archivo de imagen
-//         ]);
+        
+        // Validación
+        $request->validate([
+            'categoria_id' => 'required|integer',
+            'cod' => 'required|string',
+            'nombre' => 'required|string',
+            'color' => 'required|string',
+            'descripcion' => 'required|string',
+            'costoCompra' => 'required|integer',
+            'costoPromedio' => 'required|integer',
+            'grosor' => 'required|string',
+            'material' => 'required|string',
+            'precioVenta' => 'required|integer',            
+            'medida' => 'required|string',
+            'imagen_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // La imagen es opcional
+        ]);
+    
+        // // Actualizar datos del producto
+        // $producto->fill($request->except('imagen_url'));
+    
+        // // Verificar si el archivo de imagen fue subido
+        // if ($request->hasFile('imagen_url')) {
+        //     $foto = $request->file('imagen_url');
+        //     $imageName = time() . '.' . $foto->getClientOriginalExtension();
+    
+        //     // Mover la imagen a la carpeta 'public/imagen'
+        //     $foto->move(public_path('imagen'), $imageName);
+    
+        //     // Asignar el nombre de la imagen al producto
+        //     $producto->imagen_url = $imageName;
+        // }
 
-        $producto->categoria_id = $request->categoria_id;
-        $producto->cod = $request->cod;
-        $producto->nombre = $request->nombre;
-        $producto->color = $request->color;
-        $producto->descripcion = $request->descripcion;
-        $producto->costoCompra = $request->costoCompra;
-        $producto->costoPromedio = $request->costoPromedio;
-        $producto->grosor = $request->grosor;
-        $producto->material = $request->material;
-        $producto->medida = $request->medida;
-        $producto->cantidad = $request->cantidad;
-        $producto->precioVenta = $request->precioVenta;
-        $producto->precioDescuento = $request->precioDescuento;
-
-         // Verificar si el archivo de imagen fue subido
-        if ($request->hasFile('imagen_url')) {
-            $foto = $request->file('imagen_url');
-            $imageName = time() . '.' . $foto->getClientOriginalExtension();
-            $foto->move(public_path('imagen'), $imageName); // Mover la imagen a la carpeta 'public/imagen'
-            $producto->imagen_url = $imageName;
-        }
-
+        $imagen=$request->imagen_url;
+        $imagename=time().'.'.$imagen->getClientOriginalExtension();
+        $request->imagen_url->move('imagen', $imagename);
+        $producto->imagen_url = $imagename;
+    
         $producto->save();
-        return redirect()->back()->with('mensaje','Producto actualizado exitosanmente');
+        return redirect()->back()->with('mensaje', 'Producto actualizado exitosamente');
     }
+    
 
 
     //----------------------------------------------------------------------------------

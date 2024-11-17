@@ -32,8 +32,8 @@ class ControllerUsuario extends Controller
     public function inicio(){
         $producto = Producto::all();
         $categoria = Categoria::all();
-        $comentario = Comentario::all();    
-        $respuesta = Respuesta::all();    
+        $comentario = Comentario::all();
+        $respuesta = Respuesta::all();
         return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
     }
 
@@ -70,11 +70,11 @@ class ControllerUsuario extends Controller
     //     if ($tipoRol == 1){
     //         return view('usuario.admin');
     //     }
-    //     else{                 
+    //     else{
     //         $producto = Producto::all();
     //         $categoria = Categoria::all();
-    //         $comentario = Comentario::all();    
-    //         $respuesta = Respuesta::all();    
+    //         $comentario = Comentario::all();
+    //         $respuesta = Respuesta::all();
     //         return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
     //     }
     // }
@@ -92,8 +92,8 @@ class ControllerUsuario extends Controller
         } else {
             $producto = Producto::all();
             $categoria = Categoria::all();
-            $comentario = Comentario::all();    
-            $respuesta = Respuesta::all();    
+            $comentario = Comentario::all();
+            $respuesta = Respuesta::all();
             return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
         }
     }
@@ -110,16 +110,16 @@ class ControllerUsuario extends Controller
         $permiso = Permission::all();  // Obtiene todos los permisos
         return view('rolPermiso.editar', compact('permiso', 'role'));
     }
-    
+
     public function actualizar_usuario(Request $request, $id) {
         $role = Role::find($id);  // Encuentra el rol a actualizar
         $role->permissions()->sync($request->input('permiso', []));  // Sincroniza los permisos seleccionados
-        return redirect()->route('ver_usuario')->with('mensaje', 'Roles asignados exitosamente');;
+        return redirect()->route('ver_usuario')->with('mensaje', 'Roles asignados exitosamente');
     }
-    
+
     //----------------------------------------------------------------
     public function ver_usuario_permiso() {
-        $usuario = User::all();          
+        $usuario = User::all();
         return view('rolPermiso.usuario', compact('usuario'));
     }
 
@@ -129,7 +129,7 @@ class ControllerUsuario extends Controller
         if ($existingUsuario) {
             return redirect()->back()->with('error', 'El ID ya está en uso. Por favor, elige otro ID.');
         }
-    
+
         $usuario=new User;
         $usuario->id= $request->id;
         $usuario->name= $request->name;
@@ -143,13 +143,13 @@ class ControllerUsuario extends Controller
         $usuario->save();
         return redirect()->back()->with('mensaje','agregado exitosanmente');
     }
-    
+
     public function editar_usuario_rol($id) {
         $usuario = User::findOrFail($id);  // Usa 'findOrFail' para manejo de errores
         $roles = Role::all();  // Obtiene todos los roles
         return view('rolPermiso.editarRolUsuario', compact('usuario', 'roles'));
     }
-    
+
     public function editar_rol_user(Request $request, $id) {
         $usuario = User::findOrFail($id);  // Encuentra el usuario a actualizar
         $usuario->roles()->sync($request->input('roles', []));  // Sincroniza los roles seleccionados
@@ -157,7 +157,7 @@ class ControllerUsuario extends Controller
     }
     //-------------------------------------------------------
     public function ver_permiso() {
-        $permiso = Permission::all(); 
+        $permiso = Permission::all();
          return view('rolPermiso.permiso', compact('permiso'));
     }
 
@@ -166,13 +166,13 @@ class ControllerUsuario extends Controller
 
         return redirect()->back()->with('mensaje','agregado exitosanmente');
     }
-    
+
     //----------------------------------------------------------------
 
-    
+
 
     // public function editar_nuevo_usuario(Request $request, $id) {
-    //     $usuario = User::find($id);       
+    //     $usuario = User::find($id);
     //     $usuario->id= $request->id;
     //     $usuario->ci= $request->ci;
     //     $usuario->nombres= $request->nombres;
@@ -193,7 +193,7 @@ class ControllerUsuario extends Controller
     //     return redirect()->back()->with('message','eliminado exitosanmente');
     // }
 
-    
+
     //------------------------------------------------------------------------------------
 
     public function ver_rol() {
@@ -300,11 +300,11 @@ class ControllerUsuario extends Controller
     public function ver_empleado() {
         // Obtener solo los usuarios que tienen el rol 'Empleado'
         $usuario = User::role('Empleado')->get();
-    
+
         $horarios = Horario::all();
         $empleados = Empleado::all();
         $bitacora = Bitacora::all();
-    
+
         return view('empleado.inicio', compact('horarios', 'empleados', 'bitacora', 'usuario'));
     }
 
@@ -318,7 +318,7 @@ class ControllerUsuario extends Controller
     public function crear_empleado(Request $request)
     {
         $request->validate([
-            
+
             'ci' => 'required|integer',
             'nombre' => 'required|string',
             'sexo' => 'required|string',
@@ -352,13 +352,13 @@ class ControllerUsuario extends Controller
         return redirect()->back()->with('mensaje','Empleado agregado exitosanmente');
     }
 
-   
+
     public function editar_empl($id) {
         $empleado = Empleado::findOrFail($id);
           // Obtener solo los usuarios que tienen el rol 'Empleado'
-        $usuarios = User::role('Empleado')->get();        
+        $usuarios = User::role('Empleado')->get();
         $horarios = Horario::all();
-        $bitacora = Bitacora::all();    
+        $bitacora = Bitacora::all();
         return view('empleado.editar', compact('horarios', 'empleado', 'bitacora', 'usuarios'));
     }
 
@@ -423,9 +423,9 @@ class ControllerUsuario extends Controller
         }
         return view('login');
     }
-    
 
-   
+
+
 
 
 
