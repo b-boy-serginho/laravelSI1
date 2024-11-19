@@ -7,115 +7,12 @@
 
     <title>Tienda ARTEDEC</title>
 
-    <link rel="stylesheet" href="{{ asset('inicio/estilos.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('inicio/estilos.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('inicio/estilo.css') }}">
 
     {{-- PARA LOS COMENTARIOS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <style>
-        .box {
-            position: relative;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-    
-        .box:hover {
-            transform: scale(1.05);
-        }
-    
-        .img-box {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            height: 200px; /* Tamaño fijo de imagen */
-        }
-    
-        .img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Asegura que la imagen se adapte sin deformarse */
-        }
-    
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-        }
-    
-        .img-box:hover .overlay {
-            opacity: 1;
-        }
-    
-        .text {
-            font-size: 14px;
-        }
-    
-        .price {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    
-        .discount {
-            color: red;
-        }
-    
-        .regular {
-            text-decoration: line-through;
-            color: #999;
-        }
-    
-        .button-container {
-            margin-top: 15px;
-        }
-    
-        .add-to-cart {
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-    
-        .add-to-cart:hover {
-            background-color: #0056b3;
-        }
-    
-        /* Responsivo */
-        @media (max-width: 767px) {
-            .col-sm-6 {
-                width: 100%;
-            }
-        }
-    
-        @media (min-width: 768px) and (max-width: 991px) {
-            .col-md-4 {
-                width: 50%;
-            }
-        }
-    
-        @media (min-width: 992px) {
-            .col-lg-4 {
-                width: 33.33%;
-            }
-        }
-    </style>
+     
 
 </head>
 
@@ -159,8 +56,8 @@
     <!-- Banner -->
     <section class="banner">
         <div>
-            <h1 style="">Bienvenidos a Tienda ARTEDEC</h1>
-            <p>Encuentra una amplia variedad de productos inspirados en la naturaleza</p>
+            <h1 >Bienvenidos a Tienda ARTEDEC</h1>
+            {{-- <p>Encuentra una amplia variedad de productos inspirados en la naturaleza</p> --}}
 
         </div>
     </section>
@@ -236,10 +133,9 @@
                                 <div class="overlay">
                                     <div class="text">
 
-
                                         @if (Auth::check())
                                             <form action="{{ url('agregar_carrito', $products->id) }}" method="POST"
-                                                class="add-to-cart-form">
+                                                class="">
                                                 @csrf
                                                 <div class="form-row">
                                                     <div class="form-col">
@@ -374,7 +270,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Tienda Floral. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Tienda ArteDec. Todos los derechos reservados.</p>
     </footer>
 
 

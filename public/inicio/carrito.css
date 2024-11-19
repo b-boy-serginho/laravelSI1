@@ -1,0 +1,242 @@
+/* Estilo base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #8e44ad;
+    color: white;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #ffd1dc;
+}
+
+/* Estilo para el usuario autenticado */
+.navbar span {
+    margin-right: 15px;
+    font-size: 1rem;
+}
+
+/* Menú hamburguesa */
+.navbar div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.alert {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #28a745;
+}
+
+.alert-success p {
+    margin: 0;
+}
+
+/* Efecto de desaparición suave */
+.alert.success {
+    animation: fadeInOut 3s ease-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* --------------------------------+++++++++++++++++++++++++++++ */
+
+/* Tabla */
+table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    background-color: indigo;
+    color: white;
+    font-size: 16px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9f5f5;
+}
+
+.img_deg {
+    max-width: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones */
+.btn {
+    padding: 10px 15px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #e63946;
+}
+
+.btn-danger:hover {
+    background-color: #c72636;
+}
+
+.boton-pedido, .boton-tarjeta {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    text-decoration: none;
+    background-color: #38b000;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.boton-tarjeta {
+    background-color: #118ab2;
+}
+
+.boton-pedido:hover, .boton-tarjeta:hover {
+    background-color: #036666;
+}
+
+/* Precio total */
+.total_dg {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px;
+    color: #006d77;
+}
+
+.pedido-titulo {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+.boton-container {
+    text-align: center;
+    margin: 20px;
+}
+
+/* ------------------------------ */
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Cambia la dirección para apilar los elementos */
+        align-items: flex-start;
+    }
+
+    .navbar div {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .img_deg {
+        max-width: 80px;
+    }
+
+    .btn, .boton-pedido, .boton-tarjeta {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .total_dg {
+        font-size: 18px;
+    }
+
+    .pedido-titulo {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar a {
+        font-size: 1rem;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+
+    .total_dg {
+        font-size: 16px;
+    }
+
+    .pedido-titulo {
+        font-size: 18px;
+    }
+
+    .boton-container a {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .img_deg {
+        max-width: 70px;
+    }
+}
