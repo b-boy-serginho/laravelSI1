@@ -274,8 +274,22 @@ class ProductoController extends Controller
         //     $foto->move(public_path('imagen'), $imageName);
     
         //     // Asignar el nombre de la imagen al producto
-        //     $producto->imagen_url = $imageName;
-        // }
+        //     $producto->imagen_url = $imageName;        // }
+
+        
+        $producto->categoria_id = $request->categoria_id;
+        $producto->cod = $request->cod;
+        $producto->nombre = $request->nombre;
+        $producto->color = $request->color;
+        $producto->descripcion = $request->descripcion;
+        $producto->costoCompra = $request->costoCompra;
+        $producto->costoPromedio = $request->costoPromedio;
+        $producto->grosor = $request->grosor;
+        $producto->material = $request->material;
+        $producto->medida = $request->medida;
+        $producto->cantidad = $request->cantidad;
+        $producto->precioDescuento = $request->precioDescuento;
+        $producto->precioVenta = $request->precioVenta;
 
         $imagen=$request->imagen_url;
         $imagename=time().'.'.$imagen->getClientOriginalExtension();

@@ -125,7 +125,7 @@
                             <div>
                                 <label for="precioDescuento" class="block text-sm font-medium text-gray-700">Precio de
                                     Descuento</label>
-                                <input value="{{ old('precioDescuento', $producto->precioDescuento) }}" type="number"
+                                <input value="" type="number"
                                     name="precioDescuento" id="precioDescuento"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
