@@ -18,9 +18,7 @@ return new class extends Migration
             $table->foreignId('almacen_id')->constrained('almacenes')->cascadeOnUpdate()->cascadeOnDelete(); 
             $table->foreignId('producto_id')->constrained('productos')->cascadeOnUpdate()->cascadeOnDelete(); 
 
-            $table->integer('nit');
-            $table->integer('nro');
-            $table->string('cod_aut');
+           
 
             $table->decimal('cantidad', 12, 2);
             $table->decimal('precio_unitario', 12, 2);
