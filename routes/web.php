@@ -34,9 +34,13 @@ Route::middleware([
     Route::post('/crear_permiso', [ControllerUsuario::class, 'crear_permiso'])->name('crear_permiso');
 
     Route::get('/ver_usuario_permiso', [ControllerUsuario::class, 'ver_usuario_permiso'])->name('ver_usuario_permiso');
+    Route::post('/usuario_excel', [ControllerUsuario::class, 'usuario_excel'])->name('usuario_excel');
+
+    
     Route::post('/crear_usuario', [ControllerUsuario::class, 'crear_usuario'])->name('crear_usuario');
     Route::get('/editar_usuario_rol/{id}', [ControllerUsuario::class, 'editar_usuario_rol'])->name('editar_usuario_rol');
     Route::put('/editar_rol_user/{id}', [ControllerUsuario::class, 'editar_rol_user'])->name('editar_rol_user');
+
 
 
     // Route::post('/editar_nuevo_usuario/{id}', [ControllerUsuario::class, 'editar_nuevo_usuario']);

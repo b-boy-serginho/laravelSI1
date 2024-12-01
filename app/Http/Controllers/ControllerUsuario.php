@@ -22,12 +22,16 @@ use App\Models\Categoria;
 use App\Models\Comentario;
 use App\Models\Respuesta;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsuarioExcelImport;
+
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 
 class ControllerUsuario extends Controller
 {
+
 
     public function inicio(){
         $producto = Producto::all();
@@ -36,49 +40,6 @@ class ControllerUsuario extends Controller
         $respuesta = Respuesta::all();
         return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
     }
-
-    // public function redireccionar()
-    // {
-    //     $userId = Auth::user()->id;
-    //     $usuarioRol = UsuarioRol::where('usuario_id', $userId)->first();
-
-    //     if ($usuarioRol) {
-    //         $rolId = $usuarioRol->rol_id;
-
-    //         // Verificar el rol del usuario y redirigir al lugar correcto
-    //         switch ($rolId) {
-    //             case 1:
-    //                 // Si es administrador
-    //                 return view('usuario.admin'); // Redirige a la ruta 'admin.inicio'
-    //             case 2:
-    //                 // Si es empleado
-    //                 return view('usuario.empleado');
-    //             case 3:
-    //                 // Si es cliente
-    //                 return view('usuario.cliente');
-    //             default:
-    //                 return redirect('/')->with('error', 'Rol no reconocido.');
-    //         }
-    //     }
-    //     else {
-    //         return redirect('/')->with('error', 'No se ha asignado un rol a este usuario.');
-    //     }
-    // }
-
-    // public function redireccionar(){
-    //     $tipoRol = Auth::User()->rolUsuario;
-    //     if ($tipoRol == 1){
-    //         return view('usuario.admin');
-    //     }
-    //     else{
-    //         $producto = Producto::all();
-    //         $categoria = Categoria::all();
-    //         $comentario = Comentario::all();
-    //         $respuesta = Respuesta::all();
-    //         return view('usuario.inicio', compact('producto', 'categoria', 'comentario', 'respuesta'));
-    //     }
-    // }
-
 
     public function redireccionar(){
         $user = Auth::user();
@@ -118,6 +79,20 @@ class ControllerUsuario extends Controller
     }
 
     //----------------------------------------------------------------
+
+    public function usuario_excel(Request $request)
+    {
+        $request->validate([
+            'archivo' => 'required|mimes:xlsx,xls,csv',
+        ]);
+
+        Excel::import(new UsuarioExcelImport, $request->file('archivo'));
+
+        return redirect()->back()->with('success', 'Archivo importado exitosamente!');
+    }
+
+
+
     public function ver_usuario_permiso()
     {
         // Cargar los usuarios con sus roles
