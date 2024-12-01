@@ -36,7 +36,7 @@ class RolSeeder extends Seeder
 
 
         User::create([         
-            'name' => 'Serginho',
+            'name' => 'Administrador',
             'email' => 'admin@gmail.com',
             'estado' => 'activo',
             'fechaCreacion' => now(),

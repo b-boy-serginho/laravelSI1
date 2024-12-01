@@ -90,33 +90,37 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                               <th>Correo Electronico</th>
-                                 {{-- <th>Dirección</th>
-                                <th>Fecha de Creacion</th> --}}
+                                <th>Correo Electrónico</th>
+                                <th>Roles</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($usuario as $user)                              
-                         
+                            @foreach ($usuarios as $user)
                                 <tr>
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                     <td>
+                                    <td>
+                                        <!-- Mostrar los roles -->
+                                        @if ($user->roles->isNotEmpty())
+                                            <ul>
+                                                @foreach ($user->roles as $role)
+                                                    <li>{{ $role->name }}</li>
+                                                @endforeach
+                                            </ul>
+                                        @else
+                                            Sin rol asignado
+                                        @endif
+                                    </td>
+                                    <td>
                                         <a href="{{ url('editar_usuario_rol', $user->id) }}" class="btn btn-link text-primary">Editar</a>
-                                    </td>                                            
-                                     {{--
-                                     <td>
-                                        <a href="{{ url('borrar_usuario', $user->id) }}" 
-                                           class="btn btn-link text-danger" 
-                                           onclick="return confirm('¿Estás seguro de eliminar este horario?')">Eliminar</a>
-                                    </td> --}}
+                                    </td>
                                 </tr>
-                               
                             @endforeach
                         </tbody>
                     </table>
+                    
                 </div>
             </div>
         </div>

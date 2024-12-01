@@ -19,7 +19,6 @@
 
                     <h1 class="h4 font-weight-bold text-secondary mb-4">Formulario del Cliente</h1>
                     
-                    {{-- {{-- @role('Admin') --}}
                     <form action="{{ url('/crear_cliente') }}" method="POST">
                         @csrf
                 
@@ -33,59 +32,26 @@
                             <div class="form-group col-md-6">
                                 <label for="ci" class="font-weight-medium">CI</label>
                                 <input type="number" name="ci" min="1" id="ci" required class="form-control" placeholder="CI del cliente">
-                            </div>
+                            </div>                           
 
                             <div class="form-group col-md-6">
                                 <label for="nombre" class="font-weight-medium">Nombre del cliente</label>
                                 <input type="text" name="nombre" id="nombre" required class="form-control" placeholder="Nombre del cliente">
-                            </div>   
+                            </div> 
                             
-                            {{-- <div class="form-group col-md-6">
-                                <label for="idUsuario" class="font-weight-medium">Usuario</label>
-                                <select class="form-control" name="idUsuario" required>
-                                    <option value="" selected>Seleccionar correo...</option>
-                                    @foreach ($usuario as $user)
-                                        <option value="{{ $user->id }}">{{ $user->name}} - {{ $user->email }}</option>
-                                    @endforeach
-                                </select>
-                            </div> --}}
+                            <div class="form-group col-md-6">
+                                <label for="fecha" class="font-weight-medium">Fecha</label>
+                                <input type="datetime-local" name="fecha" id="fecha" required class="form-control"
+                                    placeholder="">
+                            </div>                        
                             
-
-                            {{-- <div class="form-group col-md-6">
-                                <label for="fechaContratacion" class="font-weight-medium">Fecha de Contratación</label>
-                                <input type="datetime-local" name="fechaContratacion" id="fechaContratacion" required class="form-control">
-                            </div>
-                                                       
-                            <div class="form-group col-md-6">
-                                <label for="sexo" class="font-weight-medium">Sexo</label>
-                                <select name="sexo" id="sexo" required class="form-control">
-                                    <option value="" selected>Seleccionar sexo...</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Femenino</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="cargo" class="font-weight-medium">Cargo</label>
-                                <input type="text" name="cargo" id="cargo" required class="form-control" placeholder="Cargo del cliente">
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="idHorario" class="font-weight-medium">Horario</label>
-                                <select class="form-control" name="idHorario" required>
-                                    <option value="" selected>Seleccionar horario...</option>
-                                    @foreach ($horarios as $hora)
-                                        <option value="{{ $hora->id }}">{{ $hora->horaInicio }} - {{ $hora->horaFinal }}</option>
-                                    @endforeach
-                                </select>
-                            </div>--}}
                         </div> 
 
                         <div class="text-right mt-3">
                             <button type="submit" class="btn btn-primary">Crear Cliente</button>
                         </div>
                     </form>
-                    {{-- @endrole --}}
+                    
                 </div>
             </div>
         </div>
@@ -100,8 +66,9 @@
                     
                     <th>Codigo</th>
                     <th>CI</th>
-                    <th>Nombre</th>                                   
-                    {{-- <th>Acciones</th> --}}
+                    <th>Nombre</th> 
+                    <th>Fecha</th>                                   
+                    <th>Factura</th>
                 </tr>
             </thead>
             <tbody>
@@ -110,14 +77,13 @@
                     <td>{{ $cliente->codigo }}</td>
                     <td>{{ $cliente->ci }}</td>
                     <td>{{ $cliente->nombre}}</td> 
-                    {{-- @role('Admin') --}}
-                    {{-- @can('crear cliente') --}}
-                    {{-- <td class="d-flex justify-content-around">
-                        <a href="{{ url('editar_empl', $cliente->id) }}" class="btn btn-link text-primary">Editar</a>                        
-                        <a href="{{ url('borrar_cliente', $cliente->id) }}" class="btn btn-link text-danger" onclick="return confirm('¿Estás seguro de eliminar este cliente?')">Eliminar</a>
-                    </td> --}}
-                    {{-- @endcan 
-                    {{-- @endrole--}}
+                    <td>{{ $cliente->fecha}}</td> 
+                    <td class="d-flex justify-content-around">
+                        <a href="{{ url('facturar', $cliente->id) }}"
+                            class="btn btn-link text-primary">CREAR FACTURA</a>                      
+                    </td> 
+                   
+                   
                 </tr>
                 @endforeach 
             </tbody>
