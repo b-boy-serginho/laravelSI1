@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
 
+            // $table->foreignId('cliente_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete(); 
+            // $table->foreignId('producto_id')->constrained('productos')->cascadeOnUpdate()->cascadeOnDelete(); 
+
              //USUARIO
              $table->string('nombreUsuario')->nullable();
              $table->string('correo')->nullable();
              $table->string('telefono')->nullable();
              $table->string('direccion')->nullable();
              $table->string('usuario_id')->nullable();
+            
              //PRODUCTO
              $table->string('nombreProducto')->nullable();
              $table->string('cantidad')->nullable();
@@ -27,6 +31,7 @@ return new class extends Migration
              $table->string('importe')->nullable();
              $table->string('imagen_url')->nullable();
              $table->string('producto_id')->nullable();
+
              //PEDIDO
              $table->string('estado_pago')->nullable();
              $table->string('estado_entrega')->nullable();

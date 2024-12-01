@@ -508,6 +508,11 @@ return [
                            'text' => 'Pedidos del cliente',
                            'url' => 'mostrar_pedido',
                        ],
+
+                       [
+                        'text' => 'Historial de pagos',
+                        'url' => 'historial',
+                        ],
                       
                    ],
                ],

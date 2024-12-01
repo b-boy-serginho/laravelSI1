@@ -24,7 +24,7 @@
                     <th>Correo</th>
                     <th>Dirección</th>
                     <th>Teléfono</th>
-
+                    {{-- <th>HISTORIAL DE PAGOS</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -35,11 +35,10 @@
                         <td>{{ $user->direccion }}</td>
                         <td>{{ $user->telefono }}</td>
                         {{-- <td class="d-flex justify-content-around">
-                                <a href="{{ url('editar_proveedor', $prov->id) }}"
-                                    class="btn btn-link text-primary">Editar</a>
-                                <a href="{{ url('borrar_proveedor', $prov->id) }}" class="btn btn-link text-danger"
-                                    onclick="return confirm('¿Estás seguro de eliminar este proveedor?')">Eliminar</a>
-                            </td> --}}
+                            <a href="{{ url('historial', $user->id) }}"
+                                class="btn btn-link text-primary">VER</a>                      
+                        </td>  --}}
+
                     </tr>
                 @endforeach
             </tbody>

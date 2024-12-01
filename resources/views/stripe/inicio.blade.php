@@ -9,7 +9,7 @@
     
 <div class="container">
     
-    <h1 style="text-align: center">Suscribete ahora!!!</h1>
+    <h1 style="text-align: center">PAGA AHORA!!!</h1>
     
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -36,12 +36,12 @@
                             id="payment-form">
                         @csrf
     
-                        <div class='form-row row'>
+                        {{-- <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Nombre</label> <input
                                     class='form-control' size='4' type='text'>
                             </div>
-                        </div>
+                        </div> --}}
     
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group card required'>

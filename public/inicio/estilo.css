@@ -89,6 +89,10 @@ body {
     border: 1px solid #28a745;
 }
 
+.alert-success p {
+    margin: 0;
+}
+
 /* Animación de alerta */
 @keyframes fadeInOut {
     0%, 100% {

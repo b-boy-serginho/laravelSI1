@@ -81,8 +81,7 @@
                     <td class="d-flex justify-content-around">
                         <a href="{{ url('facturar', $cliente->id) }}"
                             class="btn btn-link text-primary">CREAR FACTURA</a>                      
-                    </td> 
-                   
+                    </td>                   
                    
                 </tr>
                 @endforeach 

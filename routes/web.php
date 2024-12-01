@@ -97,7 +97,7 @@ Route::middleware([
 
     Route::get('/logout', [VentaController::class, 'logout'])->name('logout');
 
-    Route::get('/ver_carrito', [VentaController::class, 'ver_carrito']);
+    Route::get('/ver_carrito', [VentaController::class, 'ver_carrito'])->name('ver_carrito');
     Route::get('/eliminar_carrito/{id}', [VentaController::class, 'eliminar_carrito']);
 
     Route::get('/ver_pedido', [VentaController::class, 'ver_pedido']);
@@ -135,6 +135,7 @@ Route::middleware([
     Route::post('/crear_factura_cliente/{id}', [VentaController::class, 'crear_factura_cliente']);
     Route::get('/pdf_factura/{id}', [VentaController::class, 'pdf_factura'])->name('pdf_factura');
 
+    Route::get('/historial', [VentaController::class, 'historial']);
 
     // Route::get('/factura_cliente', [VentaController::class, 'factura_cliente']);
     // Route::get('/imprimir_factura', [VentaController::class, 'imprimir_factura']);

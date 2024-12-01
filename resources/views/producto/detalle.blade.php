@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Floral</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('inicio/detalle.css') }}">
-    
+
 </head>
 
 <body>
@@ -58,6 +59,14 @@
                 </div>
             @endif
 
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+
+
             <div class="img-box">
                 <img src="{{ asset('imagen/' . $producto->imagen_url) }}" alt="Imagen del producto">
             </div>
@@ -80,17 +89,19 @@
                     <form class="cart-form" action="{{ url('agregar_carrito', $producto->id) }}" method="POST">
                         @csrf
                         <input type="number" name="cantidad" value="1" min="1">
-                        <input onclick="return confirm('¿quieres agregar al carrito?')" type="submit" value="Añadir al carrito">
+                        <input onclick="return confirm('¿quieres agregar al carrito?')" type="submit"
+                            value="Añadir al carrito">
                     </form>
                     <br>
 
                     <div class="button-container">
                         <a class="add-to-cart mr-3" href="{{ url('/') }}">Regresar</a>
-                        <a class="add-to-cart" style="background-color: rgb(79, 162, 79)" href="{{ url('/ver_carrito') }}">Ver carrito</a>                                        
+                        <a class="add-to-cart" style="background-color: rgb(79, 162, 79)"
+                            href="{{ url('/ver_carrito') }}">Ver carrito</a>
                     </div>
                 @endif
-                
-                
+
+
             </div>
         </div>
     </section>
