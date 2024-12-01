@@ -23,7 +23,7 @@ use Carbon\Carbon;
 use App\Models\Carrito;
 use App\Models\Pedido;
 use App\Models\Cliente;
-use App\Models\Almacen;
+use App\Models\Almacenes;
 use App\Models\FacturaVenta;
 
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -33,6 +33,54 @@ use Stripe;
 
 class VentaController extends Controller
 {
+    public function factura_cliente(){
+        $cliente = Cliente::all();
+        $almacen = Almacenes::all();
+        $producto = Producto::all();
+        $factura = FacturaVenta::all();
+        return view('cliente.factura', compact('factura', 'cliente', 'almacen', 'producto'));
+    }
+
+    public function crear_factura_cliente(Request $request)
+    {
+        
+        $request->validate([
+            'cliente_id' => 'required|exists:clientes,id',
+            'almacen_id' => 'required|exists:almacenes,id',
+            'producto_id' => 'required|exists:productos,id',
+            'nit' => 'required|numeric|min:0',
+            'nro' => 'required|numeric|min:0',
+            'cod_aut' => 'required|numeric|min:0',
+            'cantidad' => 'required|numeric|min:1',
+            'precio_unitario' => 'required|numeric|min:0',
+            'descuento' => 'required|numeric|min:0',
+            'descripcion_monto' => 'required|string|max:255',
+        ]);
+       
+            $factura = new FacturaVenta;
+            $factura->cliente_id = $request->cliente_id;
+            $factura->almacen_id = $request->almacen_id;
+            $factura->producto_id = $request->producto_id;
+            $factura->nit = $request->nit;
+            $factura->nro = $request->nro;
+            $factura->cod_aut = $request->cod_aut;
+            $factura->cantidad = $request->cantidad;
+            $factura->precio_unitario = $request->precio_unitario;
+            $factura->descuento = $request->descuento;
+            $factura->subtotal = ($factura->cantidad * $factura->precio_unitario) - $request->descuento;
+            $factura->descripcion_monto = $request->descripcion_monto;           
+            $factura->save();                
+        return redirect()->back()->with('mensaje', 'Factura creada exitosamente con NRO: ' . $factura->nro);  
+    }
+
+    public function imprimir_factura(){
+        $cliente = Cliente::all();
+        $almacen = Almacenes::all();
+        $producto = Producto::all();
+        $factura = FacturaVenta::all();
+        return view('cliente.ver_factura', compact('factura', 'cliente', 'almacen', 'producto'));
+    }
+
 
     public function cliente(){
         $cliente = Cliente::all();
