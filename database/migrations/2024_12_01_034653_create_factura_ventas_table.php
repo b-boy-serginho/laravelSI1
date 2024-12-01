@@ -26,6 +26,7 @@ return new class extends Migration
             $table->decimal('precio_unitario', 12, 2);
             $table->decimal('descuento', 12, 2);
             $table->decimal('subtotal', 12, 2);
+            $table->datetime('fecha');
 
             $table->string('descripcion_monto');
 

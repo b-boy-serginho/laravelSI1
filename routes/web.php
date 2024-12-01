@@ -132,6 +132,10 @@ Route::middleware([
     Route::get('/cliente', [VentaController::class, 'cliente']);
     Route::post('/crear_cliente', [VentaController::class, 'crear_cliente']);
 
+    Route::get('/factura_cliente', [VentaController::class, 'factura_cliente']);
+    Route::post('/crear_factura_cliente', [VentaController::class, 'crear_factura_cliente']);
+    Route::get('/imprimir_factura', [VentaController::class, 'imprimir_factura']);
+
 });
 
 

@@ -495,6 +495,11 @@ return [
                             'text' => 'Factura de venta',
                             'url' => 'factura_cliente',
                         ],
+                        [
+                            'text' => 'Imprimir Factura',
+                            'url' => 'imprimir_factura',
+                        ],
+
                        [
                            'text' => 'Cuentas del Cliente',
                            'url' => 'ver_cliente',
