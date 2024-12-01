@@ -7,7 +7,7 @@
     <title>Tienda Floral</title>
 
     <link rel="stylesheet" href="{{ asset('inicio/carrito.css') }}">
-    
+
 
 
 </head>
@@ -37,12 +37,6 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
-
-
-
-
-
-                
             @else
                 <!-- Enlace de inicio de sesión si el usuario no está autenticado -->
                 <a href="/login">Iniciar Sesión</a>
@@ -55,14 +49,19 @@
         </div>
     </nav>
 
-
-
     @if (session('mensaje'))
-        <div class="alert alert-success text-center">
+        <div class="alert alert-success">
             {{ session('mensaje') }}
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    
 
     <table>
         <tr>
@@ -103,12 +102,12 @@
 
 
     <h1 class="pedido-titulo">Proceder al Pedido</h1>
-    
+
     <div class="boton-container">
         <a class="boton-pedido" href="/ver_pedido" onclick="return confirm('¿Estás seguro?')">Realizar Pedido</a>
-        <a class="boton-tarjeta" href="{{url('stripe', $totalAPagar)}}">Pagar con Tarjeta</a>
+        <a class="boton-tarjeta" href="{{ url('stripe', $totalAPagar) }}">Pagar con Tarjeta</a>
     </div>
-    
+
 
     <!-- Footer -->
     {{-- <footer>

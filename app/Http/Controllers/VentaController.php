@@ -30,9 +30,20 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 use Stripe;
 
+    // Name: Test
+        // Number: 4242 4242 4242 4242
+        // CSV: 123
+        // Expiration Month: 12
+        // Expiration Year: 2028
 
 class VentaController extends Controller
 {
+    public function historial()
+    {   
+        $pedido = Pedido::all();
+        return view('cliente.historial', compact('pedido'));
+    }
+
     public function pdf_factura($id)
     {
         $cliente = Cliente::findOrFail($id);
@@ -128,7 +139,7 @@ class VentaController extends Controller
             $cliente->nombre = $request->nombre;
             $cliente->fecha = $request->fecha;
             $cliente->save();
-        return redirect()->back()->with('mensaje', 'Cliente agregado al carrito exitosamente');
+        return redirect()->back()->with('mensaje', 'Cliente agregado exitosamente');
     }
 
      // Name: Test
@@ -155,6 +166,11 @@ class VentaController extends Controller
 
                 $usuario = Auth::user();
                 $producto = Producto::find($id);
+
+                 // Validar cantidad disponible
+            if ($request->cantidad > $producto->cantidad) {                
+                return redirect()->back()->with('error', 'La cantidad solicitada excede la cantidad disponible.');
+            }
                 $carrito = new Carrito;
                 $carrito->nombreUsuario = $usuario->name;
                 $carrito->correo = $usuario->email;
@@ -176,8 +192,14 @@ class VentaController extends Controller
                 $carrito->imagen_url = $producto->imagen_url;
                 $carrito->producto_id = $producto->id;
 
+                
                 $carrito->cantidad = $request->cantidad;
                 $carrito->save();
+
+                // Restar la cantidad solicitada del stock disponible
+                $producto->cantidad -= $request->cantidad;
+                $producto->save();
+                
                 return redirect()->back()->with('mensaje','agregado al carrito exitosanmente');
                 } 
             else {
@@ -268,8 +290,8 @@ class VentaController extends Controller
                 $cart = Carrito::find($cart_id);
                 $cart->delete();
             } 
-            Session::flash('success', 'PAGO CON EXITO!');
-            return back();
+            Session::flash('mensaje', 'PAGO REALIZADO CON EXITO!');
+            return redirect()->route('ver_carrito')->with('mensaje', 'Pago realizado exitosamente.');
         }
 //------------------------------------------------------------
         public function ver_cliente() {
