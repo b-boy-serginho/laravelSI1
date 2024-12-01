@@ -55,12 +55,14 @@ class VentaController extends Controller
             'precio_unitario' => 'required|numeric|min:0',
             'descuento' => 'required|numeric|min:0',
             'descripcion_monto' => 'required|string|max:255',
+            'fecha' => 'required'
         ]);
        
             $factura = new FacturaVenta;
             $factura->cliente_id = $request->cliente_id;
             $factura->almacen_id = $request->almacen_id;
             $factura->producto_id = $request->producto_id;
+            $factura->fecha = $request->fecha;
             $factura->nit = $request->nit;
             $factura->nro = $request->nro;
             $factura->cod_aut = $request->cod_aut;

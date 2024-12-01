@@ -134,7 +134,7 @@ Route::middleware([
 
     Route::get('/factura_cliente', [VentaController::class, 'factura_cliente']);
     Route::post('/crear_factura_cliente', [VentaController::class, 'crear_factura_cliente']);
-    Route::get('/imprimir_factura', [VentaController::class, 'imprimir_factura']);
+    Route::get('/imprimir_factura/{cliente_id}', [VentaController::class, 'imprimir_factura']);
 
 });
 
