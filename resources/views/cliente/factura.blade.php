@@ -98,7 +98,13 @@
                                     <label for="descripcion_monto" class="font-weight-medium">Descripcion del monto a pagar</label>
                                     <input type="text" name="descripcion_monto" id="descripcion_monto" required class="form-control"
                                         placeholder="Escriba el subtotal en palabras">
-                                </div> 
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="fecha" class="font-weight-medium">Fecha</label>
+                                    <input type="datetime-local" name="fecha" id="fecha" required class="form-control"
+                                        placeholder="">
+                                </div>
 
                                
                             </div>

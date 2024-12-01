@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 use App\Models\Almacenes;
+use App\Models\Categoria;
 
 class RolSeeder extends Seeder
 {
@@ -74,6 +75,10 @@ class RolSeeder extends Seeder
             'nombre' => 'ALM. VENTAS CIMAL',
             'encargado' => 'PANIAGUA ESPINDOLA ALBERT',
             'direccion' => 'CALLE SURUTO ESQ. CHURIA',          
+        ]);
+        Categoria::create([         
+            'nombre' => 'CAJA',
+            'descripcion' => 'CAJA DE PVP',                
         ]);
     }
 }
