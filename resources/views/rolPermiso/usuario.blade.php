@@ -57,13 +57,24 @@
                                     <label for="password" class="font-weight-medium">Contraseña</label>
                                     <input type="text" name="password" id="password" required value=""
                                            class="form-control" 
-                                           placeholder="Masturbinho">
+                                           placeholder="">
                                 </div> 
                              </div>
     
                             <div class="text-right mt-3">
                                 <button type="submit" class="btn btn-primary">Crear Usuario</button>
                             </div>
+
+                            
+                        </form>
+
+                        <form action="{{ route('usuario_excel') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="archivo">Selecciona un archivo Excel</label>
+                                <input type="file" name="archivo" id="archivo" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Importar</button>
                         </form>
                     </div>
                 </div>
@@ -103,14 +114,12 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <!-- Mostrar los roles -->
-                                        @if ($user->roles->isNotEmpty())
-                                            <ul>
+                                        @if ($user->roles->isNotEmpty())                                            
                                                 @foreach ($user->roles as $role)
-                                                    <li>{{ $role->name }}</li>
-                                                @endforeach
-                                            </ul>
+                                                   <p style="text-align: center">{{$role->name}}</p>
+                                                @endforeach                                            
                                         @else
-                                            Sin rol asignado
+                                            <p style="text-align: center">Cliente</p>
                                         @endif
                                     </td>
                                     <td>
