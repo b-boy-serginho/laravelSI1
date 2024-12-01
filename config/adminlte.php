@@ -451,7 +451,11 @@ return [
                         'text' => 'Etiqueta',
                         'url' => 'ver_etiqueta',
                         ],                        
-
+                    
+                        [
+                            'text' => 'Inventario',
+                            'url' => 'ver_inventario',
+                        ],
                    ],
                ],
 
@@ -477,17 +481,22 @@ return [
                    ],
                ],
 
-               [
-                'text' => 'Inventario',
-                'url' => 'ver_inventario',
-                ],
+               
 
                [
                    'text' => 'Paquete de Venta',
                    'icon' => 'fas fa-fw fa-share',
                    'submenu' => [
+                        [
+                            'text' => 'Cliente',
+                            'url' => 'cliente',
+                        ],
+                        [
+                            'text' => 'Factura de venta',
+                            'url' => 'factura_cliente',
+                        ],
                        [
-                           'text' => 'Cliente',
+                           'text' => 'Cuentas del Cliente',
                            'url' => 'ver_cliente',
                        ],
                        [

@@ -22,6 +22,9 @@ use App\Models\Bitacora;
 use Carbon\Carbon;
 use App\Models\Carrito;
 use App\Models\Pedido;
+use App\Models\Cliente;
+use App\Models\Almacen;
+use App\Models\FacturaVenta;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -31,6 +34,25 @@ use Stripe;
 class VentaController extends Controller
 {
 
+    public function cliente(){
+        $cliente = Cliente::all();
+        return view('cliente.cliente', compact('cliente'));
+    }
+
+    public function crear_cliente(Request $request){
+        $request->validate([
+            'codigo' => 'required',
+            'ci' => 'required',
+            'nombre' => 'required',
+        ]);
+        
+            $cliente = new Cliente;
+            $cliente->codigo = $request->codigo;
+            $cliente->ci = $request->ci;
+            $cliente->nombre = $request->nombre;
+            $cliente->save();
+        return redirect()->back()->with('mensaje', 'Cliente agregado al carrito exitosamente');
+    }
 
      // Name: Test
         // Number: 4242 4242 4242 4242

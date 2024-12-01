@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
-
+use App\Models\Almacenes;
 
 class RolSeeder extends Seeder
 {
@@ -69,5 +69,11 @@ class RolSeeder extends Seeder
         //     'rolUsuario' => 1,
         //     'password' => bcrypt('12345678'),          
         // ]);
+
+        Almacenes::create([         
+            'nombre' => 'ALM. VENTAS CIMAL',
+            'encargado' => 'PANIAGUA ESPINDOLA ALBERT',
+            'direccion' => 'CALLE SURUTO ESQ. CHURIA',          
+        ]);
     }
 }

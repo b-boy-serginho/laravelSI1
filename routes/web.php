@@ -129,6 +129,8 @@ Route::middleware([
     Route::get('/ver_inventario', [ProductoController::class, 'ver_inventario']);
     Route::post('/crear_inventario', [ProductoController::class, 'crear_inventario']);
 
+    Route::get('/cliente', [VentaController::class, 'cliente']);
+    Route::post('/crear_cliente', [VentaController::class, 'crear_cliente']);
 
 });
 
