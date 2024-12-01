@@ -33,6 +33,17 @@ use Stripe;
 
 class VentaController extends Controller
 {
+    public function pdf_factura($id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        $facturas = FacturaVenta::where('cliente_id', $id)->get();
+
+        $pdf = PDF::loadView('pdf.imprimir_factura', compact('facturas', 'cliente'));
+
+        return $pdf->download('factura_' . $cliente->nombre . '.pdf');
+    }
+
+
     public function factura_cliente($id)
     {
         $cliente = Cliente::findOrFail($id);
@@ -48,9 +59,9 @@ class VentaController extends Controller
             'cliente_id' => 'required|exists:clientes,id',
             'almacen_id' => 'required|exists:almacenes,id',
             'producto_id' => 'required|exists:productos,id',
-            'nit' => 'required|numeric|min:0',
-            'nro' => 'required|numeric|min:0',
-            'cod_aut' => 'required|numeric|min:0',
+            // 'nit' => 'required|numeric|min:0',
+            // 'nro' => 'required|numeric|min:0',
+            // 'cod_aut' => 'required|numeric|min:0',
             'cantidad' => 'required|numeric|min:1',
             'precio_unitario' => 'required|numeric|min:0',
             'descuento' => 'required|numeric|min:0',                      
@@ -60,9 +71,9 @@ class VentaController extends Controller
             $factura->cliente_id = $request->cliente_id;
             $factura->almacen_id = $request->almacen_id;
             $factura->producto_id = $request->producto_id;
-            $factura->nit = $request->nit;
-            $factura->nro = $request->nro;
-            $factura->cod_aut = $request->cod_aut;
+            // $factura->nit = $request->nit;
+            // $factura->nro = $request->nro;
+            // $factura->cod_aut = $request->cod_aut;
             $factura->cantidad = $request->cantidad;
             $factura->precio_unitario = $request->precio_unitario;
             $factura->descuento = $request->descuento;

@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('nombre');
             $table->datetime('fecha');
             
+            $table->integer('nit')->nullable();
+            $table->integer('nro')->nullable();
+            $table->string('cod_aut')->nullable();
+
             $table->timestamps();
         });
     }

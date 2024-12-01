@@ -18,9 +18,7 @@
                         @endif
 
                         <h1 style="text-align: center; font-weight: bold">Formulario de la Factura</h1>
-                        <div style=" font-size: 20px">
-                            <strong>PARA: </strong> {{ $cliente->nombre }}
-                        </div>
+                        
 
                         <br>
 
@@ -30,8 +28,11 @@
                             <div class="form-row">
 
                                 <div class="form-group col-md-6">
-                                    <label for="cliente_id" class="font-weight-medium">Nombre del Cliente</label>
+                                    <label for="cliente_id" class="font-weight-medium"></label>
                                     <input type="hidden" name="cliente_id" value="{{ $cliente->id }}">
+                                    <div style=" font-size: 20px">
+                                        <strong>PARA: </strong> {{ $cliente->nombre }}
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
@@ -55,7 +56,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-
+{{-- 
                                 <div class="form-group col-md-6">
                                     <label for="nit" class="font-weight-medium">NIT</label>
                                     <input type="number" name="nit" min="0" id="nit" required
@@ -72,7 +73,7 @@
                                     <label for="cod_aut" class="font-weight-medium">Codigo de Autorizacion</label>
                                     <input type="number" name="cod_aut" min="0" id="cod_aut" required
                                         class="form-control" placeholder="">
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-md-6">
                                     <label for="cantidad" class="font-weight-medium">Cantidad</label>
@@ -104,14 +105,37 @@
             </div>
         </div>
 
-        <div class="container py-5">
-            <img src="{{ asset('logo/logo.jpg') }}" alt="Logo" class="img-fluid" style="height: 100px;">
 
+
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 7%; ">
+            <img style="height: 100px;" src="{{ asset('logo/logo.jpg') }}" alt="Logo" class="img-fluid">
+            <div style="text-align: left; border: 4px solid black; border-radius: 5px; padding: 10px; width: fit-content;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td><strong>NIT:</strong></td>
+                        <td>102812501</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NRO:</strong></td>
+                        <td>5014</td>
+                    </tr>
+                    <tr>
+                        <td><strong>COD. AUTORIZACIÓN:</strong></td>
+                        <td>4513FKASALS</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="container py-2">
             <div class="text-center">
                 <h1 class="font-weight-bold" style="font-size: 2.5rem; color: #4B4B4B;">FACTURA</h1>
             </div>
-            
-            <div class="mt-4">
+
+            <div class="mt-2">
+                <p><strong>Fecha:</strong> {{ $cliente->fecha }} </p>
                 <p><strong>Nombre del Cliente:</strong> {{ $cliente->nombre }}</p>
                 <p><strong>CI:</strong> {{ $cliente->ci }}</p>
                 <p><strong>Código del Cliente:</strong> {{ $cliente->codigo }}</p>
@@ -156,6 +180,12 @@
                 </div>
             </div>
         </div>
+
+        <a href="{{ route('pdf_factura', $cliente->id) }}" style="text-align: center; background-color: green; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;">
+            Imprimir Factura
+        </a>
+        
+        
 
     </div>
 @stop
