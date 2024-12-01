@@ -33,15 +33,15 @@ use Stripe;
 
 class VentaController extends Controller
 {
-    public function factura_cliente(){
-        $cliente = Cliente::all();
-        $almacen = Almacenes::all();
-        $producto = Producto::all();
-        $factura = FacturaVenta::all();
-        return view('cliente.factura', compact('factura', 'cliente', 'almacen', 'producto'));
+    public function factura_cliente($id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        $facturas = FacturaVenta::where('cliente_id', $id)->with(['producto', 'almacen'])->get(); // Relación con producto y almacen
+        return view('cliente.factura', compact('cliente', 'facturas'));
     }
 
-    public function crear_factura_cliente(Request $request)
+
+    public function crear_factura_cliente(Request $request, $id)
     {
         
         $request->validate([
@@ -53,27 +53,41 @@ class VentaController extends Controller
             'cod_aut' => 'required|numeric|min:0',
             'cantidad' => 'required|numeric|min:1',
             'precio_unitario' => 'required|numeric|min:0',
-            'descuento' => 'required|numeric|min:0',
-            'descripcion_monto' => 'required|string|max:255',
-            'fecha' => 'required'
+            'descuento' => 'required|numeric|min:0',                      
         ]);
        
             $factura = new FacturaVenta;
             $factura->cliente_id = $request->cliente_id;
             $factura->almacen_id = $request->almacen_id;
             $factura->producto_id = $request->producto_id;
-            $factura->fecha = $request->fecha;
             $factura->nit = $request->nit;
             $factura->nro = $request->nro;
             $factura->cod_aut = $request->cod_aut;
             $factura->cantidad = $request->cantidad;
             $factura->precio_unitario = $request->precio_unitario;
             $factura->descuento = $request->descuento;
-            $factura->subtotal = ($factura->cantidad * $factura->precio_unitario) - $request->descuento;
-            $factura->descripcion_monto = $request->descripcion_monto;           
+            $factura->subtotal = ($factura->cantidad * $factura->precio_unitario) - $request->descuento;          
             $factura->save();                
         return redirect()->back()->with('mensaje', 'Factura creada exitosamente con NRO: ' . $factura->nro);  
     }
+
+    public function facturar($id)
+    {
+        // Obtener el cliente específico
+        $cliente = Cliente::find($id);
+
+        // Obtener las facturas asociadas al cliente
+        $factura = FacturaVenta::where('cliente_id', $id)->get();
+
+        // Obtener todos los almacenes y productos
+        $almacen = Almacenes::all();
+        $producto = Producto::all();
+
+        // Pasar los datos a la vista
+        return view('cliente.facturar', compact('factura', 'cliente', 'almacen', 'producto'));
+    }
+
+
 
     public function imprimir_factura(){
         $cliente = Cliente::all();
@@ -94,12 +108,14 @@ class VentaController extends Controller
             'codigo' => 'required',
             'ci' => 'required',
             'nombre' => 'required',
+            'fecha' => 'required'
         ]);
         
             $cliente = new Cliente;
             $cliente->codigo = $request->codigo;
             $cliente->ci = $request->ci;
             $cliente->nombre = $request->nombre;
+            $cliente->fecha = $request->fecha;
             $cliente->save();
         return redirect()->back()->with('mensaje', 'Cliente agregado al carrito exitosamente');
     }

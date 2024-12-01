@@ -118,10 +118,18 @@ class ControllerUsuario extends Controller
     }
 
     //----------------------------------------------------------------
-    public function ver_usuario_permiso() {
-        $usuario = User::all();
-        return view('rolPermiso.usuario', compact('usuario'));
+    public function ver_usuario_permiso()
+    {
+        // Cargar los usuarios con sus roles
+        $usuarios = User::with('roles')->get();
+
+        // Cargar todos los roles si los necesitas en el formulario
+        $roles = Role::all();
+
+        // Pasar los datos a la vista
+        return view('rolPermiso.usuario', compact('usuarios', 'roles'));
     }
+
 
     public function crear_usuario(Request $request){
         $existingUsuario = User::where('id', $request->id)->first();

@@ -383,21 +383,21 @@ return [
                    'icon' => 'fas fa-fw fa-share',
                    'submenu' => [
                         
+                        // [
+                        //     'text' => 'Pemisos ',
+                        //     'url' => 'ver_permiso',
+                        //     'can' => 'configuracion',
+                        // ],
                         [
-                            'text' => 'Pemisos ',
-                            'url' => 'ver_permiso',
-                            'can' => 'configuracion',
-                        ],
-                        [
-                            'text' => 'Usuarios ',
+                            'text' => 'Usuarios y rol',
                             'url' => 'ver_usuario_permiso',
                             'can' => 'configuracion',
                         ],
-                        [
-                            'text' => 'Roles ',
-                            'url' => 'ver_usuario',
-                            'can' => 'configuracion',
-                        ],
+                        // [
+                        //     'text' => 'Roles ',
+                        //     'url' => 'ver_usuario',
+                        //     'can' => 'configuracion',
+                        // ],
                         
                     //    [
                     //        'text' => 'Asignar Rol',
@@ -492,13 +492,13 @@ return [
                             'url' => 'cliente',
                         ],
                         [
-                            'text' => 'Factura de venta',
-                            'url' => 'factura_cliente',
+                            // 'text' => 'Factura de venta',
+                            // 'url' => 'factura_cliente',
                         ],
-                        [
-                            'text' => 'Imprimir Factura',
-                            'url' => 'imprimir_factura',
-                        ],
+                        // [
+                        //     'text' => 'Imprimir Factura',
+                        //     'url' => 'imprimir_factura',
+                        // ],
 
                        [
                            'text' => 'Cuentas del Cliente',

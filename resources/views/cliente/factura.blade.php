@@ -98,13 +98,7 @@
                                     <label for="descripcion_monto" class="font-weight-medium">Descripcion del monto a pagar</label>
                                     <input type="text" name="descripcion_monto" id="descripcion_monto" required class="form-control"
                                         placeholder="Escriba el subtotal en palabras">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="fecha" class="font-weight-medium">Fecha</label>
-                                    <input type="datetime-local" name="fecha" id="fecha" required class="form-control"
-                                        placeholder="">
-                                </div>
+                                </div>                              
 
                                
                             </div>
@@ -119,7 +113,7 @@
             </div>
         </div>
 
-        <h2 class="h5 font-weight-bold text-secondary mt-5">Lista de Clientes</h2>
+        {{-- <h2 class="h5 font-weight-bold text-secondary mt-5">Lista de Clientes</h2>
 
         <div class="table-responsive mt-3">
             <table class="table table-striped table-bordered">
@@ -140,7 +134,7 @@
                 </thead>
                 <tbody>
                     @foreach ($factura as $factura)
-                        <tr>
+                        <tr> --}}
                             {{-- <td>{{ $factura->cliente->codigo }} - {{ $factura->cliente->nombre }}</td>
                             <td>{{ $factura->almacen->nombre }} - {{ $factura->almacen->encargado }}</td>
                             <td>{{ $factura->producto->cod }} - {{ $factura->producto->nombre }}</td>
@@ -163,11 +157,11 @@
                                     </button>
                                 </form>
                             </td> --}}
-                        </tr>
+                        {{-- </tr>
                     @endforeach
                 </tbody>
             </table>
-        </div>
+        </div> --}}
         
     </div>
 @stop

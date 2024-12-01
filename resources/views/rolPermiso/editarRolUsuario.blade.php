@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <div class="card shadow-lg">
+    {{-- <div class="card shadow-lg">
         <div class="card-header bg-primary text-white text-center">
 
             
@@ -71,11 +71,11 @@
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> --}}
                         {{-- @foreach ($permiso as $per) --}}
                            
                      
-                            <tr>
+                            {{-- <tr> --}}
                                 {{-- <td>{{ $per->name}}</td> --}}
                                 {{-- <td>
                                     <a href="{{ url('editar_usuario', $user->id) }}" class="btn btn-link text-primary">Editar</a>
@@ -85,7 +85,7 @@
                                        class="btn btn-link text-danger" 
                                        onclick="return confirm('¿Estás seguro de eliminar este horario?')">Eliminar</a>
                                 </td> --}}
-                            </tr>
+                            {{-- </tr> --}}
                            
                         {{-- @endforeach --}}
                     </tbody>

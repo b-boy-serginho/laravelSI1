@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('codigo');
             $table->integer('ci');
             $table->string('nombre');
+            $table->datetime('fecha');
             
             $table->timestamps();
         });
