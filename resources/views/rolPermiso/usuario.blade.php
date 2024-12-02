@@ -74,7 +74,7 @@
                                 <label for="archivo">Selecciona un archivo Excel</label>
                                 <input type="file" name="archivo" id="archivo" class="form-control" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Importar</button>
+                            <button type="submit" class="btn btn-info">Importar</button>
                         </form>
                     </div>
                 </div>

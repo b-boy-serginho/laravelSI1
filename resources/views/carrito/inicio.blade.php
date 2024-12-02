@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Floral</title>
+    <title>Tienda ARTEDEC</title>
 
     <link rel="stylesheet" href="{{ asset('inicio/carrito.css') }}">
 
@@ -16,7 +16,7 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#">Tienda Floral</a>
+        <a href="#">Tienda ARTEDEC</a>
         <div>
 
             <!-- Verificar si el usuario está autenticado -->
