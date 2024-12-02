@@ -141,7 +141,7 @@
     </div>
 
     <div class="total">
-        <p><strong>Monto Total a Pagar:</strong> Bs 930.00</p>
+        <p><strong>Monto Total a Pagar:</strong> Bs {{ number_format($totalAPagar, 2) }}</p>
     </div>
 
 </body>
