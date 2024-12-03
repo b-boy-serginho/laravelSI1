@@ -82,13 +82,13 @@
                             </div>
 
                             <!-- Costo Promedio -->
-                            <div>
+                            {{-- <div>
                                 <label for="costoPromedio" class="block text-sm font-medium text-gray-700">Costo
                                     Promedio</label>
                                 <input value="{{ old('costoPromedio', $producto->costoPromedio) }}" type="number"
                                     name="costoPromedio" id="costoPromedio"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
+                            </div> --}}
 
                             <!-- Grosor -->
                             <div>

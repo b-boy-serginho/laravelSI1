@@ -68,11 +68,11 @@
                                         class="form-control">
                                 </div>
 
-                                <div class="form-group col-md-6">
+                                {{-- <div class="form-group col-md-6">
                                     <label for="costoPromedio" class="font-weight-medium">Costo Promedio</label>
                                     <input type="number" name="costoPromedio" min="0" id="costoPromedio"
                                         class="form-control">
-                                </div>
+                                </div> --}}
 
                                 <div class="form-group col-md-6">
                                     <label for="grosor" class="font-weight-medium">Grosor</label>
@@ -131,16 +131,16 @@
                         <th>Categoría</th>
                         <th>Código</th>
                         <th>Nombre</th>
-                        <th>Color</th>
-                        <th>Precio de Venta</th>
-                        <th>Cantidad</th>
+                        <th>Color</th>                                           
                         <th>Descripción</th>
-                        <th>Costo de Compra</th>
-                        <th>Costo Promedio</th>
+                        <th>Costo de Compra</th>                        
                         <th>Grosor</th>
                         <th>Material</th>
                         <th>Medida</th>
+                        <th>Cantidad</th>
+                        <th>Precio de Venta</th>
                         <th>Precio de Descuento</th>
+                        <th>Costo Promedio</th>
                         <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>
@@ -152,15 +152,15 @@
                             <td>{{ $productos->cod }}</td>
                             <td>{{ $productos->nombre }}</td>
                             <td>{{ $productos->color }}</td>
-                            <td>{{ $productos->precioVenta }}</td>
-                            <td>{{ $productos->cantidad }}</td>
                             <td>{{ $productos->descripcion }}</td>
                             <td>{{ $productos->costoCompra }}</td>
-                            <td>{{ $productos->costoPromedio }}</td>
                             <td>{{ $productos->grosor }}</td>
                             <td>{{ $productos->material }}</td>
                             <td>{{ $productos->medida }}</td>
+                            <td>{{ $productos->cantidad }}</td>
+                            <td>{{ $productos->precioVenta }}</td>
                             <td>{{ $productos->precioDescuento }}</td>
+                            <td>{{ $productos->costoPromedio }}</td>
                             <td><img style="width: 100px; height: 100px;" src="/imagen/{{ $productos->imagen_url }}"
                                     alt="Imagen del producto"></td>
                             <td>
