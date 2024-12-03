@@ -131,16 +131,16 @@
                         <th>Categoría</th>
                         <th>Código</th>
                         <th>Nombre</th>
-                        <th>Color</th>
-                        <th>Precio de Venta</th>
-                        <th>Cantidad</th>
+                        <th>Color</th>                                           
                         <th>Descripción</th>
-                        <th>Costo de Compra</th>
-                        <th>Costo Promedio</th>
+                        <th>Costo de Compra</th>                        
                         <th>Grosor</th>
                         <th>Material</th>
                         <th>Medida</th>
+                        <th>Cantidad</th>
+                        <th>Precio de Venta</th>
                         <th>Precio de Descuento</th>
+                        <th>Costo Promedio</th>
                         <th>Imagen</th>
                         <th>Acciones</th>
                     </tr>

@@ -295,7 +295,7 @@ class ProductoController extends Controller
         $producto->precioDescuento = $request->precioDescuento;
         $producto->precioVenta = $request->precioVenta;
 
-        if($request->precioVenta == 0){
+        if($request->precioDescuento == 0){
             $producto->costoPromedio = $request->precioVenta;
         }else{
             $producto->costoPromedio = ($request->precioVenta +$request->precioDescuento)/2;
