@@ -190,7 +190,7 @@ class ProductoController extends Controller
             'color' => 'required|string',
             'descripcion' => 'required|string',
             'costoCompra' => 'required|integer',
-            'costoPromedio' => 'required|integer',
+            // 'costoPromedio' => 'required|integer',
             'grosor' => 'required|string',
             'material' => 'required|string',
             'precioVenta' => 'required|integer',
@@ -206,13 +206,18 @@ class ProductoController extends Controller
         $producto->color = $request->color;
         $producto->descripcion = $request->descripcion;
         $producto->costoCompra = $request->costoCompra;
-        $producto->costoPromedio = $request->costoPromedio;
         $producto->grosor = $request->grosor;
         $producto->material = $request->material;
         $producto->medida = $request->medida;
         $producto->cantidad = $request->cantidad;
         $producto->precioDescuento = $request->precioDescuento;
         $producto->precioVenta = $request->precioVenta;
+
+        if($request->precioVenta == 0){
+            $producto->costoPromedio = $request->precioVenta;
+        }else{
+            $producto->costoPromedio = ($request->precioVenta +$request->precioDescuento)/2;
+        }
 
          // Verificar si el archivo de imagen fue subido
         // if ($request->hasFile('imagen_url')) {
@@ -254,7 +259,7 @@ class ProductoController extends Controller
             'color' => 'required|string',
             'descripcion' => 'required|string',
             'costoCompra' => 'required|integer',
-            'costoPromedio' => 'required|integer',
+            // 'costoPromedio' => 'required|integer',
             'grosor' => 'required|string',
             'material' => 'required|string',
             'precioVenta' => 'required|integer',            
@@ -283,13 +288,18 @@ class ProductoController extends Controller
         $producto->color = $request->color;
         $producto->descripcion = $request->descripcion;
         $producto->costoCompra = $request->costoCompra;
-        $producto->costoPromedio = $request->costoPromedio;
         $producto->grosor = $request->grosor;
         $producto->material = $request->material;
         $producto->medida = $request->medida;
         $producto->cantidad = $request->cantidad;
         $producto->precioDescuento = $request->precioDescuento;
         $producto->precioVenta = $request->precioVenta;
+
+        if($request->precioVenta == 0){
+            $producto->costoPromedio = $request->precioVenta;
+        }else{
+            $producto->costoPromedio = ($request->precioVenta +$request->precioDescuento)/2;
+        }
 
         $imagen=$request->imagen_url;
         $imagename=time().'.'.$imagen->getClientOriginalExtension();
