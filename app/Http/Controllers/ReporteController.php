@@ -42,7 +42,7 @@ class ReporteController extends Controller
 
         // Validar si la fecha de inicio y fin son válidas
         if ($fechaInicio && $fechaInicio > $fechaMax ) {
-            return back()->with('error', 'La fecha de inicio no es válida. Debe ser menor o igual a la fecha actual.');
+            return back()->with('error', 'La fecha no es válida. Debe ser menor a la fecha actual.');
         }
 
         if ($fechaFin && $fechaFin > $fechaMax) {
