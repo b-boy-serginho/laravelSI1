@@ -212,6 +212,8 @@ class ProductoController extends Controller
         $producto->cantidad = $request->cantidad;
         $producto->precioDescuento = $request->precioDescuento;
         $producto->precioVenta = $request->precioVenta;
+        $producto->fechaI = $request->fechaI;
+        $producto->fechaF = $request->fechaF;
 
         if($request->precioVenta == 0){
             $producto->costoPromedio = $request->precioVenta;
@@ -294,6 +296,9 @@ class ProductoController extends Controller
         $producto->cantidad = $request->cantidad;
         $producto->precioDescuento = $request->precioDescuento;
         $producto->precioVenta = $request->precioVenta;
+        $producto->fechaI = $request->fechaI;
+        $producto->fechaF = $request->fechaF;
+
 
         if($request->precioDescuento == 0){
             $producto->costoPromedio = $request->precioVenta;

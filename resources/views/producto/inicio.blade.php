@@ -105,6 +105,16 @@
                                     <input type="number" name="cantidad" min="0" id="cantidad"
                                         class="form-control">
                                 </div>
+                                {{-- <div class="form-group col-md-6">
+                                    <label for="fechaI" class="font-weight-medium">fecha Inicio</label>
+                                    <input type="date" name="fechaI" min="0" id="fechaI"
+                                        class="form-control">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="fechaF" class="font-weight-medium">fecha fin</label>
+                                    <input type="date" name="fechaF" min="0" id="fechaF"
+                                        class="form-control"> --}}
+                                </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="imagen_url" class="font-weight-medium">Imagen</label>

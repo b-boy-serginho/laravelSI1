@@ -28,6 +28,8 @@ return new class extends Migration
             $table->integer('cantidad')->nullable();
             $table->string('imagen_url')->nullable();
             $table->integer('precioDescuento')->nullable();
+            $table->date('fechaI')->nullable();
+            $table->date('fechaF')->nullable();
 
             $table->timestamps();
         });

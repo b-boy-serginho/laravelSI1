@@ -38,11 +38,26 @@ use Stripe;
 
 class VentaController extends Controller
 {
+    
     public function historial()
-    {   
+    {
+        // Obtener todos los pedidos
         $pedido = Pedido::all();
-        return view('cliente.historial', compact('pedido'));
+
+        // Obtener listas de valores únicos para los filtros
+        $usuarios = \DB::table('pedidos')->select('nombreUsuario')->distinct()->pluck('nombreUsuario');
+        $productos = \DB::table('pedidos')->select('nombreProducto')->distinct()->pluck('nombreProducto');
+
+        // Obtener las fechas mínimas y máximas de la tabla
+        $fechaInicio = \DB::table('pedidos')->min('created_at');
+        $fechaFin = \DB::table('pedidos')->max('updated_at');
+        $fechaMin = \DB::table('pedidos')->min('created_at');
+        $fechaMax = \DB::table('pedidos')->max('updated_at');
+
+
+        return view('cliente.historial', compact('pedido', 'usuarios', 'productos', 'fechaInicio', 'fechaFin', 'fechaMin','fechaMax'));
     }
+
 
     public function pdf_factura($id)
     {
@@ -88,7 +103,12 @@ class VentaController extends Controller
             $factura->cantidad = $request->cantidad;
             $factura->precio_unitario = $request->precio_unitario;
             $factura->descuento = $request->descuento;
-            $factura->subtotal = ($factura->cantidad * $factura->precio_unitario) - $request->descuento;          
+            if($request->descuento < $request->precio_unitario){
+                $factura->subtotal = ($factura->cantidad * $factura->precio_unitario) - $request->descuento;
+            }   
+            else{
+                return redirect()->back()->with('error', 'El descuento es mayor al precio unitario');
+            }       
             $factura->save();                
         return redirect()->back()->with('mensaje', 'Factura creada exitosamente con NRO: ' . $factura->nro);  
     }

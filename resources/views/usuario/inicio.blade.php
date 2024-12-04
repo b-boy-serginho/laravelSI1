@@ -18,6 +18,7 @@
 
 <body>
 
+    
     <!-- Navbar -->
     <nav class="navbar">
         <a href="#">Tienda ARTEDEC</a>
