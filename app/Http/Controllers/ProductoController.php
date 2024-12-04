@@ -71,11 +71,17 @@ class ProductoController extends Controller
     }
 
 //----------------------------------------------------------------------
+    public function prov_total($id){
+        $proveedor = FacturaCompra::find($id);
+        
+    }
+
     public function ver_factura(){
         $proveedor = Proveedor::all();
         $factura = FacturaCompra::all();
         $detalle = DetalleCompra::all();
         return view('factura.inicio', compact('factura', 'proveedor', 'detalle'));
+
     }
 
     public function crear_factura(Request $request){
@@ -87,7 +93,7 @@ class ProductoController extends Controller
         $factura = new FacturaCompra;
         $factura->proveedor_id = $request->proveedor_id;
         $factura->fecha = $request->fecha;
-    
+        
         // Calcular el importe sumando cantidad * costoUnitario de cada detalle asociado al proveedor
         // $importeTotal = 0;
         $detalles = DetalleCompra::where('proveedor_id', '=', $request->proveedor_id)->get();

@@ -470,11 +470,11 @@ return [
                        ],
                        
                        [
-                           'text' => 'Detalle de la Factura',
+                           'text' => 'Detalle de la Compra',
                            'url' => 'ver_detalle',
                        ],
                        [
-                        'text' => 'Factura',
+                        'text' => 'Nota de compra ',
                         'url' => 'ver_factura',
                     ],
 

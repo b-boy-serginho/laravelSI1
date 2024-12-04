@@ -64,6 +64,7 @@
                 </tr>
             </thead>
             <tbody>
+                @php $totalAPagar = 0; @endphp
                 @foreach($factura as $factura)
                 <tr>
                     <td>{{ $factura->proveedor->nombre }}</td>
@@ -72,11 +73,18 @@
                     <td>
                         <a href="{{ url('editar_factura', $factura->id) }}" class="btn btn-link text-primary">Editar</a>
                         <a href="{{ url('borrar_factura', $factura->id) }}" class="btn btn-link text-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                        <a href="{{ url('prov_total', $factura->id) }}" class="btn btn-link text-info" >ver detalles</a>
+
                     </td>
+                    @php $totalAPagar += $factura->importe; @endphp
                 </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <div class="text-right" style="font-size: 1.25rem; font-weight: bold; color: #333;">
+        <p><strong>MONTO TOTAL:</strong> Bs {{ number_format($totalAPagar, 2) }}</p>
     </div>
 </div>
 @stop

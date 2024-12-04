@@ -148,6 +148,9 @@ Route::middleware([
 
     Route::get('/reportePDF', [ReporteController::class, 'reportePDF'])->name('reportePDF');
 
+    Route::get('/prov_total', [ProductoController::class, 'prov_total'])->name('prov_total');
+
+
 });
 
 
