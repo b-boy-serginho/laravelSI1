@@ -11,7 +11,7 @@
         <div class="card shadow-lg">
             <div class="card-header bg-primary text-white text-center">
 
-                
+
                 <h2 class="h5 font-weight-bold mb-0">Pedidos de Clientes</h2>
             </div>
             <div class="card-body">
@@ -21,14 +21,15 @@
                     </div>
                 @endif
                 <div style="padding-bottom: 30px;">
-                    <form action="{{url('busqueda')}}" method="GET">
+                    <form action="{{ url('busqueda') }}" method="GET">
                         @csrf
                         <input type="text" name="search" placeholder="que es lo que buscas">
                         <input type="submit" value="Search" style="background-color: rgb(65, 65, 155); color: aliceblue; ">
                     </form>
-                </div>
-                
-                <a href="{{ route('generarPDF') }}" class="btn btn-success">IMPRIMIR TODO</a>                        
+                </div>                
+                {{-- ---------------------------------------------------------------------- --}}
+
+                <a href="{{ route('generarPDF') }}" class="btn btn-success">IMPRIMIR TODO</a>
 
                 <div class="table-responsive mt-3">
                     <table class="table table-hover table-bordered">
@@ -69,7 +70,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <img style="width: 60px; height: 60px; border-radius: 8px;" src="/imagen/{{ $user->imagen_url }}" alt="Imagen del producto">
+                                        <img style="width: 60px; height: 60px; border-radius: 8px;"
+                                            src="/imagen/{{ $user->imagen_url }}" alt="Imagen del producto">
                                     </td>
                                     <td>
                                         <a href="{{ route('imprimir', $user->id) }}" class="btn btn-success">Imprimir</a>
@@ -86,19 +88,17 @@
                                             <span class="text-muted">Entregado</span>
                                         @endif
 
-        
+
                                     </td>
                                 </tr>
 
-                                @empty    
+                            @empty
 
                                 <tr>
                                     <td colspan="16">
                                         No se encontraron los datos
                                     </td>
                                 </tr>
-                               
-
                             @endforelse
                         </tbody>
                     </table>

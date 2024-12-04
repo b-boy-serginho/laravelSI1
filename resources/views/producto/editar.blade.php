@@ -138,6 +138,17 @@
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
 
+                            {{-- <div class="form-group col-md-6">
+                                <label for="fechaI" class="font-weight-medium">fecha Inicio</label>
+                                <input value="{{ old('fechaI', $producto->fechaI) }}" type="date" name="fechaI" min="0" id="fechaI"
+                                    class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fechaF" class="font-weight-medium">fecha fin</label>
+                                <input value="{{ old('fechaF', $producto->fechaF) }}" type="date" name="fechaF" min="0" id="fechaF"
+                                    class="form-control">
+                            </div> --}}
+
                             <!-- Imagen Actual -->
                             <div>
                                 <label for="imagen_url" class="block text-sm font-medium text-gray-700">Imagen

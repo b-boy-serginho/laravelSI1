@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerUsuario;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\ReporteController;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -143,6 +145,8 @@ Route::middleware([
 
     // Route::get('/factura_cliente', [VentaController::class, 'factura_cliente']);
     // Route::get('/imprimir_factura', [VentaController::class, 'imprimir_factura']);
+
+    Route::get('/reportePDF', [ReporteController::class, 'reportePDF'])->name('reportePDF');
 
 });
 
