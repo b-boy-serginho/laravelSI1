@@ -8,33 +8,47 @@ use App\Models\Api;
 
 class ApiController extends Controller
 {
-    public function api_usuario(){
-        $api = Api::all();
-        return view('api.inicio', compact('api'));
+     // Mostrar usuarios
+    public function api_usuario()
+     {        
+         $api = Api::all();
+        //  dd($api);
+        return json_encode($api);
     }
 
-   public function crear_usuario(Request $request)
-   {
-       // Validar los datos de entrada
-       $request->validate([
-           'nombre' => 'required|string|max:255',
-           'correo' => 'required|email|max:255',
-           'telefono' => 'required|numeric',
-           'fecha' => 'required|date_format:Y-m-d\TH:i',  // Formato para datetime-local
-       ]);
+    public function api_usuario_id($user_id)
+     {    
+        $usuario = Api::find($user_id);    
+        return json_encode($usuario);
+    }
+ 
+    public function mostrar_usuario2(Request $request)
+     {    
+        $usuario = Api::find($request->user_id);    
+        return json_encode($usuario);
+    }
 
-       // Crear el nuevo usuario
-       $api = new Api;
-       $api->nombre = $request->nombre;
-       $api->correo = $request->correo;
-       $api->telefono = $request->telefono;
-       $api->fecha = $request->fecha;
-       $api->save();
-
-       // Redirigir a la vista con un mensaje
-       return redirect()->route('api_usuario')->with('sms', 'Agregado exitosamente');
-   }
-
+     // Crear un nuevo usuario
+    public function crear_usuario(Request $request)
+     {
+        // Validar los datos de entrada
+        $request->validate([
+             'nombre' => 'required|string|max:255',
+             'correo' => 'required|email|max:255',
+             'telefono' => 'required|numeric',
+             'fecha' => 'required|date_format:Y-m-d\TH:i', // Formato para datetime-local
+        ]);
+ 
+         // Crear el nuevo usuario
+        $usuario = new Api();
+        $usuario->nombre = $request->nombre;
+        $usuario->correo = $request->correo;
+        $usuario->telefono = $request->telefono;
+        $usuario->fecha = $request->fecha;
+        $usuario->save();
+        $mensaje = 'Usuario creado correctamente';
+        return json_encode($mensaje);
+    }
 
 
 }

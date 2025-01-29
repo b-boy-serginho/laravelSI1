@@ -6,5 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Api extends Model
 {
-    //
+    protected $table = 'apis'; // Nombre de la tabla
+
+    protected $fillable = [
+        'nombre', 'correo', 'telefono', 'fecha',
+    ];
 }
